@@ -66367,8 +66367,8 @@ var UserProfileSkills = /*#__PURE__*/function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/mohamad/Desktop/Final Project/finalProject/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/mohamad/Desktop/Final Project/finalProject/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/mohamad/Desktop/finalProject/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/mohamad/Desktop/finalProject/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

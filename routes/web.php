@@ -28,10 +28,11 @@ Route::get('/jobs', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::post('/contact-us', 'ContactMailController@sendMail');
 
+// Google
 Route::get('/redirect', 'Auth\LoginController@redirectToProvider')->name('google');
 Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('/profile', 'ProfileController@create');
+Route::get('/profile/create', 'ProfileController@create');
+Route::get('/profile/{profile_id}', 'ProfileController@show');

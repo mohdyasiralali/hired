@@ -65853,9 +65853,10 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 // require('./contactus');
+// require('./components/userProfile/user_profile');
 
 
-__webpack_require__(/*! ./userProfile/user_profile */ "./resources/js/userProfile/user_profile.js");
+__webpack_require__(/*! ./components/editProfile/edit_profile */ "./resources/js/components/editProfile/edit_profile.js");
 
 /***/ }),
 
@@ -65904,10 +65905,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/userProfile/user_profile.js":
-/*!**************************************************!*\
-  !*** ./resources/js/userProfile/user_profile.js ***!
-  \**************************************************/
+/***/ "./resources/js/components/editProfile/edit_profile.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/editProfile/edit_profile.js ***!
+  \*************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -65917,10 +65918,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _user_profile_intro__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user_profile_intro */ "./resources/js/userProfile/user_profile_intro.js");
-/* harmony import */ var _user_profile_bio__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user_profile_bio */ "./resources/js/userProfile/user_profile_bio.js");
-/* harmony import */ var _user_profile_skills__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user_profile_skills */ "./resources/js/userProfile/user_profile_skills.js");
-/* harmony import */ var _user_profile_portfolio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./user_profile_portfolio */ "./resources/js/userProfile/user_profile_portfolio.js");
+/* harmony import */ var _profile_picture__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile_picture */ "./resources/js/components/editProfile/profile_picture.js");
+/* harmony import */ var _skills_tab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./skills_tab */ "./resources/js/components/editProfile/skills_tab.js");
+/* harmony import */ var _profile_tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./profile_tab */ "./resources/js/components/editProfile/profile_tab.js");
+/* harmony import */ var _portfolio_tab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./portfolio_tab */ "./resources/js/components/editProfile/portfolio_tab.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -65950,39 +65951,73 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var UserProfile = /*#__PURE__*/function (_React$Component) {
-  _inherits(UserProfile, _React$Component);
+var EditProfile = /*#__PURE__*/function (_React$Component) {
+  _inherits(EditProfile, _React$Component);
 
-  var _super = _createSuper(UserProfile);
+  var _super = _createSuper(EditProfile);
 
-  function UserProfile() {
-    _classCallCheck(this, UserProfile);
+  function EditProfile() {
+    _classCallCheck(this, EditProfile);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(UserProfile, [{
+  _createClass(EditProfile, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_profile_intro__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_profile_bio__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_profile_skills__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_profile_portfolio__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container mt-5 bg-light p-5 rounded mb-5",
+        style: {
+          height: '1100px'
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_picture__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row my-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-12 order-lg-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "nav nav-tabs"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "",
+        "data-target": "#edit",
+        "data-toggle": "tab",
+        className: "nav-link active"
+      }, "Edit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "",
+        "data-target": "#skills",
+        "data-toggle": "tab",
+        className: "nav-link"
+      }, "Skills")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "",
+        "data-target": "#portfolio",
+        "data-toggle": "tab",
+        className: "nav-link"
+      }, "Portfolio"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tab-content py-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_tab__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_skills_tab__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_portfolio_tab__WEBPACK_IMPORTED_MODULE_5__["default"], null)))));
     }
   }]);
 
-  return UserProfile;
+  return EditProfile;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (UserProfile);
+/* harmony default export */ __webpack_exports__["default"] = (EditProfile);
 
 if (document.getElementById("root")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(UserProfile, null), document.getElementById("root"));
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EditProfile, null), document.getElementById("root"));
 }
 
 /***/ }),
 
-/***/ "./resources/js/userProfile/user_profile_bio.js":
-/*!******************************************************!*\
-  !*** ./resources/js/userProfile/user_profile_bio.js ***!
-  \******************************************************/
+/***/ "./resources/js/components/editProfile/portfolio_tab.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/editProfile/portfolio_tab.js ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -66014,47 +66049,38 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var UserProfileBio = /*#__PURE__*/function (_React$Component) {
-  _inherits(UserProfileBio, _React$Component);
+var PortfolioTab = /*#__PURE__*/function (_React$Component) {
+  _inherits(PortfolioTab, _React$Component);
 
-  var _super = _createSuper(UserProfileBio);
+  var _super = _createSuper(PortfolioTab);
 
-  function UserProfileBio() {
-    _classCallCheck(this, UserProfileBio);
+  function PortfolioTab() {
+    _classCallCheck(this, PortfolioTab);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(UserProfileBio, [{
+  _createClass(PortfolioTab, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "my-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container p-5 bg-light rounded"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "text-primary"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "About me")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "PROFESSIONAL PATH")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Duis non volutpat arcu, eu mollis tellus. Sed finibus aliquam neque sit amet sodales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla maximus pellentes que velit, quis consequat nulla effi citur at. Maecenas sed massa tristique.Duis non volutpat arcu, eu mollis tellus. Sed finibus aliquam neque sit amet sodales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla maximus pellentes que velit, quis consequat nulla effi citur at.Maecenas sed massa tristique.")))));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tab-pane",
+        id: "portfolio"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "portfolio"));
     }
   }]);
 
-  return UserProfileBio;
+  return PortfolioTab;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (UserProfileBio);
+/* harmony default export */ __webpack_exports__["default"] = (PortfolioTab);
 
 /***/ }),
 
-/***/ "./resources/js/userProfile/user_profile_intro.js":
-/*!********************************************************!*\
-  !*** ./resources/js/userProfile/user_profile_intro.js ***!
-  \********************************************************/
+/***/ "./resources/js/components/editProfile/profile_picture.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/editProfile/profile_picture.js ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -66086,67 +66112,54 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var UserProfileIntro = /*#__PURE__*/function (_React$Component) {
-  _inherits(UserProfileIntro, _React$Component);
+var ProfilePicture = /*#__PURE__*/function (_React$Component) {
+  _inherits(ProfilePicture, _React$Component);
 
-  var _super = _createSuper(UserProfileIntro);
+  var _super = _createSuper(ProfilePicture);
 
-  function UserProfileIntro() {
-    _classCallCheck(this, UserProfileIntro);
+  function ProfilePicture() {
+    _classCallCheck(this, ProfilePicture);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(UserProfileIntro, [{
+  _createClass(ProfilePicture, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "intro-section mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "top-right"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#",
-        className: "btn btn-danger mb-5"
-      }, "Hire Me!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-10 col-lg-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "intro rounded mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "profile-img border border-light border-3"
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "profile-image",
+        className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "w-100",
         src: "/storage/images/avatar.png",
-        alt: ""
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "mt-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Mohamnad")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Key Account Manager"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "list-group my-4 list-unstyled"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Email Address: "), "mohd.alali@gmailcom"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Born:"), " August 25, 1987", " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
+        className: "mx-auto rounded",
+        alt: "avatar",
+        style: {
+          width: "25%"
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "custom-file"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        id: "file",
+        className: "custom-file-input"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "custom-file-control btn btn-danger"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fab fa-linkedin fa-2x"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fab fa-facebook fa-2x"
-      }))))))));
+        className: "far fa-caret-square-up"
+      }), " Choose file")));
     }
   }]);
 
-  return UserProfileIntro;
+  return ProfilePicture;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (UserProfileIntro);
+/* harmony default export */ __webpack_exports__["default"] = (ProfilePicture);
 
 /***/ }),
 
-/***/ "./resources/js/userProfile/user_profile_portfolio.js":
+/***/ "./resources/js/components/editProfile/profile_tab.js":
 /*!************************************************************!*\
-  !*** ./resources/js/userProfile/user_profile_portfolio.js ***!
+  !*** ./resources/js/components/editProfile/profile_tab.js ***!
   \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -66179,92 +66192,113 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var UserProfilePortfolio = /*#__PURE__*/function (_React$Component) {
-  _inherits(UserProfilePortfolio, _React$Component);
+var ProfileTab = /*#__PURE__*/function (_React$Component) {
+  _inherits(ProfileTab, _React$Component);
 
-  var _super = _createSuper(UserProfilePortfolio);
+  var _super = _createSuper(ProfileTab);
 
-  function UserProfilePortfolio(props) {
-    var _this;
+  function ProfileTab() {
+    _classCallCheck(this, ProfileTab);
 
-    _classCallCheck(this, UserProfilePortfolio);
-
-    _this = _super.call(this, props);
-    _this.renderImages = _this.renderImages.bind(_assertThisInitialized(_this));
-    _this.renderProjects = _this.renderProjects.bind(_assertThisInitialized(_this));
-    return _this;
+    return _super.apply(this, arguments);
   }
 
-  _createClass(UserProfilePortfolio, [{
-    key: "renderProjects",
-    value: function renderProjects() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-lg-6 col-md-6 col-sm-8 mb-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bg-primary text-light rounded p-4 overflow-auto"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "text-center top-right"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "/storage/images/change.jpg",
-        className: "text-light",
-        download: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-download"
-      }), " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Project Title:"), " Hired"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-        className: "border border-light"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Description:"), " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ex corrupti tempore animi quo at tempora exercitationem unde culpa, vitae neque laboriosam eius doloribus? Repellat placeat vero eligendi consectetur quaerat.")));
-    }
-  }, {
-    key: "renderImages",
-    value: function renderImages() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-lg-4 col-md-4 col-sm-6 mb-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "img-fluid rounded",
-        src: "/storage/images/change.jpg",
-        alt: ""
-      }));
-    }
-  }, {
+  _createClass(ProfileTab, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "my-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container p-5 bg-light rounded"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row mb-2"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "text-primary"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Portfolio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "MY WORK"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container px-5 mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-        className: "text-primary mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Gallery")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, this.renderImages())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-        className: "text-primary mb-3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Projects")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, this.renderProjects())))));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tab-pane active",
+        id: "edit"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-lg-3 col-form-label form-control-label"
+      }, "Full Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-9"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text" // value="eg. John Smith"
+
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-lg-3 col-form-label form-control-label"
+      }, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-9"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "email",
+        defaultValue: "john.smith@example.com",
+        readOnly: true
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-lg-3 col-form-label form-control-label"
+      }, "Birth Day"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-9"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "date"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-lg-3 col-form-label form-control-label"
+      }, "Profession"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-9"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text" // value=""
+
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-lg-3 col-form-label form-control-label"
+      }, "Facebook Account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-9"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "url" // value=""
+
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-lg-3 col-form-label form-control-label"
+      }, "Linkedin Account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-9"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "url" // value=""
+
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "col-lg-3 col-form-label form-control-label"
+      }, "Bio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-9"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "form-control",
+        rows: "5"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-right mt-5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: "Save",
+        className: "btn btn-success"
+      }))));
     }
   }]);
 
-  return UserProfilePortfolio;
+  return ProfileTab;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (UserProfilePortfolio);
+/* harmony default export */ __webpack_exports__["default"] = (ProfileTab);
 
 /***/ }),
 
-/***/ "./resources/js/userProfile/user_profile_skills.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/userProfile/user_profile_skills.js ***!
-  \*********************************************************/
+/***/ "./resources/js/components/editProfile/skills_tab.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/editProfile/skills_tab.js ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -66296,56 +66330,31 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var UserProfileSkills = /*#__PURE__*/function (_React$Component) {
-  _inherits(UserProfileSkills, _React$Component);
+var SkillsTab = /*#__PURE__*/function (_React$Component) {
+  _inherits(SkillsTab, _React$Component);
 
-  var _super = _createSuper(UserProfileSkills);
+  var _super = _createSuper(SkillsTab);
 
-  function UserProfileSkills() {
-    _classCallCheck(this, UserProfileSkills);
+  function SkillsTab() {
+    _classCallCheck(this, SkillsTab);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(UserProfileSkills, [{
+  _createClass(SkillsTab, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "my-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container p-5 bg-light rounded"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "text-primary"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Skills")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Gained Skills")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "col-3"
-      }, "Illustrator"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "col-3"
-      }, "Photoshop"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "col-3"
-      }, "Video Editing"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "col-3"
-      }, "Microsoft Office"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "col-3"
-      }, "HTML"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "col-3"
-      }, "Illustrator"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "col-3"
-      }, "Illustrator"))))));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tab-pane",
+        id: "skills"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Skills"));
     }
   }]);
 
-  return UserProfileSkills;
+  return SkillsTab;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (UserProfileSkills);
+/* harmony default export */ __webpack_exports__["default"] = (SkillsTab);
 
 /***/ }),
 

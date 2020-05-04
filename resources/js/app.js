@@ -13,6 +13,8 @@ require('./bootstrap');
  */
 // require('./contactus');
 
-require('./userProfile/user_profile');
+// require('./components/userProfile/user_profile');
+require('./components/editProfile/edit_profile');
+
 
 

@@ -34,5 +34,7 @@ Route::post('/contact-us', 'ContactMailController@sendMail');
 Route::get('/redirect', 'Auth\LoginController@redirectToProvider')->name('google');
 Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('/profile/create', 'ProfileController@create');
-Route::get('/profile/{profile_id}', 'ProfileController@show');
+
+// Route::get('/profile/create', 'ProfileController@create');
+Route::get('/profile/{profile_id}', 'ProfileController@show');// No authentication
+Route::get('/profile/{profile_id}/edit', 'ProfileController@edit');

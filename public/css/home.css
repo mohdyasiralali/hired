@@ -1,6 +1,7 @@
 body {
     font-size: 18px;
-    background-color: #e6e9f0;
+    /* background-color: #e6e9f0; */
+    background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
 }
 
 .top-right {

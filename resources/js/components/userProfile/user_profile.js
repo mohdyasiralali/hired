@@ -19,7 +19,3 @@ class UserProfile extends React.Component {
 }
 
 export default UserProfile;
-
-if (document.getElementById("root")) {
-    ReactDOM.render(<UserProfile />, document.getElementById("root"));
-}

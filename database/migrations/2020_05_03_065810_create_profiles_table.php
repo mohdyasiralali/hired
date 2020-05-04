@@ -17,8 +17,8 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->text('bio')->nullable();
             $table->date('birth_day')->nullable();
-            $table->text('linked_profile')->nullable();
-            $table->text('facebook_profile')->nullable();
+            $table->text('linked_profile')->default('https://www.linkedin.com/in/{your_linkedin_username}');
+            $table->text('facebook_profile')->default('https://www.facebook.com/in/{your_facebook_username}');
             $table->text('profession')->nullable();
             $table->timestamps();
             $table->integer('user_id')->unsigned();

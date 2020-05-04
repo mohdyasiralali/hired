@@ -38,15 +38,26 @@ class ProfileController extends Controller
         }
 
         return response()->json([
-            'name' => $user->name,
-            'email' => $user->email,
-            'avatar' => $user->avatar,
-            'bio' => $profile->bio,
-            'birth_day' => $profile->birth_day,
-            'linked_profile' => $profile->linked_profile,
-            'facebook_profile' => $profile->facebook_profile,
-            'profession' => $profile->profession,
+            'profile' =>
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'avatar' => $user->avatar,
+                'bio' => $profile->bio,
+                'birth_day' => $profile->birth_day,
+                'linked_profile' => $profile->linked_profile,
+                'facebook_profile' => $profile->facebook_profile,
+                'profession' => $profile->profession
+            ],
             'skills' => $plucked_skills
         ]);
+    }
+
+    public function edit($id){
+        if($id != auth()->user->id){
+            // report(404);
+        }
+        $profile = Profile::find($id);
+
     }
 }

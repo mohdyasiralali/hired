@@ -26,7 +26,7 @@
 
 </head>
 
-<body>
+<body id='body'>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -63,13 +63,11 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                <a class="dropdown-item" href="/" onclick="">
-                                    Post a Job
-                                </a>
+                                <div id="nav-dropdown">
 
-                                <a class="dropdown-item" href="/" onclick="">
-                                    Messages
-                                </a>
+                                </div>
+                                
+                                <hr>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -91,7 +89,7 @@
         <main>
             @yield('content')
         </main>
-        
+
     </div>
 
     <!-- <section id="footer" class="mt-5">

@@ -4,8 +4,32 @@ import ProfilePicture from './profile_picture';
 import SkillsTab from './skills_tab';
 import ProfileTab from './profile_tab';
 import PortfolioTab from './portfolio_tab';
+import axios from 'axios';
 
 class EditProfile extends React.Component {
+    constructor(props){
+        super(props)
+
+        this.axs = this.axs.bind(this);
+    } 
+
+    componentDidMount(){
+        this.axs();
+    }
+
+    axs(){
+        //Profile ID
+        axios
+        .get("/profile/21" + this.props.team_id)
+        .then(response => {
+            console.log(response.data);
+            return response.data;
+        })
+        .then(json => {
+            // this.setState({ tasks: json });
+        });
+    }
+
     render() {
         return (
             <div
@@ -64,6 +88,6 @@ class EditProfile extends React.Component {
 
 export default EditProfile;
 
-if (document.getElementById("root")) {
-    ReactDOM.render(<EditProfile />, document.getElementById("root"));
-}
+// if (document.getElementById("root")) {
+//     ReactDOM.render(<EditProfile />, document.getElementById("root"));
+// }

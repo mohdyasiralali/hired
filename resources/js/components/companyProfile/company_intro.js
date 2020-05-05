@@ -5,11 +5,6 @@ class CompanyIntro extends React.Component {
         return (
             <section className="intro-section mb-5">
                 <div className="container">
-                    <div className="top-right">
-                        <a href="#" className="btn btn-danger mb-5">
-                            Hire Me!
-                        </a>
-                    </div>
                     <div className="row">
                         <div className="col-sm-10 col-lg-5">
                             <div className="intro rounded mb-5">

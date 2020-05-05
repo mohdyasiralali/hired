@@ -24,7 +24,7 @@ class CompanyMatching extends React.Component {
                     <div className="col-md-8 p-2">
                         <h5>
                             <b>
-                                <a href="">Mohamad Al Ali</a>
+                                <a href="" className="text-decoration-none">Mohamad Al Ali</a>
                             </b>
                         </h5>
                         <h6 className="text-muted">Full Stack Web Developer</h6>

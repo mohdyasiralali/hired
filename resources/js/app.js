@@ -50,5 +50,5 @@ navbar_options.appendChild(job_btn);
 // require('./components/userProfile/user_profile');
 // require("./components/editProfile/edit_profile");
 
-require("./components/companyProfile/company_profile");
-
+require("./components/companyProfile/company_profile");  
+// require("./components/companyProfile/text-area");  

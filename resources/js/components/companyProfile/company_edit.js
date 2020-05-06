@@ -1,5 +1,4 @@
 import React from "react";
-
 class CompanyEditProfile extends React.Component {
     constructor(props) {
         super(props);

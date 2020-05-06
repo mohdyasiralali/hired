@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Hired</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,7 +23,6 @@
 
     <!-- FONTAWESOME -->
     <script src="https://kit.fontawesome.com/41e7fe63fb.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body id='body'>
@@ -70,7 +69,7 @@
                                 <div id="nav-dropdown">
 
                                 </div>
-                                
+
                                 <hr>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -103,6 +102,7 @@
             </div>
         </footer>
     </section> -->
+
 
 </body>
 

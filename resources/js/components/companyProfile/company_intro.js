@@ -5,6 +5,7 @@ import CompanyJobs from "./company_jobs";
 import CompanyMatching from "./company_matching";
 import CompanyApplications from "./company_applications";
 import CompanyEditProfile from "./company_edit";
+import JobsPanel from "./jobs_panel";
 
 class CompanyIntro extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class CompanyIntro extends React.Component {
         this.onClickApplicants = this.onClickApplicants.bind(this);
         this.onClickApplications = this.onClickApplications.bind(this);
         this.onClickEdit = this.onClickEdit.bind(this);
+        this.onClickJobsPanel = this.onClickJobsPanel.bind(this);
         this.onClickHome = this.onClickHome.bind(this);
     }
 
@@ -25,14 +27,16 @@ class CompanyIntro extends React.Component {
     onClickApplications() {
         this.setState({ tab: 2 });
     }
-    onClickEdit(){
+    onClickEdit() {
         this.setState({ tab: 3 });
+    }
+    onClickJobsPanel() {
+        this.setState({ tab: 4 });
     }
     onClickHome(e) {
         e.preventDefault();
         this.setState({ tab: 0 });
     }
-    
 
     render_body() {
         if (this.state.tab === 0) {
@@ -61,6 +65,12 @@ class CompanyIntro extends React.Component {
                     <CompanyEditProfile></CompanyEditProfile>
                 </div>
             );
+        } else if (this.state.tab === 4) {
+            return (
+                <div>
+                    <JobsPanel></JobsPanel>
+                </div>
+            );
         }
     }
 
@@ -82,7 +92,10 @@ class CompanyIntro extends React.Component {
                             >
                                 Applications
                             </button>
-                            <button href="#" className="btn btn-danger btn-round mr-2">
+                            <button
+                                onClick={this.onClickJobsPanel}
+                                className="btn btn-danger btn-round mr-2"
+                            >
                                 Jobs
                             </button>
                             <button

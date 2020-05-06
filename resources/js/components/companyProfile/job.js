@@ -18,6 +18,19 @@ class Job extends React.Component {
         } else this.setState({ show: 0 });
     }
 
+    redner_job() {
+        return (
+            <div className="col-md-9 p-3">
+                <h3>
+                    <b>Full Stack Web Developer</b>
+                </h3>
+
+                <h6 className="text-muted">FULL TIME</h6>
+                <h6 className="text-muted">5 days ago</h6>
+            </div>
+        );
+    }
+
     render_description() {
         if (this.state.show === 1) {
             return (
@@ -48,14 +61,7 @@ class Job extends React.Component {
                             alt=""
                         ></img>
                     </div>
-                    <div className="col-md-9 p-3">
-                        <h3>
-                            <b>Full Stack Web Developer</b>
-                        </h3>
-
-                        <h6 className="text-muted">FULL TIME</h6>
-                        <h6 className="text-muted">5 days ago</h6>
-                    </div>
+                    {this.redner_job()}
                     <div className="col-md-1 p-2 mt-auto">
                         <a className="text-primary" onClick={this.show}>
                             {btn}

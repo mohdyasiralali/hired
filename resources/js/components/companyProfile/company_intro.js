@@ -1,43 +1,122 @@
 import React from "react";
+import CompanyOverview from "./company_overview";
+import CompanySkills from "./company_skills";
+import CompanyJobs from "./company_jobs";
+import CompanyMatching from "./company_matching";
+import CompanyApplications from './company_applications';
 
 class CompanyIntro extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tab: 0
+        };
+
+        this.onClickApplicants = this.onClickApplicants.bind(this);
+        this.onClickApplications = this.onClickApplications.bind(this);
+        this.onClickHome = this.onClickHome.bind(this);
+    }
+
+    onClickApplicants(e) {
+        this.setState({ tab: 1 });
+    }
+    onClickApplications(e){
+        this.setState({ tab:2 });
+    }
+    onClickHome(e) {
+        e.preventDefault();
+        this.setState({ tab: 0 });
+    }
+
+    render_body() {
+        if (this.state.tab === 0) {
+            return (
+                <div>
+                    <CompanyOverview></CompanyOverview>
+                    <CompanySkills></CompanySkills>
+                    <CompanyJobs></CompanyJobs>
+                    {/* <CompanyMatching></CompanyMatching> */}
+                </div>
+            );
+        } else if (this.state.tab === 1) {
+            return (
+                <div>
+                    <CompanyMatching></CompanyMatching>
+                </div>
+            );
+        }
+        else if (this.state.tab === 2) {
+            return (
+                <div>
+                    <CompanyApplications></CompanyApplications>
+                </div>
+            );
+        }
+    }
+
     render() {
         return (
-            <section className="intro-section mb-5">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-10 col-lg-5">
-                            <div className="intro rounded mb-5">
-                                <div className="profile-img border border-light border-3">
-                                    <img
-                                        className="w-100"
-                                        src="/storage/images/co-logo.jpg"
-                                        alt=""
-                                    ></img>
+            <div>
+                <section className="intro-section mb-5">
+                    <div className="container">
+                        <div className="top-right">
+                            <button
+                                onClick={this.onClickApplicants}
+                                className="btn btn-danger mr-2"
+                            >
+                                Matching
+                            </button>
+                            <button
+                                onClick={this.onClickApplications}
+                                className="btn btn-danger mr-2"
+                            >
+                                Applications
+                            </button>
+                            <button href="#" className="btn btn-danger mr-2">
+                                Post a Job
+                            </button>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-10 col-lg-5">
+                                <div className="intro rounded mb-5">
+                                    <div className="profile-img border border-light border-3">
+                                        <img
+                                            className="w-100"
+                                            src="/storage/images/co-logo.jpg"
+                                            alt=""
+                                        ></img>
+                                    </div>
+                                    <h2 className="mt-3">
+                                        <a
+                                            href=""
+                                            onClick={this.onClickHome}
+                                            className="text-decoration-none"
+                                        >
+                                            <b>Coroporate</b>
+                                        </a>
+                                    </h2>
+                                    <ul className="list-group my-4 list-unstyled">
+                                        <li>
+                                            <b>Industry: </b>Software
+                                        </li>
+                                        <li>
+                                            <b>Headquarters: </b>Beirut, Lebanon
+                                        </li>
+                                        <li>
+                                            <b>Website: </b>
+                                            https://www.coroporate.com
+                                        </li>
+                                        <li>
+                                            <b>Founded:</b>1987
+                                        </li>
+                                    </ul>
                                 </div>
-                                <h2 className="mt-3">
-                                    <b>Coroporate</b>
-                                </h2>
-                                <ul className="list-group my-4 list-unstyled">
-                                    <li>
-                                        <b>Industry: </b>Software
-                                    </li>
-                                    <li>
-                                        <b>Headquarters: </b>Beirut, Lebanon
-                                    </li>
-                                    <li>
-                                        <b>Website: </b>
-                                        https://www.coroporate.com
-                                    </li>
-                                    <li>
-                                        <b>Founded:</b>1987
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+                {this.render_body()}
+            </div>
         );
     }
 }

@@ -3,7 +3,8 @@ import CompanyOverview from "./company_overview";
 import CompanySkills from "./company_skills";
 import CompanyJobs from "./company_jobs";
 import CompanyMatching from "./company_matching";
-import CompanyApplications from './company_applications';
+import CompanyApplications from "./company_applications";
+import CompanyEditProfile from "./company_edit";
 
 class CompanyIntro extends React.Component {
     constructor(props) {
@@ -14,19 +15,24 @@ class CompanyIntro extends React.Component {
 
         this.onClickApplicants = this.onClickApplicants.bind(this);
         this.onClickApplications = this.onClickApplications.bind(this);
+        this.onClickEdit = this.onClickEdit.bind(this);
         this.onClickHome = this.onClickHome.bind(this);
     }
 
-    onClickApplicants(e) {
+    onClickApplicants() {
         this.setState({ tab: 1 });
     }
-    onClickApplications(e){
-        this.setState({ tab:2 });
+    onClickApplications() {
+        this.setState({ tab: 2 });
+    }
+    onClickEdit(){
+        this.setState({ tab: 3 });
     }
     onClickHome(e) {
         e.preventDefault();
         this.setState({ tab: 0 });
     }
+    
 
     render_body() {
         if (this.state.tab === 0) {
@@ -35,7 +41,6 @@ class CompanyIntro extends React.Component {
                     <CompanyOverview></CompanyOverview>
                     <CompanySkills></CompanySkills>
                     <CompanyJobs></CompanyJobs>
-                    {/* <CompanyMatching></CompanyMatching> */}
                 </div>
             );
         } else if (this.state.tab === 1) {
@@ -44,11 +49,16 @@ class CompanyIntro extends React.Component {
                     <CompanyMatching></CompanyMatching>
                 </div>
             );
-        }
-        else if (this.state.tab === 2) {
+        } else if (this.state.tab === 2) {
             return (
                 <div>
                     <CompanyApplications></CompanyApplications>
+                </div>
+            );
+        } else if (this.state.tab === 3) {
+            return (
+                <div>
+                    <CompanyEditProfile></CompanyEditProfile>
                 </div>
             );
         }
@@ -62,18 +72,24 @@ class CompanyIntro extends React.Component {
                         <div className="top-right">
                             <button
                                 onClick={this.onClickApplicants}
-                                className="btn btn-danger mr-2"
+                                className="btn btn-danger btn-round mr-2"
                             >
                                 Matching
                             </button>
                             <button
                                 onClick={this.onClickApplications}
-                                className="btn btn-danger mr-2"
+                                className="btn btn-danger btn-round mr-2"
                             >
                                 Applications
                             </button>
-                            <button href="#" className="btn btn-danger mr-2">
-                                Post a Job
+                            <button href="#" className="btn btn-danger btn-round mr-2">
+                                Jobs
+                            </button>
+                            <button
+                                onClick={this.onClickEdit}
+                                className="btn btn-danger btn-round mr-2"
+                            >
+                                Profile Settings
                             </button>
                         </div>
                         <div className="row">

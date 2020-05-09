@@ -21,13 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/jobs', function () {
-    return view('jobs');
-})->name('jobs');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/first_attempt', 'HomeController@first_attempt');
 Route::post('/contact-us', 'ContactMailController@sendMail');
 
 // Google

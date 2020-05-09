@@ -1,6 +1,16 @@
 import React from "react";
 
 class ProfileTab extends React.Component {
+    constructor(props){
+        super(props)
+
+        this.saveChanges =  this.saveChanges.bind(this);
+    }
+
+    saveChanges(e){
+        e.preventDefault();
+    }
+
     render() {
         return (
             <div className="tab-pane active" id="edit">
@@ -87,6 +97,7 @@ class ProfileTab extends React.Component {
                             type="submit"
                             value="Save"
                             className="btn btn-success"
+                            onClick={this.saveChanges}
                         ></input>
                     </div>
                 </form>

@@ -23,7 +23,7 @@
     <section id="header" class="site-wrapper">
         <div class="site-wrapper">
             <div class="top-right">
-                <a class="btn btn-outline-light btn-round" href="{{ route('jobs') }}">Jobs</a>
+                <a class="btn btn-outline-light btn-round" href="{{ route('home') }}">Jobs</a>
                 <button class="btn btn-outline-light btn-round" id="contact-btn">Contact Us</button>
             </div>
 

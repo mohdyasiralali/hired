@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import CompanyIntro from './company_intro';
 // import CompanyOverview from './company_overview';
 // import CompanySkills from './company_skills';
@@ -22,6 +21,6 @@ class CompanyProfile extends React.Component {
 
 export default CompanyProfile;
 
-if (document.getElementById("root")) {
-    ReactDOM.render(<CompanyProfile />, document.getElementById("root"));
-}
+// if (document.getElementById("root")) {
+//     ReactDOM.render(<CompanyProfile />, document.getElementById("root"));
+// }

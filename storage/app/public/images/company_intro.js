@@ -1,11 +1,11 @@
 import React from "react";
-import CompanyOverview from "./company_overview";
-import CompanySkills from "./company_skills";
-import CompanyJobs from "./company_jobs";
-import CompanyMatching from "./company_matching";
-import CompanyApplications from "./company_applications";
-import CompanyEditProfile from "./company_edit";
-import JobsPanel from "./jobsPanel/jobs_panel";
+import CompanyOverview from "../../../../resources/js/components/companyProfile/company_overview";
+import CompanySkills from "../../../../resources/js/components/companyProfile/company_skills";
+import CompanyJobs from "../../../../resources/js/components/companyProfile/company_jobs";
+import CompanyMatching from "../../../../resources/js/components/companyProfile/company_matching";
+import CompanyApplications from "../../../../resources/js/components/companyProfile/company_applications";
+import CompanyEditProfile from "../../../../resources/js/components/companyProfile/company_edit";
+import JobsPanel from "../../../../resources/js/components/companyProfile/jobsPanel/jobs_panel";
 
 class CompanyIntro extends React.Component {
     constructor(props) {
@@ -77,7 +77,7 @@ class CompanyIntro extends React.Component {
     render() {
         return (
             <div>
-                <section className="intro-section mb-5 pb-2">
+                <section className="intro-section mb-5">
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-10 col-lg-5">
@@ -85,8 +85,7 @@ class CompanyIntro extends React.Component {
                                     <div className="profile-img border border-light border-3">
                                         <img
                                             className="w-100"
-                                            src="/storage/images/co-logo.jpg"
-                                            alt=""
+                                            src="/storage/images/co-logo.jpg"                                            alt=""
                                         ></img>
                                     </div>
                                     <h2 className="mt-3">
@@ -117,7 +116,7 @@ class CompanyIntro extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right p-2">
                         <button
                             onClick={this.onClickApplicants}
                             className="btn btn-danger btn-round mr-2"
@@ -143,7 +142,7 @@ class CompanyIntro extends React.Component {
                             Profile Settings
                         </button>
                     </div>
-                </section>{" "}
+                </section>
                 {this.render_body()}
             </div>
         );

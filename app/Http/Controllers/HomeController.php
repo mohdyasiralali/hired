@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function first_attempt(){
+        return ['message'=>'hello'];
+        return auth()->profile;
+    }
 }

@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.sign_layout')
 
 @section('content')
 <div class="row justify-content-center mt-5">
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
         <img src="{{ asset('/storage/images/login.png') }}" alt="" class="w-100">
-    </div>
-    <div class="col-md-4 p-5">
+    </div> -->
+    <div class="col-md-5 p-5">
         <div class="card">
             <div class="card-body">
                 <h3 class="text-primary">Register</h3>

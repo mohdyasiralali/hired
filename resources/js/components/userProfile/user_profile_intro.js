@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import EditProfile from "../editProfile/edit_profile";
+import EditProfile from "./editProfile/edit_profile";
 
 class UserProfileIntro extends React.Component {
     constructor(props) {

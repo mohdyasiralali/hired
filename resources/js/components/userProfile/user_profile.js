@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import UserProfileIntro from './user_profile_intro';
 import UserProfileBio from './user_profile_bio';
 import UserProfileSkills from './user_profile_skills';

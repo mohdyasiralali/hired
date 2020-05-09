@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -27,7 +28,8 @@ class HomeController extends Controller
     }
 
     public function first_attempt(){
-        return ['message'=>'hello'];
-        return auth()->profile;
+        $user = Auth::user();
+        return $user->profile;
+        // return ['message'=>'hello'];
     }
 }

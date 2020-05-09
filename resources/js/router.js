@@ -3,9 +3,28 @@ import ReactDOM from "react-dom";
 import JobsHeader from "./components/jobs/header";
 import UserProfile from "./components/userProfile/user_profile";
 import CompanyProfile from "./components/companyProfile/company_profile";
+import EditProfile from "./components/userProfile/editProfile/edit_profile";
 
 const body = document.getElementById("body");
 const root = document.getElementById("root");
+
+function axs() {
+    //Profile ID
+    axios.get("/first_attempt").then(response => {
+        console.log(response.data);
+        if (response.data.id === 21) {
+            body.style =
+                "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
+            ReactDOM.render(
+                <EditProfile first_attempt={true} />,
+                document.getElementById("root")
+            );
+        }
+        return response.data;
+    });
+}
+
+axs();
 
 if (root) {
     ReactDOM.render(<JobsHeader />, document.getElementById("root"));
@@ -59,7 +78,7 @@ co_ex.className = "dropdown-item text-primary";
 co_ex.addEventListener("click", () => {
     if (root) {
         body.style =
-        "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
+            "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
         ReactDOM.render(<CompanyProfile />, document.getElementById("root"));
     }
 });
@@ -69,4 +88,4 @@ navbar_options.appendChild(co_btn);
 navbar_options.appendChild(co_ex);
 
 // require("./components/companyProfile/company_profile");
-require("./components/jobs/header");
+// require("./components/jobs/header");

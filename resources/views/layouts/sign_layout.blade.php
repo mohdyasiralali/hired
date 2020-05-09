@@ -11,7 +11,7 @@
     <title>Hired</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,17 +20,42 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
-
     <!-- FONTAWESOME -->
-    <script src="https://kit.fontawesome.com/41e7fe63fb.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/41e7fe63fb.js" crossorigin="anonymous"></script> -->
+
+    <style>
+        .btn-round {
+            border-radius: 20px;
+            width: 150px;
+        }
+
+        body,
+        html {
+            min-height: 100%;
+            font-family: Nunito;
+        }
+        .hero-image {
+            background-image: linear-gradient(to bottom, rgba(118, 109, 255, 0.5) 0%,
+                        rgb(136, 243, 255, 0.5)),
+                url('/storage/images/bg-jobs.jpg');
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .navbar-brand{
+            font-family: Pacifico;
+        }
+
+    </style>
 </head>
 
-<body id="body">
+<body class="hero-image">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white">
+        <nav class="navbar navbar-expand-md navbar-no-bg">
+
             <div class="container">
-                <a class="navbar-brand text-dark" href="{{ url('/') }}">
+                <a class="navbar-brand text-white" href="{{ url('/') }}">
                     <h2>Hired</h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -45,31 +70,14 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link btn btn-danger btn-round mr-2" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link btn btn-danger btn-round mr-2" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
                         @else
-                        <div id="nav-links"></div>
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <div id="nav-dropdown"></div>
-                                <hr>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
                         @endguest
                     </ul>
                 </div>

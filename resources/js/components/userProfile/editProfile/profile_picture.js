@@ -5,7 +5,7 @@ class ProfilePicture extends React.Component {
         return (
             <div id="profile-image" className="text-center">
                 <img
-                    src="/storage/images/avatar.png"
+                    src="/storage/images/default-avatar.png"
                     className="mx-auto rounded"
                     alt="avatar"
                     style={{width:"25%"}}

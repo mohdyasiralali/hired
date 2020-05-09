@@ -16,6 +16,54 @@ html {
     top: 18px;
 }
 
+.btn-round {
+    border-radius: 20px;
+}
+.navbar-brand{
+    font-family: Pacifico;
+}
+
+/* ================================== Main */
+
+/* ================================= Main Page - Jobs */
+.hero-image {
+    background-image: url("/storage/images/bg-jobs.jpg");
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: linear-gradient(
+        0deg,
+        rgba(118, 109, 255, 0.5) 0%,
+        rgb(136, 243, 255, 0.5) 100%
+    );
+    /* background: rgba(0, 0, 0, 0.7); */
+}
+
+.field-icon {
+    font-family: "Muli", FontAwesome, sans-serif;
+}
+
+.search-field {
+    border: none;
+    border-radius: 50px;
+}
+
+/* ================================= Main Page - Jobs */
+
+
+
+/* ================================= Intro - Personal Profile | Company Profile */
+
 .intro-section {
     padding-top: 20px;
     position: relative;
@@ -63,42 +111,4 @@ html {
     top: -100px;
     margin-bottom: -70px;
 }
-
-/* .download {
-    height: 330px;
-} */
-
-.btn-round {
-    border-radius: 20px;
-}
-.hero-image {
-    background-image: url("/storage/images/bg-jobs.jpg");
-    height: 400px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 400px;
-    background-image: linear-gradient(
-        0deg,
-        rgba(118, 109, 255, 0.5) 0%,
-        rgb(136, 243, 255, 0.5) 100%
-    );
-    /* background: rgba(0, 0, 0, 0.7); */
-}
-
-.field-icon {
-    font-family: "Muli", FontAwesome, sans-serif;
-}
-
-.search-field {
-    border: none;
-    border-radius: 50px;
-}
+/* ================================= Intro - Personal Profile | Company Profile */

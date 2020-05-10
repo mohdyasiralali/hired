@@ -27,9 +27,26 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function first_attempt(){
+    public function first_attempt()
+    {
         $user = Auth::user();
-        return $user->profile;
-        // return ['message'=>'hello'];
+        // return $user->profile->first_attempt;
+        return response()->json([
+            'first_attempt' => $user->profile->first_attempt,
+            'user_id' => $user->id
+            // 'profile' => $user->profile
+        ]);
+    }
+
+    public function auth_user()
+    {
+        $user = Auth::user();
+        $return_user = [
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'avatar' => $user->avatar
+        ];
+        return $return_user;
     }
 }

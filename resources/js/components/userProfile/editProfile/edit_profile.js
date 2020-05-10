@@ -8,30 +8,36 @@ import axios from "axios";
 class EditProfile extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            profile : {},
+            skills : {}
+        }
 
         this.axs = this.axs.bind(this);
         this.first_attempt = this.first_attempt.bind(this);
     }
+
+// ============================================ ON LOAD
 
     componentDidMount() {
         this.axs();
     }
 
     axs() {
-        //Profile ID
         axios
-            .get("/profile/21")
+            .get("/profile/"+this.props.user_id)
             .then(response => {
-                console.log(response.data);
+                console.log('from user id',response.data);
                 return response.data;
             })
             .then(json => {
-                // this.setState({ tasks: json });
+                this.setState({ profile: json.profile });
+                this.setState({ skills: json.skills });
             });
     }
 
     first_attempt() {
-        if (this.props.first_attempt === true) {
+        if (this.props.first_attempt === 1) {
             return (
                 <div className="alert alert-info alert-dismissible rounded mt-5">
                     <a
@@ -57,6 +63,23 @@ class EditProfile extends React.Component {
         }
     }
 
+// ============================================ EDIT? SAVE
+
+save(updatedProfile) {
+    axios
+        .put("/profile/"+this.props.user_id+"/edit", updatedProfile)
+        .then(response => {
+            console.log('save',response.data);
+            return response.data;
+        })
+        .then(json => {
+            this.setState({ profile: json.profile });
+            alert('Profile Successfully Updated');
+        });
+}
+
+// =============================================
+
     render() {
         return (
             <div>
@@ -66,7 +89,7 @@ class EditProfile extends React.Component {
                     // style={{ height: "1100px" }}
                 >
                     {/* Profile Picture */}
-                    <ProfilePicture></ProfilePicture>
+                    <ProfilePicture avatar={this.state.profile.avatar}></ProfilePicture>
 
                     <div className="row my-2">
                         <div className="col-lg-12 order-lg-2">
@@ -104,7 +127,16 @@ class EditProfile extends React.Component {
                             </ul>
                             <div className="tab-content py-4">
                                 {/* Tabs */}
-                                <ProfileTab></ProfileTab>
+                                <ProfileTab
+                                    name = {this.state.profile.name}
+                                    email = {this.state.profile.email}
+                                    bd = {this.state.profile.birth_day}
+                                    profession = {this.state.profile.profession}
+                                    fb = {this.state.profile.facebook_profile}
+                                    linkedin = {this.state.profile.linked_profile}
+                                    bio = {this.state.profile.bio}
+                                    save = {this.save.bind(this)}
+                                ></ProfileTab>
                                 <SkillsTab></SkillsTab>
                                 <PortfolioTab></PortfolioTab>
                             </div>

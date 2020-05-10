@@ -1,15 +1,61 @@
 import React from "react";
 
 class ProfileTab extends React.Component {
-    constructor(props){
-        super(props)
+    constructor(props) {
+        super(props);
 
-        this.saveChanges =  this.saveChanges.bind(this);
+        this.state = {
+            name: "",
+            bd: "",
+            profession: "",
+            fb:"",
+            linkedin:"",
+            bio:""
+        };
+
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeBD = this.onChangeBD.bind(this);
+        this.onChangeProfession = this.onChangeProfession.bind(this);
+        this.onChangefb = this.onChangefb.bind(this);
+        this.onChangeLinkedin = this.onChangeLinkedin.bind(this);
+        this.onChangeBio = this.onChangeBio.bind(this);
+        this.saveChanges = this.saveChanges.bind(this);
     }
 
-    saveChanges(e){
+    onChangeName(e) {
+        this.setState({ name: e.target.value });
+    }
+    onChangeBD(e) {
+        this.setState({ bd: e.target.value });
+    }
+    onChangeProfession(e) {
+        this.setState({ profession: e.target.value });
+    }
+    onChangefb(e) {
+        this.setState({ fb: e.target.value });
+    }
+    onChangeLinkedin(e){
+        this.setState({ linkedin: e.target.value });
+    }
+    onChangeBio(e){
+        this.setState({ bio: e.target.value });
+    }
+
+    saveChanges(e) {
         e.preventDefault();
+        // console.log('STATE', this.state)
+        let updatedProfile = {
+            'name' : (this.state.name === "" ? this.props.name : this.state.name),
+            'bd' : (this.state.bd === "" ? this.props.bd : this.state.bd),
+            'profession' : (this.state.profession === "" ? this.props.profession : this.state.profession),
+            'fb' : (this.state.fb === "" ? this.props.fb : this.state.fb),
+            'linkedin' : (this.state.linkedin === "" ? this.props.linkedin : this.state.linkedin),
+            'bio' : (this.state.bio === "" ? this.props.bio : this.state.bio)
+        };
+        // console.log(updateProfile);
+        this.props.save(updatedProfile);
     }
+    
 
     render() {
         return (
@@ -23,7 +69,8 @@ class ProfileTab extends React.Component {
                             <input
                                 className="form-control"
                                 type="text"
-                                // value="eg. John Smith"
+                                defaultValue={this.props.name}
+                                onChange={this.onChangeName}
                             ></input>
                         </div>
                     </div>
@@ -35,7 +82,7 @@ class ProfileTab extends React.Component {
                             <input
                                 className="form-control"
                                 type="email"
-                                defaultValue="john.smith@example.com"
+                                defaultValue={this.props.email}
                                 readOnly
                             ></input>
                         </div>
@@ -45,7 +92,12 @@ class ProfileTab extends React.Component {
                             Birth Day
                         </label>
                         <div className="col-lg-9">
-                            <input className="form-control" type="date"></input>
+                            <input
+                                className="form-control"
+                                type="date"
+                                defaultValue={this.props.bd}
+                                onChange={this.onChangeBD}
+                            ></input>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -56,7 +108,8 @@ class ProfileTab extends React.Component {
                             <input
                                 className="form-control"
                                 type="text"
-                                // value=""
+                                defaultValue={this.props.profession}
+                                onChange={this.onChangeProfession}
                             ></input>
                         </div>
                     </div>
@@ -68,7 +121,8 @@ class ProfileTab extends React.Component {
                             <input
                                 className="form-control"
                                 type="url"
-                                // value=""
+                                defaultValue={this.props.fb}
+                                onChange={this.onChangefb}
                             ></input>
                         </div>
                     </div>
@@ -80,7 +134,8 @@ class ProfileTab extends React.Component {
                             <input
                                 className="form-control"
                                 type="url"
-                                // value=""
+                                defaultValue={this.props.linkedin}
+                                onChange = {this.onChangeLinkedin}
                             ></input>
                         </div>
                     </div>
@@ -89,7 +144,12 @@ class ProfileTab extends React.Component {
                             Bio
                         </label>
                         <div className="col-lg-9">
-                            <textarea className="form-control" rows="5"></textarea>
+                            <textarea
+                                className="form-control"
+                                rows="5"
+                                defaultValue={this.props.bio}
+                                onChange = {this.onChangeBio}
+                            ></textarea>
                         </div>
                     </div>
                     <div className="text-right mt-5">

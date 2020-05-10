@@ -23,9 +23,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/contact-us', 'ContactMailController@sendMail');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/first_attempt', 'HomeController@first_attempt');
-Route::post('/contact-us', 'ContactMailController@sendMail');
+Route::get('/authenticated_user', 'HomeController@auth_user');
 
 // Google
 Route::get('/redirect', 'Auth\LoginController@redirectToProvider')->name('google');
@@ -34,4 +36,4 @@ Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 
 // Route::get('/profile/create', 'ProfileController@create');
 Route::get('/profile/{profile_id}', 'ProfileController@show');// No authentication
-Route::get('/profile/{profile_id}/edit', 'ProfileController@edit');
+Route::put('/profile/{profile_id}/edit', 'ProfileController@edit');

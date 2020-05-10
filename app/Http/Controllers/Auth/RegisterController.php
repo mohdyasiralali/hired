@@ -79,6 +79,8 @@ class RegisterController extends Controller
 
         $profile = new Profile;
         $profile->user_id = $user->id;
+        $profile->linked_profile = 'https://www.linkedin.com';
+        $profile->facebook_profile = 'https://www.facebook.com';
         $profile->save();
 
         return $user;

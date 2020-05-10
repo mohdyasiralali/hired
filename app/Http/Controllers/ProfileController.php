@@ -27,8 +27,12 @@ class ProfileController extends Controller
 
     public function show($id)
     {
-        $profile = Profile::find($id);
-        $user = User::find($profile->user_id);
+
+        // $profile = Profile::find($id);
+        // $user = User::find($profile->user_id);
+        $user = User::find($id);
+        $profile = $user->profile;
+
         $skills = $profile->skills;
         // $skills = $profile->skills->pluck('title');
         $plucked_skills = [];
@@ -53,11 +57,38 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function edit($id){
-        if($id != auth()->user->id){
-            // report(404);
+    public function edit($id, Request $request)
+    {
+        if ($id != Auth::user()->id) {
+            abort(403, 'Unauthorized action.');
         }
-        $profile = Profile::find($id);
 
+        $user = User::find($id);
+        $profile = $user->profile;
+
+        $user->name = $request->name;
+        $user->save();
+
+        $profile->birth_day = $request->bd;
+        $profile->profession = $request->profession;
+        $profile->facebook_profile = $request->fb;
+        $profile->linked_profile = $request->linkedin;
+        $profile->bio = $request->bio;
+        $profile->first_attempt = 0;
+        $profile->save();
+
+        return response()->json([
+            'profile' =>
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'avatar' => $user->avatar,
+                'bio' => $profile->bio,
+                'birth_day' => $profile->birth_day,
+                'linked_profile' => $profile->linked_profile,
+                'facebook_profile' => $profile->facebook_profile,
+                'profession' => $profile->profession
+            ]
+        ]);
     }
 }

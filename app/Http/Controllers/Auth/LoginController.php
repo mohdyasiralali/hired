@@ -83,6 +83,8 @@ class LoginController extends Controller
             
             $profile = new Profile;
             $profile->user_id = $newUser->id;
+            $profile->linked_profile = 'https://www.linkedin.com';
+            $profile->facebook_profile = 'https://www.facebook.com';
             $profile->save();
         }
         return redirect()->to('/home');

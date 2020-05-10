@@ -79169,10 +79169,15 @@ var EditProfile = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, EditProfile);
 
     _this = _super.call(this, props);
+    _this.state = {
+      profile: {},
+      skills: {}
+    };
     _this.axs = _this.axs.bind(_assertThisInitialized(_this));
     _this.first_attempt = _this.first_attempt.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // ============================================ ON LOAD
+
 
   _createClass(EditProfile, [{
     key: "componentDidMount",
@@ -79182,17 +79187,25 @@ var EditProfile = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "axs",
     value: function axs() {
-      //Profile ID
-      axios__WEBPACK_IMPORTED_MODULE_5___default.a.get("/profile/21").then(function (response) {
-        console.log(response.data);
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_5___default.a.get("/profile/" + this.props.user_id).then(function (response) {
+        console.log('from user id', response.data);
         return response.data;
-      }).then(function (json) {// this.setState({ tasks: json });
+      }).then(function (json) {
+        _this2.setState({
+          profile: json.profile
+        });
+
+        _this2.setState({
+          skills: json.skills
+        });
       });
     }
   }, {
     key: "first_attempt",
     value: function first_attempt() {
-      if (this.props.first_attempt === true) {
+      if (this.props.first_attempt === 1) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "alert alert-info alert-dismissible rounded mt-5"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -79211,7 +79224,25 @@ var EditProfile = /*#__PURE__*/function (_React$Component) {
           }
         }));
       }
-    }
+    } // ============================================ EDIT? SAVE
+
+  }, {
+    key: "save",
+    value: function save(updatedProfile) {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_5___default.a.put("/profile/" + this.props.user_id + "/edit", updatedProfile).then(function (response) {
+        console.log('save', response.data);
+        return response.data;
+      }).then(function (json) {
+        _this3.setState({
+          profile: json.profile
+        });
+
+        alert('Profile Successfully Updated');
+      });
+    } // =============================================
+
   }, {
     key: "render",
     value: function render() {
@@ -79220,7 +79251,9 @@ var EditProfile = /*#__PURE__*/function (_React$Component) {
       }, this.first_attempt()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container mt-5 bg-light p-5 rounded mb-5 h-100" // style={{ height: "1100px" }}
 
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_picture__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_picture__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        avatar: this.state.profile.avatar
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row my-2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-lg-12 order-lg-2"
@@ -79249,7 +79282,16 @@ var EditProfile = /*#__PURE__*/function (_React$Component) {
         className: "nav-link"
       }, "Portfolio"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tab-content py-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_tab__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_skills_tab__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_portfolio_tab__WEBPACK_IMPORTED_MODULE_4__["default"], null))))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profile_tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        name: this.state.profile.name,
+        email: this.state.profile.email,
+        bd: this.state.profile.birth_day,
+        profession: this.state.profile.profession,
+        fb: this.state.profile.facebook_profile,
+        linkedin: this.state.profile.linked_profile,
+        bio: this.state.profile.bio,
+        save: this.save.bind(this)
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_skills_tab__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_portfolio_tab__WEBPACK_IMPORTED_MODULE_4__["default"], null))))));
     }
   }]);
 
@@ -79378,7 +79420,7 @@ var ProfilePicture = /*#__PURE__*/function (_React$Component) {
         id: "profile-image",
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "/storage/images/default-avatar.png",
+        src: this.props.avatar,
         className: "mx-auto rounded",
         alt: "avatar",
         style: {
@@ -79451,14 +79493,81 @@ var ProfileTab = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ProfileTab);
 
     _this = _super.call(this, props);
+    _this.state = {
+      name: "",
+      bd: "",
+      profession: "",
+      fb: "",
+      linkedin: "",
+      bio: ""
+    };
+    _this.onChangeName = _this.onChangeName.bind(_assertThisInitialized(_this));
+    _this.onChangeBD = _this.onChangeBD.bind(_assertThisInitialized(_this));
+    _this.onChangeProfession = _this.onChangeProfession.bind(_assertThisInitialized(_this));
+    _this.onChangefb = _this.onChangefb.bind(_assertThisInitialized(_this));
+    _this.onChangeLinkedin = _this.onChangeLinkedin.bind(_assertThisInitialized(_this));
+    _this.onChangeBio = _this.onChangeBio.bind(_assertThisInitialized(_this));
     _this.saveChanges = _this.saveChanges.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ProfileTab, [{
+    key: "onChangeName",
+    value: function onChangeName(e) {
+      this.setState({
+        name: e.target.value
+      });
+    }
+  }, {
+    key: "onChangeBD",
+    value: function onChangeBD(e) {
+      this.setState({
+        bd: e.target.value
+      });
+    }
+  }, {
+    key: "onChangeProfession",
+    value: function onChangeProfession(e) {
+      this.setState({
+        profession: e.target.value
+      });
+    }
+  }, {
+    key: "onChangefb",
+    value: function onChangefb(e) {
+      this.setState({
+        fb: e.target.value
+      });
+    }
+  }, {
+    key: "onChangeLinkedin",
+    value: function onChangeLinkedin(e) {
+      this.setState({
+        linkedin: e.target.value
+      });
+    }
+  }, {
+    key: "onChangeBio",
+    value: function onChangeBio(e) {
+      this.setState({
+        bio: e.target.value
+      });
+    }
+  }, {
     key: "saveChanges",
     value: function saveChanges(e) {
-      e.preventDefault();
+      e.preventDefault(); // console.log('STATE', this.state)
+
+      var updatedProfile = {
+        'name': this.state.name === "" ? this.props.name : this.state.name,
+        'bd': this.state.bd === "" ? this.props.bd : this.state.bd,
+        'profession': this.state.profession === "" ? this.props.profession : this.state.profession,
+        'fb': this.state.fb === "" ? this.props.fb : this.state.fb,
+        'linkedin': this.state.linkedin === "" ? this.props.linkedin : this.state.linkedin,
+        'bio': this.state.bio === "" ? this.props.bio : this.state.bio
+      }; // console.log(updateProfile);
+
+      this.props.save(updatedProfile);
     }
   }, {
     key: "render",
@@ -79474,8 +79583,9 @@ var ProfileTab = /*#__PURE__*/function (_React$Component) {
         className: "col-lg-9"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
-        type: "text" // value="eg. John Smith"
-
+        type: "text",
+        defaultValue: this.props.name,
+        onChange: this.onChangeName
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -79485,7 +79595,7 @@ var ProfileTab = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
         type: "email",
-        defaultValue: "john.smith@example.com",
+        defaultValue: this.props.email,
         readOnly: true
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
@@ -79495,7 +79605,9 @@ var ProfileTab = /*#__PURE__*/function (_React$Component) {
         className: "col-lg-9"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
-        type: "date"
+        type: "date",
+        defaultValue: this.props.bd,
+        onChange: this.onChangeBD
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -79504,8 +79616,9 @@ var ProfileTab = /*#__PURE__*/function (_React$Component) {
         className: "col-lg-9"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
-        type: "text" // value=""
-
+        type: "text",
+        defaultValue: this.props.profession,
+        onChange: this.onChangeProfession
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -79514,8 +79627,9 @@ var ProfileTab = /*#__PURE__*/function (_React$Component) {
         className: "col-lg-9"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
-        type: "url" // value=""
-
+        type: "url",
+        defaultValue: this.props.fb,
+        onChange: this.onChangefb
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -79524,8 +79638,9 @@ var ProfileTab = /*#__PURE__*/function (_React$Component) {
         className: "col-lg-9"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
-        type: "url" // value=""
-
+        type: "url",
+        defaultValue: this.props.linkedin,
+        onChange: this.onChangeLinkedin
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -79534,7 +79649,9 @@ var ProfileTab = /*#__PURE__*/function (_React$Component) {
         className: "col-lg-9"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         className: "form-control",
-        rows: "5"
+        rows: "5",
+        defaultValue: this.props.bio,
+        onChange: this.onChangeBio
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-right mt-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -80127,25 +80244,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var body = document.getElementById("body");
-var root = document.getElementById("root");
+var root = document.getElementById("root"); // async function auth_user() {
+//     await axios
+//         .get("/authenticated_user")
+//         .then(response => {
+//             return response.data;
+//         })
+//         .then(json => {
+//             console.log("json", json);
+//             // user = json;
+//             return json;
+//         });
+// }
+// const user = auth_user();
 
 function axs() {
-  //Profile ID
   axios.get("/first_attempt").then(function (response) {
     console.log(response.data);
 
-    if (response.data.id === 21) {
+    if (response.data.first_attempt === 1) {
       body.style = "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
       react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_userProfile_editProfile_edit_profile__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        first_attempt: true
+        first_attempt: 1,
+        user_id: response.data.user_id // user={response.data.user}
+        // profile={response.data.profile}
+
       }), document.getElementById("root"));
     }
-
-    return response.data;
   });
 }
 
-axs();
+axs(); // --------------------------------------------------------------
+// =============================================================================
 
 if (root) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_jobs_header__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById("root"));
@@ -80175,10 +80305,14 @@ var profile_btn = document.createElement("button");
 profile_btn.textContent = "View Profile";
 profile_btn.className = "dropdown-item";
 profile_btn.addEventListener("click", function () {
-  if (root) {
-    body.style = "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
-    react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_userProfile_user_profile__WEBPACK_IMPORTED_MODULE_3__["default"], null), document.getElementById("root"));
-  }
+  axios.get("/first_attempt").then(function (response) {
+    if (root) {
+      body.style = "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
+      react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_userProfile_user_profile__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        user: response.data.user
+      }), document.getElementById("root"));
+    }
+  });
 });
 var co_btn = document.createElement("button");
 co_btn.textContent = "Create Company Profile";
@@ -80195,8 +80329,7 @@ co_ex.addEventListener("click", function () {
 });
 navbar_options.appendChild(profile_btn);
 navbar_options.appendChild(co_btn);
-navbar_options.appendChild(co_ex); // require("./components/companyProfile/company_profile");
-// require("./components/jobs/header");
+navbar_options.appendChild(co_ex);
 
 /***/ }),
 

@@ -21,7 +21,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- FONTAWESOME -->
-    <!-- <script src="https://kit.fontawesome.com/41e7fe63fb.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/41e7fe63fb.js" crossorigin="anonymous"></script>
 
     <style>
         .btn-round {

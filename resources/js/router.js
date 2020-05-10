@@ -8,24 +8,44 @@ import EditProfile from "./components/userProfile/editProfile/edit_profile";
 const body = document.getElementById("body");
 const root = document.getElementById("root");
 
+// async function auth_user() {
+//     await axios
+//         .get("/authenticated_user")
+//         .then(response => {
+//             return response.data;
+//         })
+//         .then(json => {
+//             console.log("json", json);
+//             // user = json;
+//             return json;
+//         });
+// }
+
+// const user = auth_user();
+
 function axs() {
-    //Profile ID
     axios.get("/first_attempt").then(response => {
         console.log(response.data);
-        if (response.data.id === 21) {
+        if (response.data.first_attempt === 1) {
             body.style =
                 "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
             ReactDOM.render(
-                <EditProfile first_attempt={true} />,
+                <EditProfile
+                    first_attempt={1}
+                    user_id = {response.data.user_id}
+                    // user={response.data.user}
+                    // profile={response.data.profile}
+                />,
                 document.getElementById("root")
             );
         }
-        return response.data;
     });
 }
-
 axs();
 
+// --------------------------------------------------------------
+
+// =============================================================================
 if (root) {
     ReactDOM.render(<JobsHeader />, document.getElementById("root"));
 }
@@ -60,11 +80,13 @@ let profile_btn = document.createElement("button");
 profile_btn.textContent = "View Profile";
 profile_btn.className = "dropdown-item";
 profile_btn.addEventListener("click", () => {
-    if (root) {
-        body.style =
-            "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
-        ReactDOM.render(<UserProfile />, document.getElementById("root"));
-    }
+    axios.get("/first_attempt").then(response => {
+        if (root) {
+            body.style =
+                "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
+            ReactDOM.render(<UserProfile user={response.data.user} />, document.getElementById("root"));
+        }
+    });
 });
 
 let co_btn = document.createElement("button");
@@ -86,6 +108,3 @@ co_ex.addEventListener("click", () => {
 navbar_options.appendChild(profile_btn);
 navbar_options.appendChild(co_btn);
 navbar_options.appendChild(co_ex);
-
-// require("./components/companyProfile/company_profile");
-// require("./components/jobs/header");

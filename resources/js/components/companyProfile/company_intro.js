@@ -21,6 +21,7 @@ class CompanyIntro extends React.Component {
         this.onClickHome = this.onClickHome.bind(this);
     }
 
+    // ===================================================== TABS
     onClickApplicants() {
         this.setState({ tab: 1 });
     }
@@ -37,13 +38,19 @@ class CompanyIntro extends React.Component {
         e.preventDefault();
         this.setState({ tab: 0 });
     }
+    // ===================================================== TABS
+    // ===================================================== RENDER TABS
 
     render_body() {
         if (this.state.tab === 0) {
             return (
                 <div>
-                    <CompanyOverview></CompanyOverview>
-                    <CompanySkills></CompanySkills>
+                    <CompanyOverview
+                        overview={this.props.overview}
+                    ></CompanyOverview>
+                    <CompanySkills
+                        skills={this.props.skills}
+                    ></CompanySkills>
                     <CompanyJobs></CompanyJobs>
                 </div>
             );
@@ -68,13 +75,15 @@ class CompanyIntro extends React.Component {
         } else if (this.state.tab === 4) {
             return (
                 <div>
-                    <JobsPanel></JobsPanel>
+                    <JobsPanel co_id={this.props.co_id}></JobsPanel>
                 </div>
             );
         }
     }
+    // ===================================================== RENDER TABS
 
     render() {
+        // console.log('pst  1 ', this.props.skills)
         return (
             <div>
                 <section className="intro-section mb-5 pb-2">
@@ -95,19 +104,21 @@ class CompanyIntro extends React.Component {
                                             onClick={this.onClickHome}
                                             className="text-decoration-none"
                                         >
-                                            <b>Coroporate</b>
+                                            <b>{this.props.name}</b>
                                         </a>
                                     </h2>
                                     <ul className="list-group my-4 list-unstyled">
                                         <li>
-                                            <b>Industry: </b>Software
+                                            <b>Industry: </b>
+                                            {this.props.industry}
                                         </li>
                                         <li>
-                                            <b>Headquarters: </b>Beirut, Lebanon
+                                            <b>Headquarters: </b>
+                                            {this.props.headquarter}
                                         </li>
                                         <li>
                                             <b>Website: </b>
-                                            https://www.coroporate.com
+                                            {this.props.website}
                                         </li>
                                     </ul>
                                 </div>

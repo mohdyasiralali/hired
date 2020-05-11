@@ -43,3 +43,10 @@ Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 // Route::get('/profile/create', 'ProfileController@create');
 Route::get('/profile/{profile_id}', 'ProfileController@show');// No authentication
 Route::put('/profile/{profile_id}/edit', 'ProfileController@edit');
+
+Route::post('/company/create', 'CompanyController@create');
+// Route::get('/company/skills/{co_id}', 'CompanyController@get_company_skills');
+
+Route::post('/job/create','JobController@create');
+Route::get('/jobs/get/{co_id}', 'JobController@get_jobs');
+Route::delete('/job/delete/{id}','JobController@delete');

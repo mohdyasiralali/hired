@@ -1,7 +1,13 @@
 import React from "react";
 
 class CompanySKills extends React.Component {
+    renderSkills(){
+        return this.props.skills.map(skill => {
+            return <li key={skill.id} className="col-3">{skill.title}</li>
+        })
+    }
     render() {
+        // console.log('yala wlee',this.props.skills)
         return (
             <section className="my-5">
                 <div className="container p-5 bg-light rounded">
@@ -18,13 +24,7 @@ class CompanySKills extends React.Component {
                         </div>
                         <div className="col-sm-8">
                             <ul className="row">
-                                <li className="col-3">Illustrator</li>
-                                <li className="col-3">Photoshop</li>
-                                <li className="col-3">Video Editing</li>
-                                <li className="col-3">Microsoft Office</li>
-                                <li className="col-3">HTML</li>
-                                <li className="col-3">Illustrator</li>
-                                <li className="col-3">Illustrator</li>
+                                {this.renderSkills()}
                             </ul>
                         </div>
                     </div>

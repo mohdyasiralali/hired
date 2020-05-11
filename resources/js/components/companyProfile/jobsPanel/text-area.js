@@ -2,15 +2,21 @@ import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 class TextArea extends React.Component {
+    constructor(props){
+        super(props)
+
+        this.handleEditorChange = this.handleEditorChange.bind(this);
+    }
     handleEditorChange(e) {
-        console.log("Content was updated:", e.target.getContent());
+        // console.log("Content was updated:", e.target.getContent());
+        this.props.getJD(e.target.getContent());
     }
 
     render() {
         return (
             <Editor
                 apiKey="udsl94mvhlj863z3qnbsmhnnkmxel3h62ofejquijfuj2d89"
-                initialValue="<p>Initial content</p>"
+                initialValue="<p>Type your JD</p>"
                 init={{
                     height: 500,
                     menubar: false,

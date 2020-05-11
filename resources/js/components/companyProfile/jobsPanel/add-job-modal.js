@@ -1,7 +1,55 @@
 import React from "react";
 import TextArea from "./text-area";
+import Swal from "sweetalert2";
 
 class AddJobModal extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            title: "",
+            type: "",
+            description: ""
+        };
+
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.onChangeType = this.onChangeType.bind(this);
+        this.onSubmitAddJob = this.onSubmitAddJob.bind(this);
+    }
+
+    onChangeTitle(e) {
+        this.setState({ title: e.target.value });
+    }
+    onChangeType(e) {
+        this.setState({ type: e.target.value });
+    }
+    onChangeDescription(jd) {
+        this.setState({ description: jd });
+    }
+
+    onSubmitAddJob(e) {
+        e.preventDefault();
+        let job = {
+            co_id: this.props.co_id,
+            title: this.state.title,
+            type: this.state.type === "" ? "Full Time" : this.state.type,
+            description: this.state.description
+        };
+        console.log("JOB ============>", job);
+        axios.post("/job/create", job).then(response => {
+            this.props.onJobAdd(response.data)
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "Successfully Created",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            // console.log(response.data);
+        });
+        $('#newJob').modal('hide');
+    }
+
     render() {
         return (
             // <!-- Modal -->
@@ -29,18 +77,22 @@ class AddJobModal extends React.Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <form>
+                            <form onSubmit={this.onSubmitAddJob}>
                                 <div className="form-group">
                                     <label>Title</label>
                                     <input
                                         type="text"
                                         placeholder="Job Title"
                                         className="form-control"
+                                        value={this.state.title}
+                                        onChange={this.onChangeTitle}
                                     ></input>
                                 </div>
                                 <div className="form-group">
                                     <select
                                         className="form-control"
+                                        value={this.state.type}
+                                        onChange={this.onChangeType}
                                     >
                                         <option>Full Time</option>
                                         <option>Part Time</option>
@@ -48,9 +100,15 @@ class AddJobModal extends React.Component {
                                 </div>
                                 <div className="form-group">
                                     <label>Description</label>
-                                    <TextArea></TextArea>
+                                    <TextArea
+                                        getJD={this.onChangeDescription.bind(
+                                            this
+                                        )}
+                                    ></TextArea>
                                 </div>
-                                <button className="btn btn-primary btn-round">
+                                <button
+                                    className="btn btn-primary btn-round"
+                                >
                                     Add
                                 </button>
                             </form>

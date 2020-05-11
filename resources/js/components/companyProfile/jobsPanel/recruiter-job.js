@@ -10,6 +10,7 @@ class JobRecruiter extends React.Component {
         };
         this.show = this.show.bind(this);
         this.render_edit = this.render_edit.bind(this);
+        this.onDeleteJob = this.onDeleteJob.bind(this);
     }
     show() {
         if (this.state.show === 0) {
@@ -25,6 +26,11 @@ class JobRecruiter extends React.Component {
             );
         }
     }
+
+    onDeleteJob() {
+        this.props.deleteJob(this.props.job);
+    }
+
     render() {
         let btn = "";
 
@@ -32,6 +38,7 @@ class JobRecruiter extends React.Component {
             btn = "Hide";
         } else btn = "Edit";
 
+        // console.log('JOBB======',this.props.job)
         return (
             <div>
                 <div
@@ -48,9 +55,11 @@ class JobRecruiter extends React.Component {
                         </div>
                         <div className="col-md-6 p-3">
                             <h3>
-                                <b>Full Stack Web Developer</b>
+                                <b>{this.props.job.title}</b>
                             </h3>
-                            <h6 className="text-muted">FULL TIME</h6>
+                            <h6 className="text-muted">
+                                {this.props.job.type}
+                            </h6>
                         </div>{" "}
                         <div className="col-md-4 p-3 text-right">
                             <button
@@ -59,7 +68,10 @@ class JobRecruiter extends React.Component {
                             >
                                 {btn}
                             </button>
-                            <button className="btn btn-danger btn-round mr-2">
+                            <button
+                                className="btn btn-danger btn-round mr-2"
+                                onClick={this.onDeleteJob}
+                            >
                                 Delete
                             </button>
                         </div>

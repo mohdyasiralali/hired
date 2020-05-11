@@ -40,13 +40,20 @@ class HomeController extends Controller
     public function auth_user()
     {
         $user = Auth::user();
-        // $return_user = [
-        //     'user_id' => $user->id,
-        //     'name' => $user->name,
-        //     'email' => $user->email,
-        //     'avatar' => $user->avatar
-        // ];
-        return $user->id;
+        $companies = $user->companies;
+        $companies_array = [];
+        foreach($companies as $company){
+            // $companies_array = [$companies_array]+[$company, $company->skills];
+            array_push($companies_array, ['company'=>$company, 'skills'=>$company->skills]);
+        }
+
+        $return_user = [
+            'user_id' => $user->id,
+            'companies' => $companies_array
+
+            // 'companies' => $user->companies
+        ];
+        return $return_user;
     }
 
     public function get_skills()

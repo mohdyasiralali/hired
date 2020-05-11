@@ -103,10 +103,12 @@ class NavDropdown extends React.Component {
         super(props);
 
         this.state = {
-            auth_user_id: null
+            auth_user_id: null,
+            companies: []
         };
 
         this.onClickViewProfile = this.onClickViewProfile.bind(this);
+        this.onClickCoProfile = this.onClickCoProfile.bind(this);
     }
     // =================================== GET USER ID
     componentDidMount() {
@@ -116,7 +118,9 @@ class NavDropdown extends React.Component {
     axs() {
         axios.get("/authenticated_user").then(response => {
             // console.log(response.data);
-            this.setState({ auth_user_id: response.data });
+            this.setState({ auth_user_id: response.data.user_id });
+            this.setState({ companies: response.data.companies });
+            // console.log('STATE', this.state);
         });
     }
 
@@ -135,12 +139,25 @@ class NavDropdown extends React.Component {
 
     // =================================== COMPANY PROFILE / PAGE
 
-    onClickCoProfile() {
+    onClickCoProfile(e) {
+        // console.log(this.state.companies);
+        // console.log('---------------------------------',e.target.id);
+        let index = parseInt(e.target.id) - 1;
+        // console.log(this.state.companies[index]);
+        let company = this.state.companies[index];
         if (root) {
             body.style =
                 "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
             ReactDOM.render(
-                <CompanyProfile />,
+                <CompanyProfile
+                    co_id={index + 1}
+                    name={company.company.name}
+                    industry={company.company.industry}
+                    headquarter={company.company.headquarter}
+                    website={company.company.website}
+                    overview={company.company.overview}
+                    skills={company.skills}
+                />,
                 document.getElementById("root")
             );
         }
@@ -148,21 +165,24 @@ class NavDropdown extends React.Component {
 
     // =================================== ON CLICK CREATE CO PAGE
 
-    onClickRenderCreate() {}
+    // onClickRenderCreate() {}
 
     // =================================== NAVBAR DROPDOWN LINKS TO RENDER
 
     companies() {
-        return (
-            <div>
-                <button
-                    className="dropdown-item"
-                    onClick={this.onClickCoProfile}
-                >
-                    Corporate Example
-                </button>
-            </div>
-        );
+        return this.state.companies.map(element => {
+            return (
+                <div key={element.company.id}>
+                    <button
+                        id={element.company.id}
+                        className="dropdown-item"
+                        onClick={this.onClickCoProfile}
+                    >
+                        {element.company.name}
+                    </button>
+                </div>
+            );
+        });
     }
     main() {
         return (
@@ -179,7 +199,6 @@ class NavDropdown extends React.Component {
                         className="dropdown-item"
                         data-toggle="modal"
                         data-target="#createPage"
-                        onClick={this.c}
                     >
                         Create Company Profile
                     </button>

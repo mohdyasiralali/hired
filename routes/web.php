@@ -27,6 +27,12 @@ Route::post('/contact-us', 'ContactMailController@sendMail');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/first_attempt', 'HomeController@first_attempt');
+Route::get('/skills', 'HomeController@get_skills');
+Route::post('/skills/add', 'HomeController@add_skills');
+Route::delete('/skill/delete/{skill_id}', 'HomeController@deleteSkill');
+
+
+Route::get('/user_skills','UserController@get_user_skills');
 Route::get('/authenticated_user', 'HomeController@auth_user');
 
 // Google

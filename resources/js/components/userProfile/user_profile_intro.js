@@ -14,7 +14,10 @@ class UserProfileIntro extends React.Component {
         if (root) {
             body.style =
                 "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
-            ReactDOM.render(<EditProfile />, document.getElementById("root"));
+            ReactDOM.render(
+                <EditProfile user_id={this.props.user_id} />,
+                document.getElementById("root")
+            );
         }
     }
     render() {
@@ -38,28 +41,28 @@ class UserProfileIntro extends React.Component {
                                 <div className="profile-img border border-light border-3">
                                     <img
                                         className="w-100"
-                                        src="/storage/images/avatar.png"
+                                        src={this.props.avatar}
                                         alt=""
                                     ></img>
                                 </div>
                                 <div>
                                     <h2 className="mt-3">
-                                        <b>Mohamnad</b>
+                                        <b>{this.props.name}</b>
                                     </h2>
-                                    <h4>Key Account Manager</h4>
+                                    <h4>{this.props.profession}</h4>
                                     <ul className="list-group my-4 list-unstyled">
                                         <li>
                                             <b>Email Address: </b>
-                                            mohd.alali@gmailcom
+                                            {this.props.email}
                                         </li>
                                         <li>
-                                            <b>Born:</b> August 25, 1987{" "}
+                                            <b>Born:</b> {this.props.bd}{" "}
                                         </li>
                                     </ul>
-                                    <a href="#">
+                                    <a href={this.props.fb}>
                                         <i className="fab fa-linkedin fa-2x"></i>
                                     </a>
-                                    <a href="#">
+                                    <a href={this.props.linkedin}>
                                         <i className="fab fa-facebook fa-2x"></i>
                                     </a>
                                 </div>

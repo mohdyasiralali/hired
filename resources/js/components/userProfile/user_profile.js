@@ -1,16 +1,49 @@
 import React from "react";
-import UserProfileIntro from './user_profile_intro';
-import UserProfileBio from './user_profile_bio';
-import UserProfileSkills from './user_profile_skills';
-import UserProfilePortfolio from './user_profile_portfolio';
+import UserProfileIntro from "./user_profile_intro";
+import UserProfileBio from "./user_profile_bio";
+import UserProfileSkills from "./user_profile_skills";
+import UserProfilePortfolio from "./user_profile_portfolio";
 
 class UserProfile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            profile: {},
+            skills: []
+        };
+    }
+    componentDidMount() {
+        this.axs();
+    }
+
+    axs() {
+        axios
+            .get("/profile/" + this.props.user_id)
+            .then(response => {
+                // console.log("from user profile", response.data);
+                return response.data;
+            })
+            .then(json => {
+                this.setState({ profile: json.profile });
+                this.setState({ skills: json.skills });
+            });
+    }
+
     render() {
         return (
             <div>
-                <UserProfileIntro></UserProfileIntro>
-                <UserProfileBio></UserProfileBio>
-                <UserProfileSkills></UserProfileSkills>
+                <UserProfileIntro
+                    user_id={this.props.user_id}
+                    avatar={this.state.profile.avatar}
+                    name={this.state.profile.name}
+                    email={this.state.profile.email}
+                    bd={this.state.profile.birth_day}
+                    profession={this.state.profile.profession}
+                    fb={this.state.profile.facebook_profile}
+                    linkedin={this.state.profile.linked_profile}
+                ></UserProfileIntro>
+                <UserProfileBio bio={this.state.profile.bio}></UserProfileBio>
+                <UserProfileSkills skills={this.state.skills}></UserProfileSkills>
                 <UserProfilePortfolio></UserProfilePortfolio>
             </div>
         );

@@ -62,7 +62,7 @@ class CompanyIntro extends React.Component {
         } else if (this.state.tab === 3) {
             return (
                 <div>
-                    <CompanyEditProfile></CompanyEditProfile>
+                    <CompanyEditProfile create={0}></CompanyEditProfile>
                 </div>
             );
         } else if (this.state.tab === 4) {
@@ -108,9 +108,6 @@ class CompanyIntro extends React.Component {
                                         <li>
                                             <b>Website: </b>
                                             https://www.coroporate.com
-                                        </li>
-                                        <li>
-                                            <b>Founded:</b>1987
                                         </li>
                                     </ul>
                                 </div>

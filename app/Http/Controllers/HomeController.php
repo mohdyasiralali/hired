@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,23 +31,47 @@ class HomeController extends Controller
     public function first_attempt()
     {
         $user = Auth::user();
-        // return $user->profile->first_attempt;
         return response()->json([
             'first_attempt' => $user->profile->first_attempt,
             'user_id' => $user->id
-            // 'profile' => $user->profile
         ]);
     }
 
     public function auth_user()
     {
         $user = Auth::user();
-        $return_user = [
-            'user_id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'avatar' => $user->avatar
-        ];
-        return $return_user;
+        // $return_user = [
+        //     'user_id' => $user->id,
+        //     'name' => $user->name,
+        //     'email' => $user->email,
+        //     'avatar' => $user->avatar
+        // ];
+        return $user->id;
+    }
+
+    public function get_skills()
+    {
+        $skills = Skill::get();
+        return $skills;
+    }
+
+    public function add_skills(Request $request)
+    {
+        $user = Auth::user();
+        $profile = $user->profile;
+        $skills = Skill::findMany($request);
+        $profile->skills()->attach($skills);
+
+        return $user->profile->skills;
+    }
+
+    public function deleteSkill($id)
+    {
+        $user = Auth::user();
+        $profile = $user->profile;
+        $skill = Skill::find($id);
+        $profile->skills()->detach($skill);
+
+        return $user->profile->skills;
     }
 }

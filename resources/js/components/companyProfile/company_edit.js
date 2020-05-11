@@ -4,14 +4,20 @@ class CompanyEditProfile extends React.Component {
         super(props);
     }
 
-    renderSelectedSkills() {
-        return (
-            <div>
-                <button className="btn btn-sm btn-info btn-round mr-1">
-                    React
-                </button>
-            </div>
-        );
+    componentDidMount() {
+        this.get_skills();
+    }
+
+    get_skills() {
+        axios
+            .get("/skills")
+            .then(response => {
+                // console.log("SKILLS", response.data);
+                return response.data;
+            })
+            .then(json => {
+                this.setState({ sys_skills: json });
+            });
     }
 
     renderSkills() {
@@ -24,15 +30,38 @@ class CompanyEditProfile extends React.Component {
         );
     }
 
+    // renderTitle() {
+    //     if (this.props.create !== 1) {
+    //         return (
+    //             <div>
+    //                 <b>Edit Company Profile</b>
+    //             </div>
+    //         );
+    //     }
+    //     return (
+    //         <div>
+    //             <b>Create Company Profile</b>
+    //         </div>
+    //     );
+    // }
+
     render() {
+        let my = "";
+        let header = "Create Company Profile";
+        if (this.props.create !== 1) {
+            my = "my-5";
+            header = "Edit Company Profile";
+        }
         return (
-            <section className="my-5">
+            <section className={my}>
                 <div className="container p-5 bg-light rounded">
                     <div className="row mb-2">
-                        <div className="col-sm-4">
+                        <div className="col-sm-6">
                             <div>
                                 <h3 className="text-primary">
-                                    <b>Edit Company Profile</b>
+                                    <div>
+                                        <b>{header}</b>
+                                    </div>
                                 </h3>
                             </div>
                         </div>
@@ -83,12 +112,12 @@ class CompanyEditProfile extends React.Component {
                             </div>
                             <div className="form-group row">
                                 <label className="col-lg-3 col-form-label form-control-label">
-                                    Founded
+                                    Headquarter
                                 </label>
                                 <div className="col-lg-9">
                                     <input
                                         className="form-control"
-                                        type="date"
+                                        type="text"
                                     ></input>
                                 </div>
                             </div>

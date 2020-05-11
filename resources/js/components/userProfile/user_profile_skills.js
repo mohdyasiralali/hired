@@ -1,6 +1,13 @@
 import React from "react";
 
 class UserProfileSkills extends React.Component {
+    renderSkills() {
+        let key = 0;
+        return this.props.skills.map(skill => {
+            key = key+1;
+            return <li className="col-3" key={key}>{skill}</li>;
+        });
+    }
     render() {
         return (
             <section className="my-5">
@@ -18,13 +25,7 @@ class UserProfileSkills extends React.Component {
                         </div>
                         <div className="col-sm-8">
                             <ul className="row">
-                                <li className="col-3">Illustrator</li>
-                                <li className="col-3">Photoshop</li>
-                                <li className="col-3">Video Editing</li>
-                                <li className="col-3">Microsoft Office</li>
-                                <li className="col-3">HTML</li>
-                                <li className="col-3">Illustrator</li>
-                                <li className="col-3">Illustrator</li>
+                                {this.renderSkills()}
                             </ul>
                         </div>
                     </div>

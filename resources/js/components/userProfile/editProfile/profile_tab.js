@@ -161,6 +161,9 @@ class ProfileTab extends React.Component {
                         ></input>
                     </div>
                 </form>
+                <hr></hr>
+                <h4 className="brand">Skills</h4>
+                {this.props.skills}
             </div>
         );
     }

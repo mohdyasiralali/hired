@@ -2,10 +2,39 @@ import React from "react";
 import TextArea from "./text-area";
 
 class JobEdit extends React.Component {
+    constructor(props){
+        super(props)
+
+        this.state = {
+            title:"",
+            description:""
+        }
+
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.onSubmitSave = this.onSubmitSave.bind(this);
+
+
+    }
+    onChangeTitle(e) {
+        this.setState({ title: e.target.value });
+    }
+    onChangeDescription(jd) {
+        this.setState({ description: jd });
+    }
+    onSubmitSave(e){
+        e.preventDefault();
+        // console.log(this.props.job.id ,'======' , this.state)
+        let newjob = {
+            'title': this.state.title === "" ? this.props.job.title : this.state.title,
+            'description': this.state.description === "" ? this.props.job.description : this.state.description,
+            'job_id' :  this.props.job.id
+        }
+        this.props.updateJob(newjob, this.props.job);
+    }
     render() {
         return (
             <div className="container p-5 mb-5">
-                <form>
+                <form onSubmit={this.onSubmitSave}>
                     <div className="row mb-3">
                         <div className="col-sm-4 mx-auto">
                             <div>
@@ -15,9 +44,11 @@ class JobEdit extends React.Component {
                             </div>
                         </div>
                         <div className="col-sm-8 mx-auto">
-                            <input type="text"
+                            <input
+                                type="text"
                                 className="w-100"
-                                defaultValue="Duis non volutpat arcu, eu mollis tellus."
+                                defaultValue={this.props.job.title}
+                                onChange = {this.onChangeTitle}
                             ></input>
                         </div>
                     </div>
@@ -30,7 +61,10 @@ class JobEdit extends React.Component {
                             </div>
                         </div>
                         <div className="col-sm-8 mx-auto">
-                            <TextArea></TextArea>
+                            <TextArea
+                                description={this.props.job.description}
+                                getJD={this.onChangeDescription.bind(this)}
+                            ></TextArea>
                         </div>
                     </div>
 

@@ -4,15 +4,37 @@ class CompanyJobs extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            jobs : []
+        }
+
         this.render_jobs = this.render_jobs.bind(this);
     }
 
+    componentDidMount() {
+        this.axs();
+    }
+
+    axs() {
+        axios.get("/jobs/get/" + this.props.co_id).then(response => {
+            // console.log('hola', response.data)
+            this.setState({ jobs: response.data });
+        });
+    }
+
     render_jobs() {
-        return (
-            <div>
-                <Job></Job>
-            </div>
-        );
+        return this.state.jobs.map(job => {
+            return (
+                <div key={job.id} className="w-100">
+                    <Job
+                        title={job.title}
+                        type={job.type}
+                        description={job.description}
+                        created_at={job.created_at}
+                    ></Job>
+                </div>
+            );
+        });
     }
 
     render() {

@@ -16,7 +16,7 @@ class TextArea extends React.Component {
         return (
             <Editor
                 apiKey="udsl94mvhlj863z3qnbsmhnnkmxel3h62ofejquijfuj2d89"
-                initialValue="<p>Type your JD</p>"
+                initialValue={this.props.description}
                 init={{
                     height: 500,
                     menubar: false,

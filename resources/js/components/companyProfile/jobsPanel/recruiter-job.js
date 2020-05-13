@@ -21,7 +21,10 @@ class JobRecruiter extends React.Component {
         if (this.state.show === 1) {
             return (
                 <div>
-                    <JobEdit></JobEdit>
+                    <JobEdit
+                        job={this.props.job}
+                        updateJob={this.updateJob.bind(this)}
+                    ></JobEdit>
                 </div>
             );
         }
@@ -29,6 +32,11 @@ class JobRecruiter extends React.Component {
 
     onDeleteJob() {
         this.props.deleteJob(this.props.job);
+    }
+
+    updateJob(newjob, job) {
+        this.props.updateJob(newjob,job);
+        this.setState({ show:0 })
     }
 
     render() {

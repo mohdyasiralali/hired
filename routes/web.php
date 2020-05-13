@@ -50,3 +50,4 @@ Route::post('/company/create', 'CompanyController@create');
 Route::post('/job/create','JobController@create');
 Route::get('/jobs/get/{co_id}', 'JobController@get_jobs');
 Route::delete('/job/delete/{id}','JobController@delete');
+Route::put('/job/update/{id}', 'JobController@update');

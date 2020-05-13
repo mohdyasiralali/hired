@@ -24,6 +24,15 @@ class JobController extends Controller
         return $co->jobs;
     }
 
+    public function update($id, Request $request){
+        $job = Job::find($id);
+        $job->title = $request->title;
+        $job->description = $request->description;
+        $job->save();
+
+        return $job;
+    }
+
     public function delete($id)
     {
         Job::where('id',$id)->delete();

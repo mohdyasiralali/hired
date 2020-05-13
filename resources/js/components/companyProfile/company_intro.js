@@ -51,7 +51,9 @@ class CompanyIntro extends React.Component {
                     <CompanySkills
                         skills={this.props.skills}
                     ></CompanySkills>
-                    <CompanyJobs></CompanyJobs>
+                    <CompanyJobs
+                        co_id = {this.props.co_id}
+                    ></CompanyJobs>
                 </div>
             );
         } else if (this.state.tab === 1) {

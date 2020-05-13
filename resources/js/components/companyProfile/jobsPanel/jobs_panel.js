@@ -60,6 +60,28 @@ class JobsPanel extends React.Component {
             }
         });
     }
+
+    updateJob(newjob, job){
+        // console.log('here we go ======>' ,job)
+        let url = '/job/update/'+job.id;
+        console.log(url)
+        axios.put(url, newjob)
+        .then(response => {
+            // console.log(response.data)
+             // console.log(response);
+             let jobs = this.state.jobs;
+             const index = jobs.indexOf(job);
+             if (index > -1) {
+                 jobs.splice(index, 1);
+                 jobs.push(response.data);
+             }
+             this.setState({
+                 jobs: jobs
+             })
+
+        });
+    }
+
     redner_jobs() {
         return this.state.jobs.map(job => {
             return (
@@ -68,6 +90,7 @@ class JobsPanel extends React.Component {
                         // job_id={job.id}
                         job={job}
                         deleteJob={this.deleteJob.bind(this)}
+                        updateJob={this.updateJob.bind(this)}
                     ></JobRecruiter>
                 </div>
             );

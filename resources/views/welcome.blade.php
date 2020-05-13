@@ -30,7 +30,7 @@
             <div class="overview p-5">
                 <div class="row">
                     <div class="col-lg-5">
-                        <h1 class="title mb-5">Hello</h1>
+                        <h1 class="title mb-5">Hired</h1>
                         <h1 class="subtitle">Lorem ipsum dolor sit amet.</h1>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi, corporis delectus perferendis debitis non maxime ea! Quaerat excepturi illo impedit, porro fuga illum iure adipisci, temporibus autem voluptates repellendus ipsam!</p>
                         <button class="btn btn-light btn-lg btn-round mb-5 mt-2" id="more-btn">Learn More</button>

@@ -37,7 +37,7 @@ class AddJobModal extends React.Component {
         };
         console.log("JOB ============>", job);
         axios.post("/job/create", job).then(response => {
-            this.props.onJobAdd(response.data)
+            this.props.onJobAdd(response.data);
             Swal.fire({
                 position: "top-center",
                 icon: "success",
@@ -47,7 +47,7 @@ class AddJobModal extends React.Component {
             });
             // console.log(response.data);
         });
-        $('#newJob').modal('hide');
+        $("#newJob").modal("hide");
     }
 
     render() {
@@ -101,14 +101,13 @@ class AddJobModal extends React.Component {
                                 <div className="form-group">
                                     <label>Description</label>
                                     <TextArea
+                                        description="<p>Write you Job Description</p>"
                                         getJD={this.onChangeDescription.bind(
                                             this
                                         )}
                                     ></TextArea>
                                 </div>
-                                <button
-                                    className="btn btn-primary btn-round"
-                                >
+                                <button className="btn btn-primary btn-round">
                                     Add
                                 </button>
                             </form>

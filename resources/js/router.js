@@ -11,6 +11,7 @@ import CompanyProfile from "./components/companyProfile/company_profile";
 import EditProfile from "./components/userProfile/editProfile/edit_profile";
 import CompanyEditProfile from "./components/companyProfile/company_edit";
 import Swal from "sweetalert2";
+import Challenges from './components/challenges/challenges'
 
 // CommonJS
 const body = document.getElementById("body");
@@ -49,7 +50,9 @@ function axs() {
                 document.getElementById("root")
             );
         } else {
-            ReactDOM.render(<JobsHeader />, document.getElementById("root"));
+            // ReactDOM.render(<JobsHeader />, document.getElementById("root"));
+            ReactDOM.render(<Challenges quiz_id = {1} />, document.getElementById("root"));
+
         }
     });
 }
@@ -251,7 +254,14 @@ const createPageModal = (
                     </button>
                 </div>
                 <div className="modal-body">
-                    <CompanyEditProfile create={1}></CompanyEditProfile>
+                    <CompanyEditProfile
+                        create={1}
+                        name=""
+                        industry=""
+                        headquarter=""
+                        website=""
+                        overview=""
+                    ></CompanyEditProfile>
                 </div>
                 <div className="modal-footer">
                     <button

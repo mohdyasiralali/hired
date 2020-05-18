@@ -63,7 +63,7 @@ class JobEdit extends React.Component {
                         <div className="col-sm-8 mx-auto">
                             <TextArea
                                 description={this.props.job.description}
-                                getJD={this.onChangeDescription.bind(this)}
+                                getContent={this.onChangeDescription.bind(this)}
                             ></TextArea>
                         </div>
                     </div>

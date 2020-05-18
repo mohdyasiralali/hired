@@ -45,9 +45,28 @@ Route::get('/profile/{profile_id}', 'ProfileController@show');// No authenticati
 Route::put('/profile/{profile_id}/edit', 'ProfileController@edit');
 
 Route::post('/company/create', 'CompanyController@create');
+Route::put('/company/update/{id}', 'CompanyController@update');
+Route::get('/company/auth/{id}', 'CompanyController@comp_auth');
 // Route::get('/company/skills/{co_id}', 'CompanyController@get_company_skills');
 
 Route::post('/job/create','JobController@create');
 Route::get('/jobs/get/{co_id}', 'JobController@get_jobs');
+Route::get('/jobs/get', 'JobController@get');
 Route::delete('/job/delete/{id}','JobController@delete');
 Route::put('/job/update/{id}', 'JobController@update');
+
+Route::post('/job/apply/{id}', 'ApplicationController@apply');
+Route::get('/applications/get/{id}', 'ApplicationController@get');
+Route::delete('/application/delete/{id}', 'ApplicationController@delete');
+
+Route::post('/image/upload', 'HomeController@upload');
+
+Route::get('/quizzes/get', 'QuizController@get');
+Route::get('/quizzes/get/{searchKey}', 'QuizController@search');
+
+Route::get('/quiz/get/{id}', 'QuizController@getQuiz');
+
+// Route::get('/questions/get/{id}', 'QuestionController@get');
+
+Route::get('/challenges/get/{id}', 'ChallengeController@get');
+Route::get('/challenges/get/{id}/{searchKey}', 'ChallengeController@search');

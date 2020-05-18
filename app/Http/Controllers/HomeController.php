@@ -42,9 +42,9 @@ class HomeController extends Controller
         $user = Auth::user();
         $companies = $user->companies;
         $companies_array = [];
-        foreach($companies as $company){
+        foreach ($companies as $company) {
             // $companies_array = [$companies_array]+[$company, $company->skills];
-            array_push($companies_array, ['company'=>$company, 'skills'=>$company->skills]);
+            array_push($companies_array, ['company' => $company, 'skills' => $company->skills]);
         }
 
         $return_user = [
@@ -80,5 +80,38 @@ class HomeController extends Controller
         $profile->skills()->detach($skill);
 
         return $user->profile->skills;
+    }
+
+    public function upload(Request $request)
+    {
+        // $validation = Validator::make($request->all(),
+        //   [
+        //       'image'=>'required|mimes:jpeg,jpg,png,gif|max:10000'
+        //   ]);
+
+        //   if ($validation->fails()){
+        //       $response=array('status'=>'error','errors'=>$validation->errors()->toArray());  
+        //       return response()->json($response);
+        //   }
+        return $request;
+
+        // if ($request->hasFile('image')) {
+
+        //     $uniqueid = uniqid();
+        //     $original_name = $request->file('image')->getClientOriginalName();
+        //     $size = $request->file('image')->getSize();
+        //     $extension = $request->file('image')->getClientOriginalExtension();
+
+        //     $name = $uniqueid . '.' . $extension;
+        //     $path = $request->file('image')->storeAs('storage/app/public/images/', $name);
+
+        //     if ($path) {
+        //         return response()->json(array('status' => 'success', 'message' => 'Image successfully uploaded', 'image' => '/storage/uploads/' . $name));
+        //     } else {
+        //         return response()->json(array('status' => 'error', 'message' => 'failed to upload image'));
+        //     }
+        // }
+
+        // return response()->json('Something went wrong');
     }
 }

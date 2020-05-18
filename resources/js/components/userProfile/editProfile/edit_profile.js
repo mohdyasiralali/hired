@@ -68,6 +68,20 @@ class EditProfile extends React.Component {
                 });
             });
     }
+
+    savepp(image) {
+        // const formData = new FormData();
+        // formData.append("image", image);
+
+        axios
+            .post("/image/upload", image)
+            .then(resposne => {
+                console.log('Response on Add Image',resposne.data);
+            })
+            // .then(data => {
+            //     console.log(data);
+            // });
+    }
     // =============================================
 
     render() {
@@ -80,6 +94,7 @@ class EditProfile extends React.Component {
                     {/* Profile Picture */}
                     <ProfilePicture
                         avatar={this.state.profile.avatar}
+                        savepp = {this.savepp.bind(this)}
                     ></ProfilePicture>
 
                     <div className="row my-2">

@@ -9,7 +9,7 @@ class TextArea extends React.Component {
     }
     handleEditorChange(e) {
         // console.log("Content was updated:", e.target.getContent());
-        this.props.getJD(e.target.getContent());
+        this.props.getContent(e.target.getContent());
     }
 
     render() {

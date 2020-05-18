@@ -5,8 +5,8 @@ class CompanyJobs extends React.Component {
         super(props);
 
         this.state = {
-            jobs : []
-        }
+            jobs: []
+        };
 
         this.render_jobs = this.render_jobs.bind(this);
     }
@@ -27,10 +27,13 @@ class CompanyJobs extends React.Component {
             return (
                 <div key={job.id} className="w-100">
                     <Job
-                        title={job.title}
-                        type={job.type}
-                        description={job.description}
-                        created_at={job.created_at}
+                        // job_id={job.id}
+                        // title={job.title}
+                        // type={job.type}
+                        // description={job.description}
+                        // created_at={job.created_at}
+                        job={job}
+                        auth={this.props.auth}
                     ></Job>
                 </div>
             );

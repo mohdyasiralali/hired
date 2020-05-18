@@ -8,7 +8,7 @@ class CompanyEditProfile extends React.Component {
 
         this.state = {
             name: "",
-            indusrty: "",
+            industry: "",
             headquarter: "",
             website: "",
             overview: "",
@@ -17,7 +17,7 @@ class CompanyEditProfile extends React.Component {
         };
 
         this.onChangeName = this.onChangeName.bind(this);
-        this.onChangeIndusrty = this.onChangeIndusrty.bind(this);
+        this.onChangeIndustry = this.onChangeIndustry.bind(this);
         this.onChangeHeadquarter = this.onChangeHeadquarter.bind(this);
         this.onChangeWebsite = this.onChangeWebsite.bind(this);
         this.onChangeOverview = this.onChangeOverview.bind(this);
@@ -43,8 +43,8 @@ class CompanyEditProfile extends React.Component {
     onChangeName(e) {
         this.setState({ name: e.target.value });
     }
-    onChangeIndusrty(e) {
-        this.setState({ indusrty: e.target.value });
+    onChangeIndustry(e) {
+        this.setState({ industry: e.target.value });
     }
     onChangeHeadquarter(e) {
         this.setState({ headquarter: e.target.value });
@@ -62,33 +62,67 @@ class CompanyEditProfile extends React.Component {
 
     onSubmitSave(e) {
         e.preventDefault();
-        console.log(this.state);
 
         let post = {
-            name: this.state.name,
-            industry: this.state.indusrty,
-            headquarter: this.state.headquarter,
-            website: this.state.website,
-            overview: this.state.overview,
+            name: this.state.name === "" ? this.props.name : this.state.name,
+            industry:
+                this.state.industry === ""
+                    ? this.props.industry
+                    : this.state.industry,
+            headquarter:
+                this.state.headquarter === ""
+                    ? this.props.headquarter
+                    : this.state.headquarter,
+            website:
+                this.state.website === ""
+                    ? this.props.website
+                    : this.state.website,
+            overview:
+                this.state.overview === ""
+                    ? this.props.overview
+                    : this.state.overview,
             skills: this.state.skills
         };
-        axios.post("/company/create", post).then(response => {
-            if (response.data.message === "added") {
-                Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: "Successfully Created",
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Something went wrong!"
-                });
-            }
-        });
+        console.log(post);
+
+        if (this.props.create === 1) {
+            axios.post("/company/create", post).then(response => {
+                if (response.data.message === "added") {
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "success",
+                        title: "Successfully Created",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!"
+                    });
+                }
+            });
+        } else {
+            let url = "/company/update/"+this.props.co_id;
+            axios.put(url, post).then(response => {
+                if (response.data.message === "updated") {
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "success",
+                        title: "Successfully Updated",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!"
+                    });
+                }
+            });
+        }
         $("#createPage").modal("hide");
     }
 
@@ -144,7 +178,8 @@ class CompanyEditProfile extends React.Component {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        value={this.state.name}
+                                        // value={this.state.name}
+                                        defaultValue={this.props.name}
                                         onChange={this.onChangeName}
                                         required
                                     ></input>
@@ -158,8 +193,9 @@ class CompanyEditProfile extends React.Component {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        value={this.state.indusrty}
-                                        onChange={this.onChangeIndusrty}
+                                        // value={this.state.indusrty}
+                                        defaultValue={this.props.industry}
+                                        onChange={this.onChangeIndustry}
                                         required
                                     ></input>
                                 </div>
@@ -172,7 +208,8 @@ class CompanyEditProfile extends React.Component {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        value={this.state.headquarter}
+                                        // value={this.state.headquarter}
+                                        defaultValue={this.props.headquarter}
                                         onChange={this.onChangeHeadquarter}
                                         required
                                     ></input>
@@ -186,7 +223,8 @@ class CompanyEditProfile extends React.Component {
                                     <input
                                         className="form-control"
                                         type="url"
-                                        value={this.state.website}
+                                        // value={this.state.website}
+                                        defaultValue={this.props.website}
                                         onChange={this.onChangeWebsite}
                                     ></input>
                                 </div>
@@ -199,7 +237,8 @@ class CompanyEditProfile extends React.Component {
                                     <textarea
                                         className="form-control"
                                         rows="5"
-                                        value={this.state.overview}
+                                        // value={this.state.overview}
+                                        defaultValue={this.props.overview}
                                         onChange={this.onChangeOverview}
                                         required
                                     ></textarea>

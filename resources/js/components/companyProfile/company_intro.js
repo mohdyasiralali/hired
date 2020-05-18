@@ -11,7 +11,8 @@ class CompanyIntro extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tab: 0
+            tab: 0,
+            auth: 0
         };
 
         this.onClickApplicants = this.onClickApplicants.bind(this);
@@ -19,6 +20,16 @@ class CompanyIntro extends React.Component {
         this.onClickEdit = this.onClickEdit.bind(this);
         this.onClickJobsPanel = this.onClickJobsPanel.bind(this);
         this.onClickHome = this.onClickHome.bind(this);
+        this.renderTab = this.renderTab.bind(this);
+
+    }
+    componentDidMount() {
+        this.check_user();
+    }
+    check_user() {
+        axios.get("/company/auth/" + this.props.co_id).then(response => {
+            this.setState({ auth: response.data });
+        });
     }
 
     // ===================================================== TABS
@@ -48,12 +59,8 @@ class CompanyIntro extends React.Component {
                     <CompanyOverview
                         overview={this.props.overview}
                     ></CompanyOverview>
-                    <CompanySkills
-                        skills={this.props.skills}
-                    ></CompanySkills>
-                    <CompanyJobs
-                        co_id = {this.props.co_id}
-                    ></CompanyJobs>
+                    <CompanySkills skills={this.props.skills}></CompanySkills>
+                    <CompanyJobs co_id={this.props.co_id} auth={this.state.auth}></CompanyJobs>
                 </div>
             );
         } else if (this.state.tab === 1) {
@@ -65,19 +72,60 @@ class CompanyIntro extends React.Component {
         } else if (this.state.tab === 2) {
             return (
                 <div>
-                    <CompanyApplications></CompanyApplications>
+                    <CompanyApplications co_id={this.props.co_id}></CompanyApplications>
                 </div>
             );
         } else if (this.state.tab === 3) {
             return (
                 <div>
-                    <CompanyEditProfile create={0}></CompanyEditProfile>
+                    <CompanyEditProfile
+                        create={0}
+                        name={this.props.name}
+                        industry={this.props.industry}
+                        headquarter={this.props.headquarter}
+                        website={this.props.website}
+                        overview={this.props.overview}
+                        co_id={this.props.co_id}
+                    ></CompanyEditProfile>
                 </div>
             );
         } else if (this.state.tab === 4) {
             return (
                 <div>
                     <JobsPanel co_id={this.props.co_id}></JobsPanel>
+                </div>
+            );
+        }
+    }
+
+    renderTab() {
+        if (this.state.auth === 1) {
+            return (
+                <div className="text-right">
+                    <button
+                        onClick={this.onClickApplicants}
+                        className="btn btn-danger btn-round mr-2"
+                    >
+                        Matching
+                    </button>
+                    <button
+                        onClick={this.onClickApplications}
+                        className="btn btn-danger btn-round mr-2"
+                    >
+                        Applications
+                    </button>
+                    <button
+                        onClick={this.onClickJobsPanel}
+                        className="btn btn-danger btn-round mr-2"
+                    >
+                        Jobs
+                    </button>
+                    <button
+                        onClick={this.onClickEdit}
+                        className="btn btn-danger btn-round mr-2"
+                    >
+                        Profile Settings
+                    </button>
                 </div>
             );
         }
@@ -127,7 +175,8 @@ class CompanyIntro extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="text-right">
+                    {this.renderTab()}
+                    {/* <div className="text-right">
                         <button
                             onClick={this.onClickApplicants}
                             className="btn btn-danger btn-round mr-2"
@@ -152,7 +201,7 @@ class CompanyIntro extends React.Component {
                         >
                             Profile Settings
                         </button>
-                    </div>
+                    </div> */}
                 </section>{" "}
                 {this.render_body()}
             </div>

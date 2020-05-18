@@ -138,3 +138,7 @@ hr.hr-text {
       left: 50%;
       transform: translate(-50%, -50%);
   }
+
+  .rounded-challenges{
+      border-radius: 15px !important;
+  }

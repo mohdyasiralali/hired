@@ -40,15 +40,21 @@ Route::get('/redirect', 'Auth\LoginController@redirectToProvider')->name('google
 Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 
 
+
+// User Profile
 // Route::get('/profile/create', 'ProfileController@create');
 Route::get('/profile/{profile_id}', 'ProfileController@show');// No authentication
 Route::put('/profile/{profile_id}/edit', 'ProfileController@edit');
 
+
+// Comapny
 Route::post('/company/create', 'CompanyController@create');
 Route::put('/company/update/{id}', 'CompanyController@update');
 Route::get('/company/auth/{id}', 'CompanyController@comp_auth');
 // Route::get('/company/skills/{co_id}', 'CompanyController@get_company_skills');
 
+
+// JOBS RECRUITER 
 Route::post('/job/create','JobController@create');
 Route::get('/jobs/get/{co_id}', 'JobController@get_jobs');
 Route::get('/jobs/get', 'JobController@get');
@@ -61,12 +67,21 @@ Route::delete('/application/delete/{id}', 'ApplicationController@delete');
 
 Route::post('/image/upload', 'HomeController@upload');
 
+
+// Quizzes
 Route::get('/quizzes/get', 'QuizController@get');
 Route::get('/quizzes/get/{searchKey}', 'QuizController@search');
-
 Route::get('/quiz/get/{id}', 'QuizController@getQuiz');
 
 // Route::get('/questions/get/{id}', 'QuestionController@get');
 
+
+
+// Challenges
 Route::get('/challenges/get/{id}', 'ChallengeController@get');
 Route::get('/challenges/get/{id}/{searchKey}', 'ChallengeController@search');
+Route::get('/challenge/questions/{id}', 'ChallengeController@get_questions');
+
+
+//SEARCH USERS
+Route::get('/users/get', 'HomeController@get_users');

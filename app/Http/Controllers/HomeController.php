@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Skill;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,6 +81,11 @@ class HomeController extends Controller
         $profile->skills()->detach($skill);
 
         return $user->profile->skills;
+    }
+
+    public function get_users(){
+        $users = User::select('id', 'name')->get()->take(5);
+        return $users;
     }
 
     public function upload(Request $request)

@@ -30,7 +30,8 @@ class QuizCard extends React.Component {
     onClickQuiz() {
         Swal.fire({
             title: "Are you sure?",
-            text: "The Quiz is MCQ, with General Questions regarding the selected feild. The minimum required grade to pass the quiz is between 65-70%. Otherwise, you will be restricted for 15 dyas",
+            text:
+                "The Quiz is MCQ, with General Questions regarding the selected feild. The minimum required grade to pass the quiz is between 65-70%. Otherwise, you will be restricted for 15 dyas",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -43,12 +44,12 @@ class QuizCard extends React.Component {
                 //     'Your file has been deleted.',
                 //     'success'
                 //   )
-                body.style =
-                    "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
+                // body.style = "background-color : #2F3133";
+                // "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
                 ReactDOM.render(
                     <Quiz
-                        quiz_id = {this.state.quiz.id}
-                        questions = {this.state.questions}
+                        quiz_id={this.state.quiz.id}
+                        questions={this.state.questions}
                     />,
                     document.getElementById("root")
                 );
@@ -58,15 +59,15 @@ class QuizCard extends React.Component {
 
     render() {
         return (
-            <div className="card jobcard rounded p-3">
-                <div className="w-100 px-2 my-2 text-center job-card-footer">
+            <div className="card jobcard rounded-circle p-3" style={{width:"200px", height:"200px"}}>
+                <div className="w-100 text-center my-auto">
                     <h5>
                         <strong>{this.state.quiz.title}</strong>
                     </h5>
                     <div className="row p-2">
                         <div className="col-md-12">
                             <button
-                                className="btn btn-primary btn-sm btn-round mr-2"
+                                className="btn btn-dark btn-sm btn-round mr-2"
                                 onClick={this.onClickQuiz}
                                 value={this.state.quiz.id}
                             >

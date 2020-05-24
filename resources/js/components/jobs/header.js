@@ -4,15 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 class JobsHeader extends React.Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
-            quizzes: [],
+            quizzes: []
         };
         this.onChangeSearch = this.onChangeSearch.bind(this);
-
     }
     componentDidMount() {
         this.axs();
@@ -23,8 +21,8 @@ class JobsHeader extends React.Component {
             this.setState({ quizzes: response.data });
         });
     }
-    onChangeSearch(e){
-        axios.get("/quizzes/get/"+e.target.value).then(response => {
+    onChangeSearch(e) {
+        axios.get("/quizzes/get/" + e.target.value).then(response => {
             this.setState({ quizzes: response.data });
         });
     }
@@ -40,7 +38,7 @@ class JobsHeader extends React.Component {
                                     <div className="w-100 text-center">
                                         <h1 className="text-light mb-4">
                                             <b>
-                                                Get matched with a job you love{" "}
+                                                Get matched with a job you <span className="brand" style={{fontSize:"40px"}}>love</span>{" "}
                                                 <i className="fas fa-heart"></i>
                                             </b>
                                         </h1>
@@ -49,23 +47,25 @@ class JobsHeader extends React.Component {
                                             <input
                                                 type="text"
                                                 className="py-1 px-3 w-25 field-icon search-field mx-2"
-                                                onChange = {this.onChangeSearch}
+                                                onChange={this.onChangeSearch}
                                             ></input>
                                         </div>
-
-                                        <h4 className="text-light mt-2">
+                                        <h4 className="text-light mt-3 mb-5">
                                             <b>
-                                                Search skills, professions &
-                                                companies
+                                                Search a job that you think you are belong to
                                             </b>
                                         </h4>
+                                        <hr className="w-50" style={{borderColor:'#fff'}}></hr>
+                                        <JobsLayout
+                                            quizzes={this.state.quizzes}
+                                        ></JobsLayout>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <JobsLayout quizzes={this.state.quizzes}></JobsLayout>
+                {/* <JobsLayout quizzes={this.state.quizzes}></JobsLayout> */}
             </div>
         );
     }

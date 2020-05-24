@@ -16,8 +16,8 @@ class Quiz extends React.Component {
             incorrect: 0,
             submit: 0,
             timer: 15,
-            subject: "",
-            letter: ""
+            // subject: "",
+            // letter: ""
         };
         this.handleClick = this.handleClick.bind(this);
         this.onClickSubmit = this.onClickSubmit.bind(this);
@@ -70,7 +70,7 @@ class Quiz extends React.Component {
                     this.state.correct +
                     " out of "+this.state.dataSet.length+"! Keep it up"
             });
-            body.style = "background-color: #e6e9f0";
+            // body.style = "background-color: #2F3133";
             ReactDOM.render(<Challenges 
                 quiz_id = {this.props.quiz_id}
             />, document.getElementById("root"));
@@ -105,8 +105,8 @@ class Quiz extends React.Component {
         }
 
         return (
-            <section className="my-5">
-                <div className="container p-5 bg-light rounded">
+            <section>
+                <div className="container p-5 bg-light rounded" style={{marginTop:"80px"}}>
                     <div className="text-right">
                         <p className="text-muted">
                             {this.state.current + 1}/{this.state.dataSet.length}

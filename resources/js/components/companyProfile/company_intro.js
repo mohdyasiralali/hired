@@ -63,18 +63,18 @@ class CompanyIntro extends React.Component {
                     <CompanyJobs co_id={this.props.co_id} auth={this.state.auth}></CompanyJobs>
                 </div>
             );
-        } else if (this.state.tab === 1) {
-            return (
-                <div>
-                    <CompanyMatching></CompanyMatching>
-                </div>
-            );
-        } else if (this.state.tab === 2) {
-            return (
-                <div>
-                    <CompanyApplications co_id={this.props.co_id}></CompanyApplications>
-                </div>
-            );
+        // } else if (this.state.tab === 1) {
+        //     return (
+        //         <div>
+        //             <CompanyMatching></CompanyMatching>
+        //         </div>
+        //     );
+        // } else if (this.state.tab === 2) {
+        //     return (
+        //         <div>
+        //             <CompanyApplications co_id={this.props.co_id}></CompanyApplications>
+        //         </div>
+        //     );
         } else if (this.state.tab === 3) {
             return (
                 <div>
@@ -102,7 +102,7 @@ class CompanyIntro extends React.Component {
         if (this.state.auth === 1) {
             return (
                 <div className="text-right">
-                    <button
+                    {/* <button
                         onClick={this.onClickApplicants}
                         className="btn btn-danger btn-round mr-2"
                     >
@@ -113,7 +113,7 @@ class CompanyIntro extends React.Component {
                         className="btn btn-danger btn-round mr-2"
                     >
                         Applications
-                    </button>
+                    </button> */}
                     <button
                         onClick={this.onClickJobsPanel}
                         className="btn btn-danger btn-round mr-2"

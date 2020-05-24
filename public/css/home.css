@@ -1,6 +1,7 @@
 body {
     font-size: 18px;
-    background-color: #e6e9f0;
+    background-color: #1E2529;
+    /* background-color: rgba(47, 49, 51, 0.8); */
     /* background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%); */
 }
 
@@ -19,11 +20,11 @@ html {
 .btn-round {
     border-radius: 20px;
 }
-.navbar-brand{
+.navbar-brand {
     font-family: Pacifico;
 }
 
-.brand{
+.brand {
     font-family: Pacifico;
     font-size: 30px;
 }
@@ -32,7 +33,7 @@ html {
 /* ================================= Main Page - Jobs */
 .hero-image {
     background-image: url("/storage/images/bg-jobs.jpg");
-    height: 400px;
+    height: 850px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -45,11 +46,13 @@ html {
     left: 0;
     width: 100%;
     min-height: 100%;
-    background-image: linear-gradient(
+    background-color: rgba(47, 49, 51, 0.8);
+    /* #2F3133; */
+    /* background-image: linear-gradient(
         0deg,
         rgba(118, 109, 255, 0.5) 0%,
         rgb(136, 243, 255, 0.5) 100%
-    );
+    ); */
     /* background: rgba(0, 0, 0, 0.7); */
 }
 
@@ -63,8 +66,6 @@ html {
 }
 
 /* ================================= Main Page - Jobs */
-
-
 
 /* ================================= Intro - Personal Profile | Company Profile */
 
@@ -119,26 +120,41 @@ html {
 
 hr.hr-text {
     position: relative;
-      border: none;
-      height: 1px;
-      background: #999;
-  }
-  
-  hr.hr-text::before {
-      content: attr(data-content);
-      display: inline-block;
-      background: #fff;
-      font-weight: bold;
-      font-size: 0.85rem;
-      color: #999;
-      border-radius: 30rem;
-      padding: 0.2rem 2rem;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-  }
+    border: none;
+    height: 1px;
+    background: #999;
+}
 
-  .rounded-challenges{
-      border-radius: 15px !important;
-  }
+hr.hr-text::before {
+    content: attr(data-content);
+    display: inline-block;
+    background: #fff;
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: #999;
+    border-radius: 30rem;
+    padding: 0.2rem 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.rounded-challenges {
+    border-radius: 15px !important;
+}
+
+
+.row-fluid {
+    overflow: hidden;
+    /* white-space: nowrap; */
+}
+
+/* .row-fluid .col-md-3 {
+    display: inline-block;
+    float: none;
+} */
+
+
+
+/* #2F3133; */

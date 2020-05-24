@@ -34,19 +34,23 @@
             min-height: 100%;
             font-family: Nunito;
         }
+
         .hero-image {
-            background-image: linear-gradient(to bottom, rgba(118, 109, 255, 0.5) 0%,
-                        rgb(136, 243, 255, 0.5)),
+            background-image: linear-gradient(to bottom, rgba(47, 49, 51, 0.8) 0%,
+                    rgba(30, 37, 41, 0.5)),
                 url('/storage/images/bg-jobs.jpg');
+
+            /* background-color: rgba(47, 49, 51, 0.8),
+                url('/storage/images/bg-jobs.jpg'); */
             height: 100%;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
-        .navbar-brand{
+
+        .navbar-brand {
             font-family: Pacifico;
         }
-
     </style>
 </head>
 

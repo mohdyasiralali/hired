@@ -5,26 +5,27 @@ import Swal from "sweetalert2";
 import TheChallenge from "./the_challenge";
 
 class ChallengeCard extends React.Component {
-    // constructor(props) {
-    //     super(props);
+    constructor(props) {
+        super(props);
 
-    //     this.state = {
-    //         quiz: [],
-    //         questions: []
-    //     };
-    //     this.onClickQuiz = this.onClickQuiz.bind(this);
-    // }
+        this.state = {
+            questions: []
+        };
+        this.onClickChallenge = this.onClickChallenge.bind(this);
+    }
 
-    // componentDidMount() {
-    //     this.axs();
-    // }
+    componentDidMount() {
+        this.axs();
+    }
 
-    // axs() {
-    //     axios.get("/challenge/get/" + this.props.quiz_id).then(response => {
-    //         this.setState({ quiz: response.data.quiz });
-    //         this.setState({ questions: response.data.questions });
-    //     });
-    // }
+    axs() {
+        axios
+            .get("/challenge/questions/" + this.props.challenge.id)
+            .then(response => {
+                console.log(response.data);
+                this.setState({ questions: response.data });
+            });
+    }
     onClickChallenge() {
         Swal.fire({
             title: "Are you sure?",
@@ -37,10 +38,10 @@ class ChallengeCard extends React.Component {
             confirmButtonText: "Yes,  continue!"
         }).then(result => {
             if (result.value) {
-                body.style =
-                    "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
+                // body.style =
+                //     "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
                 ReactDOM.render(
-                    <TheChallenge />,
+                    <TheChallenge questions={this.state.questions} />,
                     document.getElementById("root")
                 );
             }
@@ -49,7 +50,10 @@ class ChallengeCard extends React.Component {
 
     render() {
         return (
-            <div className="card jobcard rounded-challenges px-3 pb-2">
+            <div
+                className="card jobcard rounded-challenges pb-2"
+                style={{ minHeight: "300px" }}
+            >
                 <div className="px-2 my-2">
                     <div className="row p-2 text-center justify-content-center">
                         {/* <div className="col-md-4"> */}
@@ -68,15 +72,20 @@ class ChallengeCard extends React.Component {
                                 <strong>Familiar with: </strong>
                                 {this.props.challenge.techs}
                             </h6>
-                            <button
-                                className="btn btn-primary btn-sm btn-round mr-2"
-                                onClick={this.onClickChallenge}
-                                value={this.props.challenge.id}
-                            >
-                                Take the Challenge
-                            </button>
                         </div>
                     </div>
+                </div>
+                <div
+                className="w-100 text-center"
+                    style={{ position: "absolute", marginTop: "100%" }}
+                >
+                    <button
+                        className="btn btn-primary btn-sm btn-round mr-2"
+                        onClick={this.onClickChallenge}
+                        // value={this.props.challenge.id}
+                    >
+                        Take the Challenge
+                    </button>
                 </div>
             </div>
         );

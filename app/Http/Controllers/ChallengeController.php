@@ -21,4 +21,9 @@ class ChallengeController extends Controller
             ->orWhere('techs', 'like', '%' . $key . '%')->get();
         return $challenges;
     }
+
+    public function get_questions($id){
+        $challenges = Challenge::find($id);
+        return $challenges->questions;
+    }
 }

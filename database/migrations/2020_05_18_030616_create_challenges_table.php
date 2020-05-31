@@ -20,8 +20,13 @@ class CreateChallengesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('challenges' , function (Blueprint $table) {
+        Schema::table('challenges', function (Blueprint $table) {
             $table->bigInteger('quiz_id')->unsigned();
+            $table->bigInteger('company_id')->unsigned();
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->OnDelete('cascade');
 
             $table->foreign('quiz_id')
                 ->references('id')

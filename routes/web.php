@@ -81,6 +81,9 @@ Route::get('/quiz/get/{id}', 'QuizController@getQuiz');
 Route::get('/challenges/get/{id}', 'ChallengeController@get');
 Route::get('/challenges/get/{id}/{searchKey}', 'ChallengeController@search');
 Route::get('/challenge/questions/{id}', 'ChallengeController@get_questions');
+Route::get('/challenges/company/get/{id}', 'ChallengeController@get_company_challenges');
+Route::post('/challenge/create', 'ChallengeController@create');
+Route::delete('/challenge/delete/{id}', 'ChallengeController@delete');
 
 
 //SEARCH USERS

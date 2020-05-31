@@ -120,7 +120,7 @@ class EditProfile extends React.Component {
                                         Skills
                                     </a>
                                 </li> */}
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <a
                                         href=""
                                         data-target="#portfolio"
@@ -129,7 +129,7 @@ class EditProfile extends React.Component {
                                     >
                                         Portfolio
                                     </a>
-                                </li>
+                                </li> */}
                             </ul>
                             <div className="tab-content py-4">
                                 {/* Tabs */}
@@ -153,7 +153,7 @@ class EditProfile extends React.Component {
                                     sys_skills={this.state.sys_skills}
                                     skills={this.state.skills}
                                 ></SkillsTab> */}
-                                <PortfolioTab></PortfolioTab>
+                                {/* <PortfolioTab></PortfolioTab> */}
                             </div>
                         </div>
                     </div>

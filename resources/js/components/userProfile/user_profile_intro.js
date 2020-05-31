@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import EditProfile from "./editProfile/edit_profile";
+import UserProfileBio from "./user_profile_bio";
+import UserProfileSkills from "./user_profile_skills";
 
 class UserProfileIntro extends React.Component {
     constructor(props) {
@@ -9,11 +11,11 @@ class UserProfileIntro extends React.Component {
     }
 
     renderEdit() {
-        const body = document.getElementById("body");
+        // const body = document.getElementById("body");
         const root = document.getElementById("root");
         if (root) {
-            body.style =
-                "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
+            // body.style =
+            //     "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
             ReactDOM.render(
                 <EditProfile user_id={this.props.user_id} />,
                 document.getElementById("root")
@@ -22,21 +24,19 @@ class UserProfileIntro extends React.Component {
     }
     render() {
         return (
-            <section className="intro-section mb-5">
+            <section className="p-5">
+                {/* <div className="text-right">
+                    <button
+                        className="btn btn-primary btn-round mr-2"
+                        onClick={this.renderEdit}
+                    >
+                        Edit Profile
+                    </button>
+                </div> */}
                 <div className="container">
-                    <div className="top-right">
-                        <a href="#" className="btn btn-danger btn-round mr-2">
-                            Hire Me!
-                        </a>
-                        <button
-                            className="btn btn-danger btn-round mr-2"
-                            onClick={this.renderEdit}
-                        >
-                            Edit Profile
-                        </button>
-                    </div>
                     <div className="row">
-                        <div className="col-sm-10 col-lg-5">
+                        {/* <div className="col-sm-10 col-lg-5"> */}
+                        <div className="col-sm-10 col-md-5 bg-light p-4 rounded">
                             <div className="intro rounded mb-5">
                                 <div className="profile-img border border-light border-3">
                                     <img
@@ -59,14 +59,33 @@ class UserProfileIntro extends React.Component {
                                             <b>Born:</b> {this.props.bd}{" "}
                                         </li>
                                     </ul>
-                                    <a href={this.props.fb}>
-                                        <i className="fab fa-linkedin fa-2x"></i>
-                                    </a>
-                                    <a href={this.props.linkedin}>
-                                        <i className="fab fa-facebook fa-2x"></i>
-                                    </a>
+                                    <div>
+                                        <a href={this.props.fb}>
+                                            <i className="fab fa-linkedin fa-2x"></i>
+                                        </a>
+                                        <a href={this.props.linkedin}>
+                                            <i className="fab fa-facebook fa-2x"></i>
+                                        </a>
+                                    </div>
+
+                                    <div className="mt-1"> 
+                                        <button
+                                            className="btn btn-outline-primary btn-round mr-2 mb-3"
+                                            onClick={this.renderEdit}
+                                        >
+                                            Edit Profile
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="col-md-7">
+                            <UserProfileBio
+                                bio={this.props.bio}
+                            ></UserProfileBio>
+                            <UserProfileSkills
+                                skills={this.props.skills}
+                            ></UserProfileSkills>
                         </div>
                     </div>
                 </div>

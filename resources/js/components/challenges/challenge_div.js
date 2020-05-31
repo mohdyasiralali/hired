@@ -9,20 +9,11 @@ import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
-// import "prismjs/components/prism-css";
-// import "prismjs/components/prism-markup-templating";
 import parse from "html-react-parser";
 
-// const code = `// write you code here 
-// // -Familiarize yourself with concepts of Clean Code & Clean Design
-// `;
 class ChallengeDiv extends React.Component {
     constructor(props) {
         super(props);
-
-        // this.state = {
-        //     code
-        // };
 
         this.renderText = this.renderText.bind(this);
         this.onClickSubmit = this.onClickSubmit.bind(this);
@@ -33,12 +24,17 @@ class ChallengeDiv extends React.Component {
         return parse(this.props.question.question);
     }
 
-    onClickSubmit(){
+    onClickSubmit() {
         this.props.onClickSubmit();
-        // this.setState({ code:code })
     }
 
     render() {
+        let btn = "";
+        if (this.props.final_submit === 0) {
+            btn = "Next";
+        } else {
+            btn = "Submit";
+        }
         return (
             <div>
                 <div
@@ -75,7 +71,7 @@ class ChallengeDiv extends React.Component {
                         className="btn btn-danger btn-round"
                         onClick={this.onClickSubmit}
                     >
-                        Submit
+                        {btn}
                     </button>
                 </div>
             </div>

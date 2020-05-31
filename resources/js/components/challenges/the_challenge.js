@@ -19,13 +19,25 @@ class TheChallenge extends React.Component {
         var length = this.props.questions.length;
 
         this.state = {
+            auth_user_id: null,
             question: question,
             length: length,
             current: 0,
-            code
+            code,
+            answers: []
         };
 
         this.onClickChallenge = this.onClickChallenge.bind(this);
+    }
+
+    componentDidMount() {
+        this.axs();
+    }
+
+    axs() {
+        axios.get("/authenticated_user").then(response => {
+            this.setState({ auth_user_id: response.data.user_id });
+        });
     }
 
     onClickChallenge(id) {
@@ -45,28 +57,43 @@ class TheChallenge extends React.Component {
             confirmButtonText: "Yes,  continue!"
         }).then(result => {
             if (result.value) {
+                let answer = {
+                    question_id: this.state.question.id,
+                    user_id: this.state.auth_user_id,
+                    code: this.state.code
+                };
+
+                let answers = this.state.answers;
+                answers.push(answer);
+
                 if (this.state.current === this.state.length - 1) {
-                    alert("Todo something");
+                    console.log("SUBMITTED ANSWERS", this.state.answers);
                 } else {
                     this.setState({
-                        question: this.props.questions[this.state.current + 1]
+                        question: this.props.questions[this.state.current + 1],
+                        current: this.state.current + 1,
+                        code: code,
+                        answers: answers
                     });
-                    this.setState({ current: this.state.current + 1 });
-                    this.setState({ code: code });
+                    // this.setState({ current: this.state.current + 1 });
+                    // this.setState({ code: code });
+                    // this.setState({ answers:answers })
                 }
             }
         });
     }
 
     renderRightDiv() {
+        let index = -1;
         return this.props.questions.map(question => {
+            index = index + 1;
             let disable = false;
             let icon = <i className="far fa-check-circle mr-3"></i>;
-            if (this.state.current !== parseInt(question.id) - 1) {
+
+            if (this.state.current !== index) {
                 disable = true;
-                
             }
-            if (this.state.current > parseInt(question.id) - 1) {
+            if (this.state.current > index) {
                 icon = <i className="fas fa-check-circle mr-3"></i>;
             }
             return (
@@ -89,7 +116,12 @@ class TheChallenge extends React.Component {
     onCodeChange(code) {
         this.setState({ code: code });
     }
+
     render() {
+        let final_submit = 0
+        if (this.state.current === this.state.length - 1) {
+            final_submit = 1
+        }
         return (
             <section>
                 <div className="container-fluid">
@@ -100,15 +132,8 @@ class TheChallenge extends React.Component {
                                 code={this.state.code}
                                 onClickSubmit={this.onClickSubmit.bind(this)}
                                 onCodeChange={this.onCodeChange.bind(this)}
+                                final_submit = {final_submit}
                             ></ChallengeDiv>
-                            {/* <div className="text-right mt-5">
-                                <button
-                                    className="btn btn-danger btn-round"
-                                    onClick={this.onClickSubmit}
-                                >
-                                    Submit
-                                </button>
-                            </div> */}
                         </div>
                         <div className="col-md-3 py-5 text-center bg-white mx-auto rounded">
                             {this.renderRightDiv()}

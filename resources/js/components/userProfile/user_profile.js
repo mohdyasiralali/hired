@@ -2,7 +2,7 @@ import React from "react";
 import UserProfileIntro from "./user_profile_intro";
 import UserProfileBio from "./user_profile_bio";
 import UserProfileSkills from "./user_profile_skills";
-import UserProfilePortfolio from "./user_profile_portfolio";
+// import UserProfilePortfolio from "./user_profile_portfolio";
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -41,10 +41,12 @@ class UserProfile extends React.Component {
                     profession={this.state.profile.profession}
                     fb={this.state.profile.facebook_profile}
                     linkedin={this.state.profile.linked_profile}
+                    bio={this.state.profile.bio}
+                    skills={this.state.skills}
                 ></UserProfileIntro>
-                <UserProfileBio bio={this.state.profile.bio}></UserProfileBio>
-                <UserProfileSkills skills={this.state.skills}></UserProfileSkills>
-                <UserProfilePortfolio></UserProfilePortfolio>
+                {/* <UserProfileBio bio={this.state.profile.bio}></UserProfileBio>
+                <UserProfileSkills skills={this.state.skills}></UserProfileSkills> */}
+                {/* <UserProfilePortfolio></UserProfilePortfolio> */}
             </div>
         );
     }

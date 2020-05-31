@@ -70,7 +70,7 @@ axs();
 class NavLinks extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {users : []}
+        this.state = { users: [] };
         this.onClickJobs = this.onClickJobs.bind(this);
         // this.onFocusSearchUsers = this.onFocusSearchUsers.bind(this);
     }
@@ -88,7 +88,7 @@ class NavLinks extends React.Component {
 
     axs() {
         axios.get("/users/get").then(response => {
-            this.setState({users : response.data})
+            this.setState({ users: response.data });
             console.log(response.data);
         });
     }
@@ -103,8 +103,8 @@ class NavLinks extends React.Component {
                     <div>
                         <FontAwesomeIcon icon={faUserTie} />
                     </div>
-                    <div className="ml-3 mr-1" style={{width:"250px"}}>
-                        <FreeSolo users = {this.state.users}></FreeSolo>
+                    <div className="ml-3 mr-1" style={{ width: "250px" }}>
+                        <FreeSolo users={this.state.users}></FreeSolo>
                     </div>
                     {/* <input
                         type="text"
@@ -119,6 +119,12 @@ class NavLinks extends React.Component {
                     onClick={this.onClickJobs}
                 >
                     Jobs
+                </button>
+                <button
+                    className="btn btn-dark btn-round mr-2"
+                    onClick={this.onClickJobs}
+                >
+                    Companies
                 </button>
             </li>
         );
@@ -226,7 +232,7 @@ class NavDropdown extends React.Component {
                         className="dropdown-item"
                         onClick={this.onClickViewProfile}
                     >
-                        Viewe Profile
+                        View Profile
                     </button>
                     <button
                         type="button"

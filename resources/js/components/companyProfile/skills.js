@@ -13,6 +13,8 @@ class Skills extends React.Component {
     constructor(props) {
         super(props);
 
+
+        // SKILLS IN STATE TO BE DELETED 
         this.state = {
             skills: [],
             // user_skills: [],
@@ -50,7 +52,7 @@ class Skills extends React.Component {
     onSkillsChange(e, values) {
         e.preventDefault();
         this.setState({ skills: values });
-        this.returnSkills();
+        this.returnSkills(values);
         // console.log(this.state.user_skills);
     }
     // ======================================= DELETE SKILL
@@ -67,7 +69,7 @@ class Skills extends React.Component {
     // }
     // ======================================= ADD SKILL NOTE:{Missing Clear Autocomplete value}
 
-    returnSkills() {
+    returnSkills(values) {
 
         // let user_skills_array = [];
         // this.state.user_skills.map(skill => {
@@ -75,7 +77,7 @@ class Skills extends React.Component {
         // });
 
         let skills_array = [];
-        this.state.skills.map(skill => {
+        values.map(skill => {
             // let bool = user_skills_array.includes(skill.id);
             // if (!bool) {
             skills_array.push(skill.id);

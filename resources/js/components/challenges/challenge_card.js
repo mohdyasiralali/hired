@@ -28,9 +28,9 @@ class ChallengeCard extends React.Component {
     }
     onClickChallenge() {
         Swal.fire({
-            title: "Are you sure?",
+            title: "READ ME!",
             text:
-                "The Challenge is set of coding questions, regarding the selected feild. The minimum required grade to pass the challenge is between 65-70%. Otherwise, you will be restricted for 15 dyas",
+                "The Challenge is set of coding questions. Whenever you finish a question and hit the Next button, you can't go back. Keep your code, intended and clean.",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

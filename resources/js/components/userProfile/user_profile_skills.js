@@ -5,12 +5,12 @@ class UserProfileSkills extends React.Component {
         let key = 0;
         return this.props.skills.map(skill => {
             key = key+1;
-            return <li className="col-3" key={key}>{skill}</li>;
+            return <li className="col-4" key={key}>{skill}</li>;
         });
     }
     render() {
         return (
-            <section className="my-5">
+            <section className="mt-3">
                 <div className="container p-5 bg-light rounded">
                     <div className="row">
                         <div className="col-sm-4">

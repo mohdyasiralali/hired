@@ -3,13 +3,13 @@ import React from "react";
 class CompanySKills extends React.Component {
     renderSkills(){
         return this.props.skills.map(skill => {
-            return <li key={skill.id} className="col-3">{skill.title}</li>
+            return <li key={skill.id} className="col-4">{skill.title}</li>
         })
     }
     render() {
         // console.log('yala wlee',this.props.skills)
         return (
-            <section className="my-5">
+            <section className="mt-3">
                 <div className="container p-5 bg-light rounded">
                     <div className="row">
                         <div className="col-sm-4">

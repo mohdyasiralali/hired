@@ -27,6 +27,8 @@ class CreateCquestionsTable extends Migration
                 ->references('id')
                 ->on('challenges')
                 ->OnDelete('cascade');
+
+
         });
     }
 

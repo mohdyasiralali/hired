@@ -11,17 +11,9 @@ class CompanyIntro extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tab: 0,
             auth: 0
         };
-
-        this.onClickApplicants = this.onClickApplicants.bind(this);
-        this.onClickApplications = this.onClickApplications.bind(this);
-        this.onClickEdit = this.onClickEdit.bind(this);
-        this.onClickJobsPanel = this.onClickJobsPanel.bind(this);
-        this.onClickHome = this.onClickHome.bind(this);
         this.renderTab = this.renderTab.bind(this);
-
     }
     componentDidMount() {
         this.check_user();
@@ -33,99 +25,56 @@ class CompanyIntro extends React.Component {
     }
 
     // ===================================================== TABS
-    onClickApplicants() {
-        this.setState({ tab: 1 });
-    }
-    onClickApplications() {
-        this.setState({ tab: 2 });
-    }
-    onClickEdit() {
-        this.setState({ tab: 3 });
-    }
-    onClickJobsPanel() {
-        this.setState({ tab: 4 });
-    }
-    onClickHome(e) {
-        e.preventDefault();
-        this.setState({ tab: 0 });
-    }
-    // ===================================================== TABS
     // ===================================================== RENDER TABS
-
-    render_body() {
-        if (this.state.tab === 0) {
-            return (
-                <div>
-                    <CompanyOverview
-                        overview={this.props.overview}
-                    ></CompanyOverview>
-                    <CompanySkills skills={this.props.skills}></CompanySkills>
-                    <CompanyJobs co_id={this.props.co_id} auth={this.state.auth}></CompanyJobs>
-                </div>
-            );
-        // } else if (this.state.tab === 1) {
-        //     return (
-        //         <div>
-        //             <CompanyMatching></CompanyMatching>
-        //         </div>
-        //     );
-        // } else if (this.state.tab === 2) {
-        //     return (
-        //         <div>
-        //             <CompanyApplications co_id={this.props.co_id}></CompanyApplications>
-        //         </div>
-        //     );
-        } else if (this.state.tab === 3) {
-            return (
-                <div>
-                    <CompanyEditProfile
-                        create={0}
-                        name={this.props.name}
-                        industry={this.props.industry}
-                        headquarter={this.props.headquarter}
-                        website={this.props.website}
-                        overview={this.props.overview}
-                        co_id={this.props.co_id}
-                    ></CompanyEditProfile>
-                </div>
-            );
-        } else if (this.state.tab === 4) {
-            return (
-                <div>
-                    <JobsPanel co_id={this.props.co_id}></JobsPanel>
-                </div>
-            );
-        }
-    }
+    //     <CompanyJobs
+    //       co_id={this.props.co_id}
+    //       auth={this.state.auth}
+    //     ></CompanyJobs>
 
     renderTab() {
         if (this.state.auth === 1) {
             return (
-                <div className="text-right">
-                    {/* <button
-                        onClick={this.onClickApplicants}
-                        className="btn btn-danger btn-round mr-2"
-                    >
-                        Matching
-                    </button>
-                    <button
-                        onClick={this.onClickApplications}
-                        className="btn btn-danger btn-round mr-2"
-                    >
-                        Applications
-                    </button> */}
-                    <button
-                        onClick={this.onClickJobsPanel}
-                        className="btn btn-danger btn-round mr-2"
-                    >
-                        Jobs
-                    </button>
-                    <button
-                        onClick={this.onClickEdit}
-                        className="btn btn-danger btn-round mr-2"
-                    >
-                        Profile Settings
-                    </button>
+                <div className="row my-5">
+                    <div className="col-lg-12">
+                        <ul className="nav nav-tabs">
+                            <li className="nav-item">
+                                <a
+                                    href=""
+                                    data-target="#editTab"
+                                    data-toggle="tab"
+                                    className="nav-link active"
+                                >
+                                    Edit
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a
+                                    href=""
+                                    data-target="#jobsTab"
+                                    data-toggle="tab"
+                                    className="nav-link"
+                                >
+                                    Challenges
+                                </a>
+                            </li>
+                        </ul>
+                        <div className="tab-content">
+                            <div className="tab-pane active" id="editTab">
+                                <CompanyEditProfile
+                                    create={0}
+                                    name={this.props.name}
+                                    industry={this.props.industry}
+                                    headquarter={this.props.headquarter}
+                                    website={this.props.website}
+                                    overview={this.props.overview}
+                                    co_id={this.props.co_id}
+                                ></CompanyEditProfile>
+                            </div>
+                            <div className="tab-pane" id="jobsTab">
+                                <JobsPanel co_id={this.props.co_id}></JobsPanel>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             );
         }
@@ -136,11 +85,11 @@ class CompanyIntro extends React.Component {
         // console.log('pst  1 ', this.props.skills)
         return (
             <div>
-                <section className="intro-section mb-5 pb-2">
+                <section className="mb-5 p-5">
                     <div className="container">
                         <div className="row">
-                            <div className="col-sm-10 col-lg-5">
-                                <div className="intro rounded mb-5">
+                            <div className="col-md-5 p-5 bg-light rounded">
+                                <div className="intro rounded mb-5 p-3">
                                     <div className="profile-img border border-light border-3">
                                         <img
                                             className="w-100"
@@ -149,13 +98,7 @@ class CompanyIntro extends React.Component {
                                         ></img>
                                     </div>
                                     <h2 className="mt-3">
-                                        <a
-                                            href=""
-                                            onClick={this.onClickHome}
-                                            className="text-decoration-none"
-                                        >
                                             <b>{this.props.name}</b>
-                                        </a>
                                     </h2>
                                     <ul className="list-group my-4 list-unstyled">
                                         <li>
@@ -173,37 +116,19 @@ class CompanyIntro extends React.Component {
                                     </ul>
                                 </div>
                             </div>
+                            <div className="col-md-7">
+                                <CompanyOverview
+                                    overview={this.props.overview}
+                                ></CompanyOverview>
+                                <CompanySkills
+                                    skills={this.props.skills}
+                                ></CompanySkills>
+                            </div>
                         </div>
                     </div>
-                    {this.renderTab()}
-                    {/* <div className="text-right">
-                        <button
-                            onClick={this.onClickApplicants}
-                            className="btn btn-danger btn-round mr-2"
-                        >
-                            Matching
-                        </button>
-                        <button
-                            onClick={this.onClickApplications}
-                            className="btn btn-danger btn-round mr-2"
-                        >
-                            Applications
-                        </button>
-                        <button
-                            onClick={this.onClickJobsPanel}
-                            className="btn btn-danger btn-round mr-2"
-                        >
-                            Jobs
-                        </button>
-                        <button
-                            onClick={this.onClickEdit}
-                            className="btn btn-danger btn-round mr-2"
-                        >
-                            Profile Settings
-                        </button>
-                    </div> */}
+
+                    <div className="container">{this.renderTab()}</div>
                 </section>{" "}
-                {this.render_body()}
             </div>
         );
     }

@@ -3,7 +3,7 @@ import React from "react";
 class CompanyOverview extends React.Component {
     render() {
         return (
-            <section className="my-5">
+            <section>
                 <div className="container p-5 bg-light rounded">
                     <div className="row">
                         <div className="col-sm-4">

@@ -6,8 +6,10 @@ class CompanyEditProfile extends React.Component {
     constructor(props) {
         super(props);
 
+        let name = this.props.name;
+
         this.state = {
-            name: "",
+            name: name,
             industry: "",
             headquarter: "",
             website: "",
@@ -127,15 +129,16 @@ class CompanyEditProfile extends React.Component {
     }
 
     render() {
+        console.log('Name =====>' , this.props.name, 'Create?', this.props.create)
         let my = "";
         let header = "Create Company Profile";
         if (this.props.create !== 1) {
-            my = "my-5";
+            // my = "my-5";
             header = "Edit Company Profile";
         }
         return (
             <section className={my}>
-                <div className="container p-5 bg-light rounded">
+                <div className="p-5 bg-light rounded-bottom">
                     <div className="row mb-2">
                         <div className="col-sm-6">
                             <div>
@@ -179,7 +182,7 @@ class CompanyEditProfile extends React.Component {
                                         className="form-control"
                                         type="text"
                                         // value={this.state.name}
-                                        defaultValue={this.props.name}
+                                        defaultValue={this.state.name}
                                         onChange={this.onChangeName}
                                         required
                                     ></input>

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use Illuminate\Http\Request;
 use App\Challenge;
 use App\cquestions;
 use App\Question;
 use App\Quiz;
 use Illuminate\Broadcasting\Channel;
+use Illuminate\Support\Facades\Auth;
+
 
 class ChallengeController extends Controller
 {
@@ -15,6 +18,7 @@ class ChallengeController extends Controller
     {
         $quiz = Quiz::find($id);
         $challenges = $quiz->challenges;
+
         return $challenges;
     }
 
@@ -74,5 +78,31 @@ class ChallengeController extends Controller
     {
         Challenge::where('id', $id)->delete();
         return response()->json(['message' => 'Deleted']);
+    }
+
+    public function submit(Request $request)
+    {
+        $array =  $request->answers;
+        foreach ($array as $element) {
+            $answer = new Answer;
+            $answer->question_id = $element['question_id'];
+            $answer->user_id = $element['user_id'];
+            $answer->code = $element['code'];
+            $answer->challenge_id = $element['challenge_id'];
+            $answer->save();
+        }
+
+        return response()->json(['message' => 'Successfully added']);
+    }
+
+    public function user_challenges($id)
+    {
+        $challenges = Answer::select('challenge_id')->where('user_id', $id)->get();
+        $arr = [];
+        foreach ($challenges as $challenge) {
+            array_push($arr, $challenge->challenge_id);
+        }
+        $unique = array_unique($arr);
+        return $unique;
     }
 }

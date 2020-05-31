@@ -23,6 +23,7 @@ class CreateChallengesTable extends Migration
         Schema::table('challenges', function (Blueprint $table) {
             $table->bigInteger('quiz_id')->unsigned();
             $table->bigInteger('company_id')->unsigned();
+            
             $table->foreign('company_id')
                 ->references('id')
                 ->on('companies')

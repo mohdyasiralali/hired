@@ -13,4 +13,8 @@ class Challenge extends Model
     public function questions(){
         return $this->hasMany(cquestions::class);
     }
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
 }

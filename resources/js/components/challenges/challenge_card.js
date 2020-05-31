@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 // import Quiz from "./quiz";
 import Swal from "sweetalert2";
 import TheChallenge from "./the_challenge";
+import Quiz from "../jobs/quiz";
 
 class ChallengeCard extends React.Component {
     constructor(props) {
@@ -22,7 +23,6 @@ class ChallengeCard extends React.Component {
         axios
             .get("/challenge/questions/" + this.props.challenge.id)
             .then(response => {
-                console.log(response.data);
                 this.setState({ questions: response.data });
             });
     }
@@ -38,17 +38,40 @@ class ChallengeCard extends React.Component {
             confirmButtonText: "Yes,  continue!"
         }).then(result => {
             if (result.value) {
-                // body.style =
-                //     "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
                 ReactDOM.render(
-                    <TheChallenge questions={this.state.questions} />,
+                    <TheChallenge
+                        questions={this.state.questions}
+                        quiz_id={this.props.quiz_id}
+                        user_id={this.props.user_id}
+                    />,
                     document.getElementById("root")
                 );
             }
         });
     }
 
+    // render_card_btn() {
+    //     let text = "";
+    //     let disable = false
+    //     if(this.props.bool_taken === 1 ){
+    //         disable = true;
+    //         text = "Alrady Taken"
+    //     }
+    // }
+
     render() {
+        let text = "Take the Challenge";
+        let disable = false;
+        if (this.props.bool_taken === 1) {
+            disable = true;
+            text = "Alrady Taken";
+        }
+
+        if (this.props.bool_property === 1) {
+            disable = true;
+            text = "Property";
+        }
+
         return (
             <div
                 className="card jobcard rounded-challenges pb-2"
@@ -76,15 +99,17 @@ class ChallengeCard extends React.Component {
                     </div>
                 </div>
                 <div
-                className="w-100 text-center"
+                    className="w-100 text-center"
                     style={{ position: "absolute", marginTop: "100%" }}
                 >
+                    {/* {this.render_card_btn()} */}
                     <button
                         className="btn btn-primary btn-sm btn-round mr-2"
                         onClick={this.onClickChallenge}
                         // value={this.props.challenge.id}
+                        disabled={disable}
                     >
-                        Take the Challenge
+                        {text}
                     </button>
                 </div>
             </div>

@@ -34,14 +34,3 @@ class QuestionController extends Controller
     //     return $questions_array;
     // }
 }
-
-// {
-//     question: "In which dir React Compnents are saved?",
-//     answers: [
-//         "js/components/",
-//         "vendor/components/",
-//         "external/components/",
-//         "vendor/"
-//     ],
-//     correct: 0
-// }

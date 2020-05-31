@@ -25,7 +25,7 @@ class Quiz extends React.Component {
     } // end constructor
 
     componentDidMount() {
-        console.log(this.props.questions);
+        // console.log(this.props.questions);
         this.startTimer();
     }
 

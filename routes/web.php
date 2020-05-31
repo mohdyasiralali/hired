@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +32,7 @@ Route::post('/skills/add', 'HomeController@add_skills');
 Route::delete('/skill/delete/{skill_id}', 'HomeController@deleteSkill');
 
 
-Route::get('/user_skills','UserController@get_user_skills');
+Route::get('/user_skills', 'UserController@get_user_skills');
 Route::get('/authenticated_user', 'HomeController@auth_user');
 
 // Google
@@ -55,10 +55,10 @@ Route::get('/company/auth/{id}', 'CompanyController@comp_auth');
 
 
 // JOBS RECRUITER 
-Route::post('/job/create','JobController@create');
+Route::post('/job/create', 'JobController@create');
 Route::get('/jobs/get/{co_id}', 'JobController@get_jobs');
 Route::get('/jobs/get', 'JobController@get');
-Route::delete('/job/delete/{id}','JobController@delete');
+Route::delete('/job/delete/{id}', 'JobController@delete');
 Route::put('/job/update/{id}', 'JobController@update');
 
 Route::post('/job/apply/{id}', 'ApplicationController@apply');
@@ -82,9 +82,14 @@ Route::get('/challenges/get/{id}', 'ChallengeController@get');
 Route::get('/challenges/get/{id}/{searchKey}', 'ChallengeController@search');
 Route::get('/challenge/questions/{id}', 'ChallengeController@get_questions');
 Route::get('/challenges/company/get/{id}', 'ChallengeController@get_company_challenges');
-Route::post('/challenge/create', 'ChallengeController@create');
+Route::get('/challenges/user/{id}', 'ChallengeController@user_challenges');
 Route::delete('/challenge/delete/{id}', 'ChallengeController@delete');
+Route::post('/challenge/create', 'ChallengeController@create');
+Route::post('/challenge/submit', 'ChallengeController@submit');
 
+
+//Submissions/Answers
+Route::get('/challenge/submissions/get/{id}', 'AnswerController@submissions');
 
 //SEARCH USERS
 Route::get('/users/get', 'HomeController@get_users');

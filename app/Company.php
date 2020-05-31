@@ -23,4 +23,8 @@ class Company extends Model
     public function applications(){
         return $this->hasMany(Application::class);
     }
+
+    public function challenges(){
+        return $this->hasMany(Challenge::class);
+    }
 }

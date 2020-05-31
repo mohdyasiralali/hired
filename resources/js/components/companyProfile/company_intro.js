@@ -6,6 +6,7 @@ import CompanyMatching from "./company_matching";
 import CompanyApplications from "./company_applications";
 import CompanyEditProfile from "./company_edit";
 import JobsPanel from "./jobsPanel/jobs_panel";
+import Submissions from '../companyProfile/submissions';
 
 class CompanyIntro extends React.Component {
     constructor(props) {
@@ -57,6 +58,16 @@ class CompanyIntro extends React.Component {
                                     Challenges
                                 </a>
                             </li>
+                            <li className="nav-item">
+                                <a
+                                    href=""
+                                    data-target="#submissionsTab"
+                                    data-toggle="tab"
+                                    className="nav-link"
+                                >
+                                    Submissions
+                                </a>
+                            </li>
                         </ul>
                         <div className="tab-content">
                             <div className="tab-pane active" id="editTab">
@@ -72,6 +83,9 @@ class CompanyIntro extends React.Component {
                             </div>
                             <div className="tab-pane" id="jobsTab">
                                 <JobsPanel co_id={this.props.co_id}></JobsPanel>
+                            </div>
+                            <div className="tab-pane" id="submissionsTab">
+                                <Submissions co_id={this.props.co_id}></Submissions>
                             </div>
                         </div>
                     </div>
@@ -98,7 +112,7 @@ class CompanyIntro extends React.Component {
                                         ></img>
                                     </div>
                                     <h2 className="mt-3">
-                                            <b>{this.props.name}</b>
+                                        <b>{this.props.name}</b>
                                     </h2>
                                     <ul className="list-group my-4 list-unstyled">
                                         <li>

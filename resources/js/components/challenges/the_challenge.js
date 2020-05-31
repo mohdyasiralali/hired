@@ -5,8 +5,11 @@
 // https://prismjs.com/
 
 import React from "react";
+import ReactDOM from "react-dom";
 import ChallengeDiv from "./challenge_div";
+import challenges from "./challenges";
 import Swal from "sweetalert2";
+import Challenges from "./challenges";
 
 const code = `// write you code here 
 // -Familiarize yourself with concepts of Clean Code & Clean Design
@@ -19,7 +22,7 @@ class TheChallenge extends React.Component {
         var length = this.props.questions.length;
 
         this.state = {
-            auth_user_id: null,
+            // auth_user_id: null,
             question: question,
             length: length,
             current: 0,
@@ -30,15 +33,15 @@ class TheChallenge extends React.Component {
         this.onClickChallenge = this.onClickChallenge.bind(this);
     }
 
-    componentDidMount() {
-        this.axs();
-    }
+    // componentDidMount() {
+    //     this.axs();
+    // }
 
-    axs() {
-        axios.get("/authenticated_user").then(response => {
-            this.setState({ auth_user_id: response.data.user_id });
-        });
-    }
+    // axs() {
+    //     axios.get("/authenticated_user").then(response => {
+    //         this.setState({ auth_user_id: response.data.user_id });
+    //     });
+    // }
 
     onClickChallenge(id) {
         let index = parseInt(id) - 1;
@@ -58,8 +61,9 @@ class TheChallenge extends React.Component {
         }).then(result => {
             if (result.value) {
                 let answer = {
+                    challenge_id: this.state.question.challenge_id,
                     question_id: this.state.question.id,
-                    user_id: this.state.auth_user_id,
+                    user_id: this.props.user_id,
                     code: this.state.code
                 };
 
@@ -68,6 +72,38 @@ class TheChallenge extends React.Component {
 
                 if (this.state.current === this.state.length - 1) {
                     console.log("SUBMITTED ANSWERS", this.state.answers);
+                    axios
+                        .post("/challenge/submit", {
+                            answers: this.state.answers
+                        })
+                        .then(response => {
+                            console.log(response.data);
+                            if (
+                                response.data.message === "Successfully added"
+                            ) {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Successfully Submited",
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                });
+                                if (document.getElementById("root")) {
+                                    ReactDOM.render(
+                                        <Challenges
+                                            quiz_id={this.props.quiz_id}
+                                        />,
+                                        document.getElementById("root")
+                                    );
+                                }
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Something went wrong!"
+                                });
+                            }
+                        });
                 } else {
                     this.setState({
                         question: this.props.questions[this.state.current + 1],
@@ -75,9 +111,6 @@ class TheChallenge extends React.Component {
                         code: code,
                         answers: answers
                     });
-                    // this.setState({ current: this.state.current + 1 });
-                    // this.setState({ code: code });
-                    // this.setState({ answers:answers })
                 }
             }
         });
@@ -118,9 +151,9 @@ class TheChallenge extends React.Component {
     }
 
     render() {
-        let final_submit = 0
+        let final_submit = 0;
         if (this.state.current === this.state.length - 1) {
-            final_submit = 1
+            final_submit = 1;
         }
         return (
             <section>
@@ -132,7 +165,7 @@ class TheChallenge extends React.Component {
                                 code={this.state.code}
                                 onClickSubmit={this.onClickSubmit.bind(this)}
                                 onCodeChange={this.onCodeChange.bind(this)}
-                                final_submit = {final_submit}
+                                final_submit={final_submit}
                             ></ChallengeDiv>
                         </div>
                         <div className="col-md-3 py-5 text-center bg-white mx-auto rounded">

@@ -2,14 +2,15 @@ import React from "react";
 // import JobsLayout from "../jobs/jobs-layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import ChallengesArea from './challenges_area';
+import ChallengesArea from "./challenges_area";
 
 class Challenges extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            challenges: []
+            challenges: [],
+            auth_user: []
         };
         this.onChangeSearch = this.onChangeSearch.bind(this);
     }
@@ -18,17 +19,34 @@ class Challenges extends React.Component {
     }
 
     axs() {
-        axios.get("/challenges/get/"+this.props.quiz_id).then(response => {
-            console.log(response.data)
+        axios.get("/authenticated_user").then(response => {
+            this.setState({ auth_user: response.data });
+            // console.log('aith state user',this.state.auth_user);
+        });
+        axios.get("/challenges/get/" + this.props.quiz_id).then(response => {
             this.setState({ challenges: response.data });
         });
     }
     onChangeSearch(e) {
-        axios.get("/challenges/get/"+this.props.quiz_id+"/" + e.target.value).then(response => {
-            this.setState({ challenges: response.data });
-        });
+        axios
+            .get("/challenges/get/" + this.props.quiz_id + "/" + e.target.value)
+            .then(response => {
+                this.setState({ challenges: response.data });
+            });
     }
 
+    render_area() {
+        if (this.state.auth_user.length !== 0) {
+            console.log("ATTEMPTS ss ", this.state.auth_user);
+            return (
+                <ChallengesArea
+                    challenges={this.state.challenges}
+                    quiz_id={this.props.quiz_id}
+                    auth_user={this.state.auth_user}
+                ></ChallengesArea>
+            );
+        }
+    }
     render() {
         return (
             <div>
@@ -49,7 +67,12 @@ class Challenges extends React.Component {
                         </div>
                     </div>
                 </section>
-                <ChallengesArea challenges={this.state.challenges}></ChallengesArea>
+                {this.render_area()}
+                {/* <ChallengesArea
+                    challenges={this.state.challenges}
+                    quiz_id={this.props.quiz_id}
+                    auth_user={this.state.auth_user}
+                ></ChallengesArea> */}
             </div>
         );
     }

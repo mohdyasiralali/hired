@@ -51,8 +51,6 @@ class ChallengeDiv extends React.Component {
                 </div>
                 <div className="bg-dark">
                     <Editor
-                        // value={this.state.code}
-                        // onValueChange={code => this.setState({ code })}
                         value={this.props.code}
                         onValueChange={code => this.props.onCodeChange(code)}
                         highlight={code => highlight(code, languages.js)}

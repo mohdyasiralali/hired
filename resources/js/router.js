@@ -5,17 +5,18 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import JobsHeader from "./components/jobs/header";
-import UserProfile from "./components/userProfile/user_profile";
-import CompanyProfile from "./components/companyProfile/company_profile";
-import EditProfile from "./components/userProfile/editProfile/edit_profile";
-import CompanyEditProfile from "./components/companyProfile/company_edit";
+import JobsHeader from "./components/jobs/JobsHeader";
+import UserProfile from "./components/userProfile/UserProfile";
+import CompanyProfile from "./components/companyProfile/CompanyProfile";
+import EditProfile from "./components/userProfile/editProfile/EditProfile";
+import CompanyEditProfile from "./components/companyProfile/CompanyEdit";
 import Swal from "sweetalert2";
-import Challenges from "./components/challenges/challenges";
+import Challenges from "./components/challenges/Challenges";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FreeSolo from "./components/searchUsers";
+import FreeSolo from "./components/SearchUsers";
 
 import { faSearch, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import Chats from './components/Chats';
 
 // CommonJS
 const body = document.getElementById("body");
@@ -70,13 +71,11 @@ axs();
 class NavLinks extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { users: [] };
+        // this.state = { users: [] };
         this.onClickJobs = this.onClickJobs.bind(this);
+        this.onClickCompanies = this.onClickCompanies.bind(this);
+        this.onClickChats = this.onClickChats.bind(this);
         // this.onFocusSearchUsers = this.onFocusSearchUsers.bind(this);
-    }
-
-    componentDidMount() {
-        this.axs();
     }
 
     onClickJobs(e) {
@@ -85,13 +84,27 @@ class NavLinks extends React.Component {
             ReactDOM.render(<JobsHeader />, document.getElementById("root"));
         }
     }
-
-    axs() {
-        axios.get("/users/get").then(response => {
-            this.setState({ users: response.data });
-            console.log(response.data);
-        });
+    onClickCompanies(e) {
+        if (root) {
+            ReactDOM.render(<Chats />, document.getElementById("root"));
+        }
     }
+
+    onClickChats(e) {
+        if (root) {
+            ReactDOM.render(<Chats />, document.getElementById("root"));
+        }
+    }
+
+    // componentDidMount() {
+    //     this.axs();
+    // }
+    // axs() {
+    //     axios.get("/users/get").then(response => {
+    //         this.setState({ users: response.data });
+    //         console.log(response.data);
+    //     });
+    // }
 
     render() {
         return (
@@ -99,20 +112,14 @@ class NavLinks extends React.Component {
                 {/* <button className="btn btn-primary btn-round mr-2">
                     Messaging
                 </button> */}
-                <div className="bg-light border border-dark d-inline search-field px-3 mr-2 d-flex w-75">
+                {/* <div className="bg-light border border-dark d-inline search-field px-3 mr-2 d-flex w-75">
                     <div>
                         <FontAwesomeIcon icon={faUserTie} />
                     </div>
                     <div className="ml-3 mr-1" style={{ width: "250px" }}>
                         <FreeSolo users={this.state.users}></FreeSolo>
                     </div>
-                    {/* <input
-                        type="text"
-                        className="py-1 px-3 w-50 field-icon search-field mx-2"
-                        onFocus={this.onFocusSearchUsers}
-                        onChange={this.onCsdhangeSearch}
-                    ></input> */}
-                </div>
+                </div> */}
                 {/* <div id="search-box"></div> */}
                 <button
                     className="btn btn-dark btn-round mr-2"
@@ -125,6 +132,12 @@ class NavLinks extends React.Component {
                     onClick={this.onClickJobs}
                 >
                     Companies
+                </button>
+                <button
+                    className="btn btn-dark btn-round mr-2"
+                    onClick={this.onClickChats}
+                >
+                    Chats
                 </button>
             </li>
         );

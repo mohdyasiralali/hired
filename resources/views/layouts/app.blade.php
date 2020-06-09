@@ -22,6 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/chats.css') }}" rel="stylesheet">
     <link href="{{ asset('css/prism.css') }}" rel="stylesheet">
 
     <!-- FONTAWESOME -->
@@ -83,6 +84,7 @@
             @yield('content')
         </main>
     </div>
-</body>
 
+
+</body>
 </html>

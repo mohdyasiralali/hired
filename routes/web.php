@@ -24,6 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::post('/contact-us', 'ContactMailController@sendMail');
+Route::post('/meeting-mail', 'MeetingMailController@sendMail');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/first_attempt', 'HomeController@first_attempt');

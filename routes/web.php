@@ -1,12 +1,12 @@
  <?php
 
-use App\Mail\ContactMail;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+    use App\Mail\ContactMail;
+    use Illuminate\Support\Facades\Route;
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Request;
 
 
-/*
+    /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -17,80 +17,85 @@ use Illuminate\Support\Facades\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-Auth::routes();
+    Auth::routes();
 
-Route::post('/contact-us', 'ContactMailController@sendMail');
-Route::post('/meeting-mail', 'MeetingMailController@sendMail');
+    Route::post('/contact-us', 'ContactMailController@sendMail');
+    Route::post('/meeting-mail', 'MeetingMailController@sendMail');
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/first_attempt', 'HomeController@first_attempt');
-Route::get('/skills', 'HomeController@get_skills');
-Route::post('/skills/add', 'HomeController@add_skills');
-Route::delete('/skill/delete/{skill_id}', 'HomeController@deleteSkill');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/first_attempt', 'HomeController@first_attempt');
+    Route::get('/skills', 'HomeController@get_skills');
+    Route::post('/skills/add', 'HomeController@add_skills');
+    Route::delete('/skill/delete/{skill_id}', 'HomeController@deleteSkill');
 
+    Route::get('/get_user', 'HomeController@user');
 
-Route::get('/user_skills', 'UserController@get_user_skills');
-Route::get('/authenticated_user', 'HomeController@auth_user');
+    Route::get('/user_skills', 'UserController@get_user_skills');
+    Route::get('/authenticated_user', 'HomeController@auth_user');
 
-// Google
-Route::get('/redirect', 'Auth\LoginController@redirectToProvider')->name('google');
-Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
-
-
-
-// User Profile
-// Route::get('/profile/create', 'ProfileController@create');
-Route::get('/profile/{profile_id}', 'ProfileController@show');// No authentication
-Route::put('/profile/{profile_id}/edit', 'ProfileController@edit');
-
-
-// Comapny
-Route::post('/company/create', 'CompanyController@create');
-Route::put('/company/update/{id}', 'CompanyController@update');
-Route::get('/company/auth/{id}', 'CompanyController@comp_auth');
-// Route::get('/company/skills/{co_id}', 'CompanyController@get_company_skills');
-
-
-// JOBS RECRUITER 
-Route::post('/job/create', 'JobController@create');
-Route::get('/jobs/get/{co_id}', 'JobController@get_jobs');
-Route::get('/jobs/get', 'JobController@get');
-Route::delete('/job/delete/{id}', 'JobController@delete');
-Route::put('/job/update/{id}', 'JobController@update');
-
-Route::post('/job/apply/{id}', 'ApplicationController@apply');
-Route::get('/applications/get/{id}', 'ApplicationController@get');
-Route::delete('/application/delete/{id}', 'ApplicationController@delete');
-
-Route::post('/image/upload', 'HomeController@upload');
-
-
-// Quizzes
-Route::get('/quizzes/get', 'QuizController@get');
-Route::get('/quizzes/get/{searchKey}', 'QuizController@search');
-Route::get('/quiz/get/{id}', 'QuizController@getQuiz');
-
-// Route::get('/questions/get/{id}', 'QuestionController@get');
+    // Google
+    Route::get('/redirect', 'Auth\LoginController@redirectToProvider')->name('google');
+    Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 
 
 
-// Challenges
-Route::get('/challenges/get/{id}', 'ChallengeController@get');
-Route::get('/challenges/get/{id}/{searchKey}', 'ChallengeController@search');
-Route::get('/challenge/questions/{id}', 'ChallengeController@get_questions');
-Route::get('/challenges/company/get/{id}', 'ChallengeController@get_company_challenges');
-Route::get('/challenges/user/{id}', 'ChallengeController@user_challenges');
-Route::delete('/challenge/delete/{id}', 'ChallengeController@delete');
-Route::post('/challenge/create', 'ChallengeController@create');
-Route::post('/challenge/submit', 'ChallengeController@submit');
+    // User Profile
+    // Route::get('/profile/create', 'ProfileController@create');
+    Route::get('/profile/{profile_id}', 'ProfileController@show'); // No authentication
+    Route::put('/profile/{profile_id}/edit', 'ProfileController@edit');
 
 
-//Submissions/Answers
-Route::get('/challenge/submissions/get/{id}', 'AnswerController@submissions');
+    // Comapny
+    Route::post('/company/create', 'CompanyController@create');
+    Route::put('/company/update/{id}', 'CompanyController@update');
+    Route::get('/company/auth/{id}', 'CompanyController@comp_auth');
+    // Route::get('/company/skills/{co_id}', 'CompanyController@get_company_skills');
 
-//SEARCH USERS
-Route::get('/users/get', 'HomeController@get_users');
+
+    // JOBS RECRUITER 
+    Route::post('/job/create', 'JobController@create');
+    Route::get('/jobs/get/{co_id}', 'JobController@get_jobs');
+    Route::get('/jobs/get', 'JobController@get');
+    Route::delete('/job/delete/{id}', 'JobController@delete');
+    Route::put('/job/update/{id}', 'JobController@update');
+
+    Route::post('/job/apply/{id}', 'ApplicationController@apply');
+    Route::get('/applications/get/{id}', 'ApplicationController@get');
+    Route::delete('/application/delete/{id}', 'ApplicationController@delete');
+
+    Route::post('/image/upload', 'HomeController@upload');
+
+
+    // Quizzes
+    Route::get('/quizzes/get', 'QuizController@get');
+    Route::get('/quizzes/get/{searchKey}', 'QuizController@search');
+    Route::get('/quiz/get/{id}', 'QuizController@getQuiz');
+
+    // Route::get('/questions/get/{id}', 'QuestionController@get');
+
+
+
+    // Challenges
+    Route::get('/challenges/get/{id}', 'ChallengeController@get');
+    Route::get('/challenges/get/{id}/{searchKey}', 'ChallengeController@search');
+    Route::get('/challenge/questions/{id}', 'ChallengeController@get_questions');
+    Route::get('/challenges/company/get/{id}', 'ChallengeController@get_company_challenges');
+    Route::get('/challenges/user/{id}', 'ChallengeController@user_challenges');
+    Route::delete('/challenge/delete/{id}', 'ChallengeController@delete');
+    Route::post('/challenge/create', 'ChallengeController@create');
+    Route::post('/challenge/submit', 'ChallengeController@submit');
+
+
+    //Submissions/Answers
+    Route::get('/challenge/submissions/get/{id}', 'AnswerController@submissions');
+
+    //SEARCH USERS
+    Route::get('/users/get', 'HomeController@get_users');
+
+
+    // PORTFolio Images
+    Route::post('/portfolio/fileupload', 'PortfolioImageController@store');

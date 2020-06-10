@@ -106,6 +106,7 @@
     width: 60%;
 }
 .chat-bubble {
+    font-size: 14px;
     padding: 10px 14px;
     background: #eee;
     margin: 10px 30px;
@@ -143,7 +144,7 @@
         opacity: 1;
     }
 }
-.offset-md-9 .chat-bubble {
+.offset-md-7 .chat-bubble {
     background: #74b9ff;
     color: #fff;
 }

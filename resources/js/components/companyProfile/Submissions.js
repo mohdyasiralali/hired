@@ -5,9 +5,12 @@
 // import { DateTimePicker } from 'react-widgets'
 
 import React from "react";
+import ReactDOM from "react-dom";
 import Swal from "sweetalert2";
 import AddToCalendar from "@culturehq/add-to-calendar";
 import "@culturehq/add-to-calendar/dist/styles.css";
+
+import Chats from "../Chats";
 // import DateTimePickerInput from "./date-time-picker";
 
 // import DatePicker from "react-datepicker";
@@ -57,6 +60,8 @@ class Submissions extends React.Component {
         this.onChangeMessageLink = this.onChangeMessageLink.bind(this);
         this.onChangeMessageContent = this.onChangeMessageContent.bind(this);
         this.onSubmitSendMessage = this.onSubmitSendMessage.bind(this);
+
+        this.onClickChat = this.onClickChat.bind(this);
     }
     componentDidMount() {
         this.axs();
@@ -167,6 +172,15 @@ class Submissions extends React.Component {
         $(message_modal_trigger).modal("hide");
     }
 
+    onClickChat(e, user) {
+        e.preventDefault();
+        console.log(user)
+        ReactDOM.render(
+            <Chats user={user}></Chats>,
+            document.getElementById("root")
+        );
+    }
+
     render_submissions() {
         if (this.state.submissions.length === 0) {
             return (
@@ -230,7 +244,12 @@ class Submissions extends React.Component {
                                 >
                                     <i className="fas fa-code"></i>
                                 </button>
-                                <button className="btn btn-danger btn-round mr-2">
+                                <button
+                                    className="btn btn-danger btn-round mr-2"
+                                    onClick={e =>
+                                        this.onClickChat(e, submission.user)
+                                    }
+                                >
                                     <i className="far fa-paper-plane"></i>
                                 </button>
                                 <button

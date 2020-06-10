@@ -17,4 +17,12 @@ class Profile extends Model
     public function skills(){
         return $this->belongsToMany(Skill::class);
     }
+
+    public function links(){
+        return $this->hasMany(PortfolioLink::class);
+    }
+
+    public function images(){
+        return $this->hasMany(PortfolioImage::class);
+    }
 }

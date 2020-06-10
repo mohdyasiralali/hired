@@ -38,6 +38,35 @@ class HomeController extends Controller
         ]);
     }
 
+    public function user()
+    {
+        $user = User::find(Auth::user()->id);
+        $profile = $user->profile;
+
+        $skills = $profile->skills;
+        $plucked_skills = [];
+
+        foreach ($skills as $skill) {
+            array_push($plucked_skills, $skill->title);
+        }
+
+        return response()->json([
+            'user_id' => $user->id,
+            'profile' =>
+            [
+                'name' => $user->name,
+                'email' => $user->email,
+                'avatar' => $user->avatar,
+                'bio' => $profile->bio,
+                'birth_day' => $profile->birth_day,
+                'linked_profile' => $profile->linked_profile,
+                'facebook_profile' => $profile->facebook_profile,
+                'profession' => $profile->profession
+            ],
+            'skills' => $plucked_skills
+        ]);
+    }
+
     public function auth_user()
     {
         $user = Auth::user();
@@ -83,7 +112,8 @@ class HomeController extends Controller
         return $user->profile->skills;
     }
 
-    public function get_users(){
+    public function get_users()
+    {
         $users = User::select('id', 'name')->get()->take(5);
         return $users;
     }

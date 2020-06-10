@@ -51,7 +51,9 @@ class ProfileController extends Controller
                 'birth_day' => $profile->birth_day,
                 'linked_profile' => $profile->linked_profile,
                 'facebook_profile' => $profile->facebook_profile,
-                'profession' => $profile->profession
+                'profession' => $profile->profession,
+                'id' => $profile->id
+
             ],
             'skills' => $plucked_skills
         ]);
@@ -87,7 +89,8 @@ class ProfileController extends Controller
                 'birth_day' => $profile->birth_day,
                 'linked_profile' => $profile->linked_profile,
                 'facebook_profile' => $profile->facebook_profile,
-                'profession' => $profile->profession
+                'profession' => $profile->profession,
+                'id' => $profile->id
             ]
         ]);
     }

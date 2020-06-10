@@ -136,7 +136,7 @@ class Chats extends React.Component {
         let key = 0;
         return this.state.messages.map(message => {
             key = key + 1;
-            console.log(message);
+            // console.log(message);
             if (
                 message.senderId === undefined &&
                 message.receiverId === undefined

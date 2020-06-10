@@ -97,5 +97,10 @@
     Route::get('/users/get', 'HomeController@get_users');
 
 
-    // PORTFolio Images
+    // PORTFolio Images/links
     Route::post('/portfolio/fileupload', 'PortfolioImageController@store');
+    Route::get('/portfolio/images/{id}', 'PortfolioImageController@get_images');
+
+    Route::post('/portfolio/addlink', 'PortfolioLinkController@store');
+    Route::get('/portfolio/links/{id}', 'PortfolioLinkController@get_links');
+

@@ -23,6 +23,17 @@ class UserProfileIntro extends React.Component {
             );
         }
     }
+    renderPortfolio() {
+        if (this.props.profile_id !== undefined) {
+            return (
+                <div className="row">
+                    <UserProfilePortfolio
+                        profile_id={this.props.profile_id}
+                    ></UserProfilePortfolio>
+                </div>
+            );
+        }
+    }
     render() {
         return (
             <section className="p-5">
@@ -89,9 +100,7 @@ class UserProfileIntro extends React.Component {
                             ></UserProfileSkills>
                         </div>
                     </div>
-                    <div className="row">
-                        <UserProfilePortfolio></UserProfilePortfolio>
-                    </div>
+                    {this.renderPortfolio()}
                 </div>
             </section>
         );

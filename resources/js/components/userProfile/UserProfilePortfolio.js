@@ -6,13 +6,41 @@ class UserProfilePortfolio extends React.Component {
         super(props);
 
         this.state = {
-            image: ""
+            images: [],
+            links: [],
+            image: "",
+
+            link_title: "",
+            link_url: ""
         };
 
         this.renderImages = this.renderImages.bind(this);
         this.renderProjects = this.renderProjects.bind(this);
 
         this.onChangeFile = this.onChangeFile.bind(this);
+    }
+
+    componentDidMount() {
+        this.axs();
+    }
+    axs() {
+        let stateImages = [],
+            stateLinks = [];
+        axios
+            .get("/portfolio/images/" + this.props.profile_id)
+            .then(response => {
+                this.setState({ images: response.data });
+                // stateImages = response.data;
+            });
+
+        axios
+            .get("/portfolio/links/" + this.props.profile_id)
+            .then(response => {
+                // stateLinks = response.data;
+                this.setState({ links: response.data });
+            });
+
+        // this.setState({ images: stateImages, links: stateLinks });
     }
 
     onClickProjectLink(e) {
@@ -36,53 +64,100 @@ class UserProfilePortfolio extends React.Component {
         reader.readAsDataURL(file);
     }
 
-    onClickUpload(){
-        const url = '/portfolio/fileupload';
-        const formData = {file: this.state.image}
-        return  axios.post(url, formData)
-                .then(response => console.log(response))
-      }
+    onClickUpload() {
+        const url = "/portfolio/fileupload";
+        const formData = {
+            file: this.state.image,
+            profile_id: this.props.profile_id
+        };
+        let stateImages = this.state.images;
+        return axios.post(url, formData).then(response => {
+            stateImages.push(response.data);
+            this.setState({ images: stateImages });
+            $("#previewModal").modal("hide");
+        });
+    }
+
+    onClickAddLink() {
+        $("#linkModal").modal("show");
+    }
+
+    onChangeLinkTitle(e) {
+        this.setState({ link_title: e.target.value });
+    }
+
+    onChangeLinkURL(e) {
+        this.setState({ link_url: e.target.value });
+    }
+
+    onClickSubmitLink(e) {
+        e.preventDefault();
+        let data = {
+            title: this.state.link_title,
+            url: this.state.link_url,
+            profile_id: this.props.profile_id
+        };
+        let stateLinks = this.state.links;
+        axios.post("/portfolio/addlink", data).then(response => {
+            // console.log(response.data);
+            stateLinks.push(response.data);
+            this.setState({ links: stateLinks });
+        });
+        $("#linkModal").modal("hide");
+    }
 
     renderProjects() {
-        return (
-            <div
-                className="col-lg-4 col-md-4 col-sm-8 mb-2 link-div--onhover"
-                onClick={this.onClickProjectLink.bind(this)}
-            >
+        return this.state.links.map(link => {
+            return (
                 <div
-                    className="p-1 overflow-auto bg-primary d-flex"
-                    style={{ borderRadius: "50px" }}
+                    className="col-lg-4 col-md-4 col-sm-8 mb-2 link-div--onhover"
+                    onClick={this.onClickProjectLink.bind(this)}
+                    key={link.id}
                 >
                     <div
-                        className="bg-light btn-round mr-3 text-center"
-                        style={{
-                            width: "50px",
-                            height: "50px",
-                            borderRadius: "50%"
-                        }}
+                        className="p-1 overflow-auto bg-primary d-flex"
+                        style={{ borderRadius: "50px" }}
                     >
-                        <div className="w-100 h-100">
-                            <i className="fas fa-link fa-2x mt-2"></i>
+                        <div
+                            className="bg-light btn-round mr-3 text-center"
+                            style={{
+                                width: "55px",
+                                height: "55px",
+                                borderRadius: "50%"
+                            }}
+                        >
+                            <div className="w-75 h-75 mx-auto mt-2">
+                                {/* <i className="fas fa-link fa-2x mt-2"></i> */}
+                                <img
+                                    className="img-fluid"
+                                    src="/storage/images/link.png"
+                                    alt=""
+                                ></img>
+                            </div>
+                        </div>
+                        <div className="text-center text-light">
+                            <h5 className="mt-3">{link.title}</h5>
                         </div>
                     </div>
-                    <div className="text-center text-light">
-                        <h5 className="mt-3">Hired</h5>
-                    </div>
                 </div>
-            </div>
-        );
+            );
+        });
     }
 
     renderImages() {
-        return (
-            <div className="col-lg-4 col-md-4 col-sm-6 mb-2">
-                <img
-                    className="img-fluid rounded"
-                    src="/storage/images/change.jpg"
-                    alt=""
-                ></img>
-            </div>
-        );
+        return this.state.images.map(image => {
+            let src = "/storage/images/portfolio/" + image.img_src;
+            return (
+                <div key={image.id} className="col-lg-4 col-md-4 col-sm-6 mb-2">
+                    <img
+                        className="img-fluid rounded mx-auto"
+                        src={src}
+                        style={{ maxHeight: "200px" }}
+                        alt=""
+                    ></img>
+                </div>
+            );
+        });
     }
 
     render() {
@@ -118,12 +193,15 @@ class UserProfilePortfolio extends React.Component {
                             </div>
                             <div className="row">{this.renderImages()}</div>
                         </div>
-                        <div>
-                            <div className="d-flex  mb-3">
+                        <div className="mt-5">
+                            <div className="d-flex my-3">
                                 <h4 className="text-primary mr-3">
                                     <b>Projects</b>
                                 </h4>
-                                <button className="btn btn-primary btn-round btn-sm">
+                                <button
+                                    className="btn btn-primary btn-round btn-sm"
+                                    onClick={this.onClickAddLink.bind(this)}
+                                >
                                     <i className="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -131,7 +209,7 @@ class UserProfilePortfolio extends React.Component {
                         </div>
                     </div>
                 </div>{" "}
-                {/* <!-- Modal --> */}
+                {/* <!-- Modal Image --> */}
                 <div
                     className="modal fade"
                     id="previewModal"
@@ -173,6 +251,71 @@ class UserProfilePortfolio extends React.Component {
                                         <i className="fas fa-upload mr-3"></i>
                                         Upload
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* <!-- Modal Link --> */}
+                <div
+                    className="modal fade"
+                    id="linkModal"
+                    tabIndex="-1"
+                    role="dialog"
+                    aria-labelledby="linkModalLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="linkModalLabel">
+                                    Add Project Link
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="container p-3">
+                                    <form
+                                        onSubmit={this.onClickSubmitLink.bind(
+                                            this
+                                        )}
+                                    >
+                                        <div className="form-group">
+                                            <label>Title</label>
+                                            <input
+                                                className="form-control"
+                                                value={this.state.link_title}
+                                                onChange={this.onChangeLinkTitle.bind(
+                                                    this
+                                                )}
+                                                required
+                                            ></input>
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Link</label>
+                                            <input
+                                                type="url"
+                                                className="form-control"
+                                                value={this.state.link_url}
+                                                onChange={this.onChangeLinkURL.bind(
+                                                    this
+                                                )}
+                                                required
+                                            ></input>
+                                        </div>
+                                        <div className="my-3 text-right">
+                                            <button className="btn btn-primary btn-round">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

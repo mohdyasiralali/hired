@@ -48,6 +48,7 @@
     </section>
 
     <section id="features">
+    <!-- <?php phpinfo(); ?> -->
         <div class="p-5">
             <div class="container text-center">
                 <h1 class="display-4 text-weight-bold" style="color: #2f005d">Features</h1>

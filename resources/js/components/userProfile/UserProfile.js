@@ -42,11 +42,9 @@ class UserProfile extends React.Component {
                     fb={this.state.profile.facebook_profile}
                     linkedin={this.state.profile.linked_profile}
                     bio={this.state.profile.bio}
+                    profile_id = {this.state.profile.id}
                     skills={this.state.skills}
                 ></UserProfileIntro>
-                {/* <UserProfileBio bio={this.state.profile.bio}></UserProfileBio>
-                <UserProfileSkills skills={this.state.skills}></UserProfileSkills> */}
-                {/* <UserProfilePortfolio></UserProfilePortfolio> */}
             </div>
         );
     }

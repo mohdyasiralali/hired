@@ -14,9 +14,10 @@ import Swal from "sweetalert2";
 import Challenges from "./components/challenges/Challenges";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FreeSolo from "./components/SearchUsers";
+import Blog from "./components/Blog";
 
 import { faSearch, faUserTie } from "@fortawesome/free-solid-svg-icons";
-import Chats from './components/Chats';
+import Chats from "./components/Chats";
 
 // CommonJS
 const body = document.getElementById("body");
@@ -96,6 +97,12 @@ class NavLinks extends React.Component {
         }
     }
 
+    onClickBlog(e) {
+        if (root) {
+            ReactDOM.render(<Blog />, document.getElementById("root"));
+        }
+    }
+
     // componentDidMount() {
     //     this.axs();
     // }
@@ -122,22 +129,34 @@ class NavLinks extends React.Component {
                 </div> */}
                 {/* <div id="search-box"></div> */}
                 <button
-                    className="btn btn-dark btn-round mr-2"
+                    // style={{ background: "none", border: "none" }}
+                    style={{ fontSize: "1em" }}
+                    className="btn btn-light mr-2"
                     onClick={this.onClickJobs}
                 >
-                    Jobs
+                    <i className="fas fa-briefcase mr-2"></i>Jobs
                 </button>
                 <button
-                    className="btn btn-dark btn-round mr-2"
+                    style={{ fontSize: "1em" }}
+                    className="btn btn-light mr-2"
+                    onClick={this.onClickBlog.bind(this)}
+                >
+                    <i className="fas fa-newspaper mr-2"></i>Blog
+                </button>
+                <button
+                    style={{ fontSize: "1em" }}
+                    // className="btn btn-dark btn-round mr-2"
+                    className="btn btn-light mr-2"
                     onClick={this.onClickJobs}
                 >
-                    Companies
+                    <i className="far fa-handshake mr-2"></i>Companies
                 </button>
                 <button
-                    className="btn btn-dark btn-round mr-2"
+                    style={{ fontSize: "1em" }}
+                    className="btn btn-light mr-2"
                     onClick={this.onClickChats}
                 >
-                    Chats
+                    <i className="fas fa-comments mr-2"></i>Chats
                 </button>
             </li>
         );
@@ -245,7 +264,7 @@ class NavDropdown extends React.Component {
                         className="dropdown-item"
                         onClick={this.onClickViewProfile}
                     >
-                        View Profile
+                        <i className="fas fa-id-card-alt mr-3"></i>View Profile
                     </button>
                     <button
                         type="button"
@@ -253,7 +272,7 @@ class NavDropdown extends React.Component {
                         data-toggle="modal"
                         data-target="#createPage"
                     >
-                        Create Company Profile
+                        <i className="fas fa-plus mr-3"></i>Create Company Profile
                     </button>
                 </div>
             </div>
@@ -264,7 +283,7 @@ class NavDropdown extends React.Component {
         return (
             <div>
                 {this.main()}
-                <hr data-content="Companies" className="hr-text"></hr>
+                {/* <hr data-content="Companies" className="hr-text"></hr> */}
                 {this.companies()}
             </div>
         );

@@ -104,3 +104,8 @@
     Route::post('/portfolio/addlink', 'PortfolioLinkController@store');
     Route::get('/portfolio/links/{id}', 'PortfolioLinkController@get_links');
 
+    Route::post("/blog/articles/create", 'ArticleController@create');
+    Route::get("/blog/articles", 'ArticleController@get');
+    Route::get("/blog/articles/{id}", 'ArticleController@get_byId');
+
+    Route::post('/article/comments/add', 'CommentController@create');

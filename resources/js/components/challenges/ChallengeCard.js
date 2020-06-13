@@ -50,15 +50,6 @@ class ChallengeCard extends React.Component {
         });
     }
 
-    // render_card_btn() {
-    //     let text = "";
-    //     let disable = false
-    //     if(this.props.bool_taken === 1 ){
-    //         disable = true;
-    //         text = "Alrady Taken"
-    //     }
-    // }
-
     render() {
         let text = "Take the Challenge";
         let disable = false;
@@ -79,14 +70,11 @@ class ChallengeCard extends React.Component {
             >
                 <div className="px-2 my-2">
                     <div className="row p-2 text-center justify-content-center">
-                        {/* <div className="col-md-4"> */}
                         <img
                             src="/storage/images/blind.gif"
                             alt="avatar"
                             className="w-50 rounded-circle mb-2"
                         ></img>
-                        {/* </div> */}
-                        {/* <div className="col-md-8 bg-"> */}
                         <div>
                             <h5>
                                 <strong>{this.props.challenge.title}</strong>
@@ -102,11 +90,9 @@ class ChallengeCard extends React.Component {
                     className="w-100 text-center"
                     style={{ position: "absolute", marginTop: "100%" }}
                 >
-                    {/* {this.render_card_btn()} */}
                     <button
                         className="btn btn-primary btn-sm btn-round mr-2"
                         onClick={this.onClickChallenge}
-                        // value={this.props.challenge.id}
                         disabled={disable}
                     >
                         {text}

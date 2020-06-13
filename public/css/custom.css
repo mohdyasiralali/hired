@@ -21,28 +21,51 @@ body {
 
 .site-wrapper {
     width: 100%;
-    background:url("/storage/images/bgpg1.png");
-    height: 100%;
+    background: url("/storage/images/recruiter.jpg");
+    height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    color:#fff;
+    color: #fff;
     font-size: 18px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    /* background-color: rgba(47, 49, 51, 0.8); */
+    background: rgb(47, 49, 51);
+    background: linear-gradient(
+        90deg,
+        rgba(47, 49, 51, 0.7903362028405112) 0%,
+        rgba(47, 49, 51, 0.6726891440169818) 20%,
+        rgba(47, 49, 51, 0.9752101524203431) 100%
+    );
+    /* #2F3133; */
+    /* background-image: linear-gradient(
+      0deg,
+      rgba(118, 109, 255, 0.5) 0%,
+      rgb(136, 243, 255, 0.5) 100%
+  ); */
+    /* background: rgba(0, 0, 0, 0.7); */
 }
 
 .btn-round {
     border-radius: 20px;
-    width:170px;
+    width: 170px;
 }
 
 .title {
-    font-size: 120px;
+    font-size: 145px;
     /* font-weight: bold; */
 }
 
 .subtitle {
-    font-size: 54px;
-    color: #3ed6e6;
+    font-size: 42px;
+    font-family: "Roboto", sans-serif; /* color: #3ed6e6; */
     /* font-weight: bold; */
 }
 
@@ -51,17 +74,17 @@ body {
 .ml11 {
     font-size: 34px;
     color: #fff;
-  }
-  
-  .ml11 .text-wrapper {
+}
+
+.ml11 .text-wrapper {
     position: relative;
     display: inline-block;
     padding-top: 0.1em;
     padding-right: 0.05em;
     padding-bottom: 0.15em;
-  }
-  
-  .ml11 .line {
+}
+
+.ml11 .line {
     opacity: 0;
     position: absolute;
     left: 0;
@@ -69,22 +92,21 @@ body {
     width: 3px;
     background-color: #fff;
     transform-origin: 0 50%;
-  }
-  
-  .ml11 .line1 { 
-    top: 0; 
+}
+
+.ml11 .line1 {
+    top: 0;
     left: 0;
-  }
-  
-  .ml11 .letter {
+}
+
+.ml11 .letter {
     display: inline-block;
     line-height: 1em;
-  }
+}
 
-  /* question -----------------------------------------*/
+/* question -----------------------------------------*/
 
-  .breaker{
-    background-color: #2f005d;
+.breaker {
+    background-color: #212121;
     color: white;
-  }
-
+}

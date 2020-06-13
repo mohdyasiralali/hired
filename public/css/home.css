@@ -25,19 +25,19 @@ html {
 }
 
 .navbar-brand {
-    font-family: Pacifico;
+    font-family: "Roboto", sans-serif;
 }
 
 .brand {
-    font-family: Pacifico;
-    font-size: 30px;
+    font-family: "Roboto", sans-serif;
+    /* font-size: 30px; */
 }
 /* ================================== Main */
 
 /* ================================= Main Page - Jobs */
 .hero-image {
     background-image: url("/storage/images/bg-jobs.jpg");
-    height: 850px;
+    height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -177,7 +177,7 @@ div.pop-up {
     position: relative;
     overflow: hidden;
 }
-.btn-file input[type=file] {
+.btn-file input[type="file"] {
     position: absolute;
     top: 0;
     right: 0;
@@ -187,7 +187,7 @@ div.pop-up {
     text-align: right;
     filter: alpha(opacity=0);
     opacity: 0;
-    outline: none;   
+    outline: none;
     cursor: inherit;
     display: block;
 }

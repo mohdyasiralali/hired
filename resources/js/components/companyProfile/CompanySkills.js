@@ -15,7 +15,7 @@ class CompanySKills extends React.Component {
                         <div className="col-sm-4">
                             <div>
                                 <h3 className="text-primary">
-                                    <b>Skills</b>
+                                    <b>Techs</b>
                                 </h3>
                                 <h6>
                                     <strong>REQUIRED SKILLS</strong>

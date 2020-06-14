@@ -15,6 +15,7 @@ import Challenges from "./components/challenges/Challenges";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FreeSolo from "./components/SearchUsers";
 import Blog from "./components/Blog";
+import Companies from './components/Companies';
 
 import { faSearch, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import Chats from "./components/Chats";
@@ -87,7 +88,7 @@ class NavLinks extends React.Component {
     }
     onClickCompanies(e) {
         if (root) {
-            ReactDOM.render(<Chats />, document.getElementById("root"));
+            ReactDOM.render(<Companies />, document.getElementById("root"));
         }
     }
 
@@ -103,31 +104,9 @@ class NavLinks extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //     this.axs();
-    // }
-    // axs() {
-    //     axios.get("/users/get").then(response => {
-    //         this.setState({ users: response.data });
-    //         console.log(response.data);
-    //     });
-    // }
-
     render() {
         return (
             <li className="nav-item text-right d-flex">
-                {/* <button className="btn btn-primary btn-round mr-2">
-                    Messaging
-                </button> */}
-                {/* <div className="bg-light border border-dark d-inline search-field px-3 mr-2 d-flex w-75">
-                    <div>
-                        <FontAwesomeIcon icon={faUserTie} />
-                    </div>
-                    <div className="ml-3 mr-1" style={{ width: "250px" }}>
-                        <FreeSolo users={this.state.users}></FreeSolo>
-                    </div>
-                </div> */}
-                {/* <div id="search-box"></div> */}
                 <button
                     // style={{ background: "none", border: "none" }}
                     style={{ fontSize: "1em" }}
@@ -147,7 +126,7 @@ class NavLinks extends React.Component {
                     style={{ fontSize: "1em" }}
                     // className="btn btn-dark btn-round mr-2"
                     className="btn btn-light mr-2"
-                    onClick={this.onClickJobs}
+                    onClick={this.onClickCompanies}
                 >
                     <i className="far fa-handshake mr-2"></i>Companies
                 </button>

@@ -31,6 +31,9 @@
     Route::get('/skills', 'HomeController@get_skills');
     Route::post('/skills/add', 'HomeController@add_skills');
     Route::delete('/skill/delete/{skill_id}', 'HomeController@deleteSkill');
+    Route::get('/companies/get/all', 'HomeController@get_companies');
+    Route::get('/companies/get/{location}', 'HomeController@get_companies_bylocation');
+
 
     Route::get('/get_user', 'HomeController@user');
 

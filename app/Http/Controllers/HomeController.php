@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Skill;
 use App\User;
 use Illuminate\Http\Request;
@@ -74,15 +75,12 @@ class HomeController extends Controller
         $companies = $user->companies;
         $companies_array = [];
         foreach ($companies as $company) {
-            // $companies_array = [$companies_array]+[$company, $company->skills];
             array_push($companies_array, ['company' => $company, 'skills' => $company->skills]);
         }
 
         $return_user = [
             'user_id' => $user->id,
             'companies' => $companies_array
-
-            // 'companies' => $user->companies
         ];
         return $return_user;
     }
@@ -117,6 +115,28 @@ class HomeController extends Controller
     {
         $users = User::select('id', 'name')->get()->take(5);
         return $users;
+    }
+
+    public function get_companies()
+    {
+        $companies = Company::get();
+        $companies_array = [];
+        foreach ($companies as $company) {
+            array_push($companies_array, ['company' => $company, 'skills' => $company->skills]);
+        }
+
+        return $companies_array;
+    }
+
+    public function get_companies_bylocation($location)
+    {
+        $companies = Company::where('headquarter', 'like', '%'.$location.'%')->get();
+        $companies_array = [];
+        foreach ($companies as $company) {
+            array_push($companies_array, ['company' => $company, 'skills' => $company->skills]);
+        }
+
+        return $companies_array;
     }
 
     public function upload(Request $request)

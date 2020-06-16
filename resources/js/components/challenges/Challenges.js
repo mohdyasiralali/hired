@@ -24,6 +24,7 @@ class Challenges extends React.Component {
             // console.log('aith state user',this.state.auth_user);
         });
         axios.get("/challenges/get/" + this.props.quiz_id).then(response => {
+            console.log(response.data);
             this.setState({ challenges: response.data });
         });
     }
@@ -37,7 +38,6 @@ class Challenges extends React.Component {
 
     render_area() {
         if (this.state.auth_user.length !== 0) {
-            console.log("ATTEMPTS ss ", this.state.auth_user);
             return (
                 <ChallengesArea
                     challenges={this.state.challenges}

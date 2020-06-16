@@ -79,9 +79,13 @@ class ChallengeCard extends React.Component {
                             <h5>
                                 <strong>{this.props.challenge.title}</strong>
                             </h5>
-                            <h6 className="text-muted text-uppercase my-3">
+                            <h6 className="text-muted text-uppercase mt-3">
                                 <strong>Familiar with: </strong>
                                 {this.props.challenge.techs}
+                            </h6>
+                            <h6 className="text-muted text-uppercase mb-3">
+                                <strong><i className="far fa-clock mr-2"></i>Published: </strong>
+                                {this.props.date}
                             </h6>
                         </div>
                     </div>

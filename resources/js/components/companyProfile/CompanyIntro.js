@@ -100,7 +100,9 @@ class CompanyIntro extends React.Component {
                                 ></Submissions>
                             </div>
                             <div className="tab-pane" id="matchingTab">
-                                <CompanyMatching></CompanyMatching>
+                                <CompanyMatching
+                                    co_id={this.props.co_id}
+                                ></CompanyMatching>
                             </div>
                         </div>
                     </div>

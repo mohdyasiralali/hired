@@ -56,6 +56,7 @@
     Route::post('/company/create', 'CompanyController@create');
     Route::put('/company/update/{id}', 'CompanyController@update');
     Route::get('/company/auth/{id}', 'CompanyController@comp_auth');
+    Route::get('/company/matching/{id}', 'CompanyController@get_matching');
     // Route::get('/company/skills/{co_id}', 'CompanyController@get_company_skills');
 
 

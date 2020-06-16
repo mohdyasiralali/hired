@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Company;
+use App\Profile;
 use App\Skill;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,38 @@ class CompanyController extends Controller
         if ($owner == auth()->user()->id) {
             return true;
         } else return 0;
+    }
+
+    public function get_matching($id)
+    {
+        $company = Company::find($id);
+        $skills = $company->skills;
+
+        $profiles = [];
+
+        foreach ($skills as $skill) {
+            $profile_skill = $skill->profiles;
+            foreach ($profile_skill as $ps) {
+                array_push($profiles, $ps->id);
+            }
+        }
+
+        $profiles = array_unique($profiles);
+
+        $users = [];
+        foreach ($profiles as $profileId) {
+            $p = Profile::find($profileId);
+            $profession = $p->profession;
+            $curr_user = $p->user;
+            array_push($users, [
+                "name" => $curr_user->name,
+                "id" => $curr_user->id,
+                "email" => $curr_user->email,
+                "profession" => $profession,
+                "avatar" => $curr_user->avatar
+            ]);
+        }
+        return $users;
     }
 
     // public function get_company_skills($id)

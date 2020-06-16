@@ -11,37 +11,17 @@ import CompanyProfile from "./components/companyProfile/CompanyProfile";
 import EditProfile from "./components/userProfile/editProfile/EditProfile";
 import CompanyEditProfile from "./components/companyProfile/CompanyEdit";
 import Swal from "sweetalert2";
-import Challenges from "./components/challenges/Challenges";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FreeSolo from "./components/SearchUsers";
 import Blog from "./components/Blog";
 import Companies from './components/Companies';
-
-import { faSearch, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import Chats from "./components/Chats";
-
 // CommonJS
 const body = document.getElementById("body");
 const root = document.getElementById("root");
-
-// async function auth_user() {
-//     await axios
-//         .get("/authenticated_user")
-//         .then(response => {
-//             return response.data;
-//         })
-//         .then(json => {
-//             console.log("json", json);
-//             // user = json;
-//             return json;
-//         });
-// }
 
 // ============================== ONLOAD CHECK FIRST ATTEMPT
 
 function axs() {
     axios.get("/first_attempt").then(response => {
-        // console.log(response.data);
         if (response.data.first_attempt === 1) {
             Swal.fire({
                 imageUrl: "/storage/images/first-attempt2.png",
@@ -50,39 +30,28 @@ function axs() {
                 html: "For a better experience! Complete your profile",
                 imageAlt: "Welcome Image"
             });
-            // body.style =
-            //     "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
             ReactDOM.render(
                 <EditProfile user_id={response.data.user_id} />,
                 document.getElementById("root")
             );
         } else {
-            // body.style =
-            //     "background-color: #fff";
             ReactDOM.render(<JobsHeader />, document.getElementById("root"));
-            // ReactDOM.render(<Challenges quiz_id = {1} />, document.getElementById("root"));
         }
     });
 }
 axs();
-// if (root) {
-// ReactDOM.render(<JobsHeader />, document.getElementById("root"));
-// }
 
 // ============================== NAVBAR ITEMS / LINKS
 class NavLinks extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = { users: [] };
         this.onClickJobs = this.onClickJobs.bind(this);
         this.onClickCompanies = this.onClickCompanies.bind(this);
         this.onClickChats = this.onClickChats.bind(this);
-        // this.onFocusSearchUsers = this.onFocusSearchUsers.bind(this);
     }
 
     onClickJobs(e) {
         if (root) {
-            // body.style = "background-color: #e6e9f0";
             ReactDOM.render(<JobsHeader />, document.getElementById("root"));
         }
     }
@@ -108,7 +77,6 @@ class NavLinks extends React.Component {
         return (
             <li className="nav-item text-right d-flex">
                 <button
-                    // style={{ background: "none", border: "none" }}
                     style={{ fontSize: "1em" }}
                     className="btn btn-light mr-2"
                     onClick={this.onClickJobs}
@@ -124,7 +92,6 @@ class NavLinks extends React.Component {
                 </button>
                 <button
                     style={{ fontSize: "1em" }}
-                    // className="btn btn-dark btn-round mr-2"
                     className="btn btn-light mr-2"
                     onClick={this.onClickCompanies}
                 >
@@ -168,10 +135,8 @@ class NavDropdown extends React.Component {
 
     axs() {
         axios.get("/authenticated_user").then(response => {
-            // console.log(response.data);
             this.setState({ auth_user_id: response.data.user_id });
             this.setState({ companies: response.data.companies });
-            // console.log('STATE', this.state);
         });
     }
 
@@ -179,8 +144,6 @@ class NavDropdown extends React.Component {
 
     onClickViewProfile() {
         if (root) {
-            // body.style =
-            //     "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
             ReactDOM.render(
                 <UserProfile user_id={this.state.auth_user_id} />,
                 document.getElementById("root")
@@ -191,14 +154,10 @@ class NavDropdown extends React.Component {
     // =================================== COMPANY PROFILE / PAGE
 
     onClickCoProfile(e) {
-        // console.log(this.state.companies);
-        // console.log('---------------------------------',e.target.id);
+
         let index = parseInt(e.target.id) - 1;
-        // console.log(this.state.companies[index]);
         let company = this.state.companies[index];
         if (root) {
-            // body.style =
-            //     "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
             ReactDOM.render(
                 <CompanyProfile
                     co_id={index + 1}
@@ -262,7 +221,6 @@ class NavDropdown extends React.Component {
         return (
             <div>
                 {this.main()}
-                {/* <hr data-content="Companies" className="hr-text"></hr> */}
                 {this.companies()}
             </div>
         );

@@ -4,6 +4,7 @@ import EditProfile from "./editProfile/EditProfile";
 import UserProfileBio from "./UserProfileBio";
 import UserProfileSkills from "./UserProfileSkills";
 import UserProfilePortfolio from "./UserProfilePortfolio";
+import {user} from "../../AuthenticatedUser";
 
 class UserProfileIntro extends React.Component {
     constructor(props) {
@@ -29,12 +30,17 @@ class UserProfileIntro extends React.Component {
                 <div className="row">
                     <UserProfilePortfolio
                         profile_id={this.props.profile_id}
+                        user_id = {this.props.user_id}
                     ></UserProfilePortfolio>
                 </div>
             );
         }
     }
     render() {
+        let hidden = false;
+        if (this.props.user_id !== user.user_id) {
+            hidden = true;
+        }
         return (
             <section className="p-5">
                 {/* <div className="text-right">
@@ -84,6 +90,7 @@ class UserProfileIntro extends React.Component {
                                         <button
                                             className="btn btn-outline-primary btn-round mr-2 mb-3"
                                             onClick={this.renderEdit}
+                                            hidden={hidden}
                                         >
                                             Edit Profile
                                         </button>

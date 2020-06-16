@@ -19,11 +19,13 @@ class MeetingMailController extends Controller
         $data = [
             'from_name' => $user->name,
             'from_email' => $user->email,
+            'user_avatar' =>$user->avatar,
             'company_name' => $company->name,
             'company_industry' => $company->industry,
             'company_headquarter' => $company->headquarter,
             'company_website' => $company->website,
             'company_overview' => $company->overview,
+            'company_avatar' => $company->avatar,
             'to' => $request->to,
             'subject' => $request->subject,
             'message_content' => $request->content,

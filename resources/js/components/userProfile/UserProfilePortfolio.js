@@ -1,5 +1,5 @@
 import React from "react";
-import user from "../../AuthenticatedUser";
+import {user} from "../../AuthenticatedUser";
 
 class UserProfilePortfolio extends React.Component {
     constructor(props) {
@@ -161,6 +161,10 @@ class UserProfilePortfolio extends React.Component {
     }
 
     render() {
+        let hidden = false;
+        if (this.props.user_id !== user.user_id) {
+            hidden = true;
+        }
         return (
             <section className="my-5">
                 <div className="container p-5 bg-light rounded">
@@ -183,11 +187,15 @@ class UserProfilePortfolio extends React.Component {
                                 <h4 className="text-primary mr-3">
                                     <b>Gallery</b>
                                 </h4>
-                                <span className="btn btn-primary btn-file btn-round">
+                                <span
+                                    className="btn btn-primary btn-file btn-round"
+                                    hidden={hidden}
+                                >
                                     <i className="fas fa-plus"></i>
                                     <input
                                         type="file"
                                         onChange={this.onChangeFile}
+                                        hidden={hidden}
                                     ></input>
                                 </span>
                             </div>
@@ -201,6 +209,7 @@ class UserProfilePortfolio extends React.Component {
                                 <button
                                     className="btn btn-primary btn-round btn-sm"
                                     onClick={this.onClickAddLink.bind(this)}
+                                    hidden={hidden}
                                 >
                                     <i className="fas fa-plus"></i>
                                 </button>

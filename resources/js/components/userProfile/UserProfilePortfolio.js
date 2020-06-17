@@ -1,5 +1,5 @@
 import React from "react";
-import {user} from "../../AuthenticatedUser";
+import { user } from "../../AuthenticatedUser";
 
 class UserProfilePortfolio extends React.Component {
     constructor(props) {
@@ -18,6 +18,7 @@ class UserProfilePortfolio extends React.Component {
         this.renderProjects = this.renderProjects.bind(this);
 
         this.onChangeFile = this.onChangeFile.bind(this);
+        this.onClickProjectLink = this.onClickProjectLink.bind(this);
     }
 
     componentDidMount() {
@@ -43,8 +44,9 @@ class UserProfilePortfolio extends React.Component {
         // this.setState({ images: stateImages, links: stateLinks });
     }
 
-    onClickProjectLink(e) {
-        window.open("https://www.geeksforgeeks.org", "_blank");
+    onClickProjectLink(e, link) {
+        console.log(link);
+        window.open(link.link);
     }
 
     onChangeFile(e) {
@@ -111,7 +113,7 @@ class UserProfilePortfolio extends React.Component {
             return (
                 <div
                     className="col-lg-4 col-md-4 col-sm-8 mb-2 link-div--onhover"
-                    onClick={this.onClickProjectLink.bind(this)}
+                    onClick={e => this.onClickProjectLink(e, link)}
                     key={link.id}
                 >
                     <div

@@ -215,7 +215,7 @@
         $("#contact-btn").click(function() {
             $('html, body').animate({
                 scrollTop: $("#contact").offset().top
-            }, 2000);
+            }, 4000);
         });
 
         $("#more-btn").click(function() {

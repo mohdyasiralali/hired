@@ -1,5 +1,4 @@
 // REFERENCES | Sweet popups
-// https://sweetalert2.github.io/
 // npm install sweetalert2
 // import Swal from "sweetalert2";
 
@@ -12,16 +11,16 @@ import EditProfile from "./components/userProfile/editProfile/EditProfile";
 import CompanyEditProfile from "./components/companyProfile/CompanyEdit";
 import Swal from "sweetalert2";
 import Blog from "./components/Blog";
-import Companies from './components/Companies';
+import Companies from "./components/Companies";
 import Chats from "./components/Chats";
-// CommonJS
+
 const body = document.getElementById("body");
 const root = document.getElementById("root");
 
 // ============================== ONLOAD CHECK FIRST ATTEMPT
 
 function axs() {
-    axios.get("/first_attempt").then(response => {
+    axios.get("/api/first_attempt").then(response => {
         if (response.data.first_attempt === 1) {
             Swal.fire({
                 imageUrl: "/storage/images/first-attempt2.png",
@@ -128,13 +127,13 @@ class NavDropdown extends React.Component {
         this.onClickViewProfile = this.onClickViewProfile.bind(this);
         this.onClickCoProfile = this.onClickCoProfile.bind(this);
     }
-    // =================================== GET USER ID
+
     componentDidMount() {
         this.axs();
     }
 
     axs() {
-        axios.get("/authenticated_user").then(response => {
+        axios.get("/api/authenticated_user").then(response => {
             this.setState({ auth_user_id: response.data.user_id });
             this.setState({ companies: response.data.companies });
         });
@@ -154,7 +153,6 @@ class NavDropdown extends React.Component {
     // =================================== COMPANY PROFILE / PAGE
 
     onClickCoProfile(e) {
-
         let index = parseInt(e.target.id) - 1;
         let company = this.state.companies[index];
         if (root) {
@@ -172,10 +170,6 @@ class NavDropdown extends React.Component {
             );
         }
     }
-
-    // =================================== ON CLICK CREATE CO PAGE
-
-    // onClickRenderCreate() {}
 
     // =================================== NAVBAR DROPDOWN LINKS TO RENDER
 
@@ -210,7 +204,8 @@ class NavDropdown extends React.Component {
                         data-toggle="modal"
                         data-target="#createPage"
                     >
-                        <i className="fas fa-plus mr-3"></i>Create Company Profile
+                        <i className="fas fa-plus mr-3"></i>Create Company
+                        Profile
                     </button>
                 </div>
             </div>
@@ -231,7 +226,6 @@ let navbar_options = document.getElementById("nav-dropdown");
 if (navbar_options) {
     ReactDOM.render(<NavDropdown />, document.getElementById("nav-dropdown"));
 }
-// ----------------------------------------------
 // =================================================================CREATE MODAL
 
 const createPageModal = (

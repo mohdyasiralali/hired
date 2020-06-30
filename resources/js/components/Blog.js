@@ -17,21 +17,20 @@ class Blog extends React.Component {
 
         this.onChangeCurrentArticle = this.onChangeCurrentArticle.bind(this);
     }
-
+    // ===================================================================== GET ALL ARTICLES ON COMPONENT LOAD
     componentDidMount() {
         this.axs();
     }
 
     axs() {
-        axios.get("/blog/articles").then(response => {
-            // console.log(response.data);
+        axios.get("/api/blog/articles").then(response => {
             this.setState({
                 articles: response.data,
                 current_article: response.data[0]
             });
         });
     }
-
+    // ===================================================================== IMAGE UPLOAD
     onChangeFile(e) {
         let files = e.target.files || e.dataTransfer.files;
         if (!files.length) return;
@@ -47,6 +46,7 @@ class Blog extends React.Component {
         };
         reader.readAsDataURL(file);
     }
+    // ===================================================================== SUBMIT NEW ARTICLE
 
     onChangeAddTitle(e) {
         this.setState({ modal_title: e.target.value });
@@ -67,31 +67,28 @@ class Blog extends React.Component {
             content: this.state.modal_content
         };
         let stateArticles = this.state.articles;
-        axios.post("/blog/articles/create", data).then(response => {
+        axios.post("/api/blog/articles/create", data).then(response => {
             stateArticles.push(response.data);
             this.setState({ articles: stateArticles });
         });
     }
-
+    // =====================================================================ON CHANGE DISPLAYED ARTICLE
     onChangeCurrentArticle(e, article) {
         this.setState({ current_article: article });
     }
-
+    // ===================================================================== ON CHANGE DISPLAYED ARTICLES | MY ARTICLES & ALL
     onChangeSelect(e) {
-        // console.log(e.target.value);
-        let RequestURL = "/blog/articles/" + user.user_id;
+        let RequestURL = "/api/blog/articles/" + user.user_id;
         this.setState({ select_value: e.target.value });
         if (e.target.value === "1") {
             axios.get(RequestURL).then(response => {
-                // console.log(response.data);
                 this.setState({
                     articles: response.data,
                     current_article: response.data[0]
                 });
             });
         } else {
-            axios.get("/blog/articles").then(response => {
-                // console.log(response.data);
+            axios.get("/api/blog/articles").then(response => {
                 this.setState({
                     articles: response.data,
                     current_article: response.data[0]
@@ -99,15 +96,17 @@ class Blog extends React.Component {
             });
         }
     }
+    // ===================================================================== ON CHANGE COMMENT
 
     onChangeComment(e) {
         this.setState({ comment: e.target.value });
     }
-
+    // ===================================================================== ENTER KEY EVENT | COMMENT
     onKeyPressComment(e) {
         if (e.key !== "Enter") return;
         this.onSubmitComment(e);
     }
+    // ===================================================================== ADD COMMENT
 
     onSubmitComment(e) {
         e.preventDefault();
@@ -120,13 +119,12 @@ class Blog extends React.Component {
             user_avatar: user.profile.avatar
         };
         let stateComments = this.state.current_article;
-        axios.post("/article/comments/add", data).then(response => {
-            // console.log(response.data);
+        axios.post("/api/article/comments/add", data).then(response => {
             stateComments.comments.push(response.data);
-            this.setState({ current_article : stateComments });
+            this.setState({ current_article: stateComments });
         });
     }
-
+    // ===================================================================== RENDER DISPLAYED ARTICLE COMMENTS
     renderArticleComments() {
         return this.state.current_article.comments.map(comment => {
             return (
@@ -152,9 +150,9 @@ class Blog extends React.Component {
         });
     }
 
+    // ===================================================================== LEFT DIV | DISPLAYED ARTICLE
     renderLeftDiv() {
         if (this.state.current_article.length !== 0) {
-            // console.log("CURrent", this.state.current_article.article);
             let src =
                 "/storage/images/articles/" +
                 this.state.current_article.article.img_src;
@@ -221,6 +219,7 @@ class Blog extends React.Component {
             );
         }
     }
+    // ===================================================================== RIGHT DIV | ALL ARTICLES
 
     renderRightDiv() {
         return this.state.articles.map(article => {
@@ -260,7 +259,6 @@ class Blog extends React.Component {
                                     <br></br>
                                     <span>{date}</span>
                                 </h6>
-                                {/* <h6 className="text-muted"></h6> */}
                             </div>
                         </div>
                         <div className="text-right my-2 px-3">
@@ -282,7 +280,7 @@ class Blog extends React.Component {
             );
         });
     }
-
+    // ===================================================================== MAIN RENDER (RIGHT + LEFT + FILTER + MODAL)
     render() {
         return (
             <div className="container-fluid">
@@ -321,8 +319,7 @@ class Blog extends React.Component {
                         </div>
                     </div>
                 </div>
-
-                {/* <!-- Modal --> */}
+                {/* // =====================================================================  ADD ARTICLE MODAL*/}
                 <div
                     className="modal fade"
                     id="AddArticleModal"

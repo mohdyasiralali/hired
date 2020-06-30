@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import Quiz from "./quiz";
 import Swal from "sweetalert2";
 import TheChallenge from "./TheChallenge";
-import Quiz from "../jobs/Quiz";
 
 class ChallengeCard extends React.Component {
     constructor(props) {
@@ -21,7 +19,7 @@ class ChallengeCard extends React.Component {
 
     axs() {
         axios
-            .get("/challenge/questions/" + this.props.challenge.id)
+            .get("/api/challenge/questions/" + this.props.challenge.id)
             .then(response => {
                 this.setState({ questions: response.data });
             });

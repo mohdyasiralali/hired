@@ -21,8 +21,6 @@ class QuizController extends Controller
 
     public function getQuiz($id)
     {
-        // $quiz = Quiz::find($id);
-
         $quiz = Quiz::find($id);
         $questions = $quiz->questions;
 
@@ -43,8 +41,6 @@ class QuizController extends Controller
                 'correct' => $correct
             ]);
         }
-
-        // return $quiz;
         return response()->json(['quiz' => $quiz, 'questions' => $questions_array]);
     }
 }

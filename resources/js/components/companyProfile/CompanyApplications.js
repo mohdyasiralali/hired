@@ -1,5 +1,4 @@
 import React from "react";
-import parse from "html-react-parser";
 import Swal from "sweetalert2";
 
 class CompanyApplications extends React.Component {
@@ -19,23 +18,16 @@ class CompanyApplications extends React.Component {
     }
 
     axs() {
-        let url = "/applications/get/" + this.props.co_id;
+        let url = "/api/applications/get/" + this.props.co_id;
         axios.get(url).then(response => {
-            console.log(response.data);
             this.setState({ applications: response.data });
         });
     }
-
     onClickShowLetter(e) {
         let modal_id = "#letter_modal_" + e.target.value;
-        // console.log(modal_id);
         $(modal_id).modal("show");
     }
     onClickDismiss(e) {
-        // axios.delete('/application/delete/'+e.target.value)
-        // .then(response => {
-        //     console.log(response.data);
-        // })
         let id = e.target.value;
         Swal.fire({
             title: "Are you sure?",
@@ -47,14 +39,13 @@ class CompanyApplications extends React.Component {
         }).then(result => {
             if (result.value) {
                 axios
-                    .delete("/application/delete/" + id)
+                    .delete("/api/application/delete/" + id)
                     .then(response => {
                         Swal.fire(
                             "Deleted!",
                             "Your file has been deleted.",
                             "success"
                         );
-                        console.log(response.data);
                         return response.data;
                     })
                     .then(json => {
@@ -74,9 +65,6 @@ class CompanyApplications extends React.Component {
                     style={{ backgroundColor: "#e6e9f0" }}
                     key={application.application.id}
                 >
-                    {/* <div className="top-right"> 
-                    <span>X</span>
-                </div> */}
                     <div className="row">
                         <div className="col-md-4 text-center my-auto">
                             <img
@@ -97,9 +85,6 @@ class CompanyApplications extends React.Component {
                                         </a>
                                     </b>
                                 </h5>
-                                {/* <h6 className="text-muted">
-                                Full Stack Web Developer
-                            </h6> */}
                                 <h6 className="text-muted">
                                     {application.applicant.email}
                                 </h6>

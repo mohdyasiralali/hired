@@ -13,11 +13,8 @@ class UserProfileIntro extends React.Component {
     }
 
     renderEdit() {
-        // const body = document.getElementById("body");
         const root = document.getElementById("root");
         if (root) {
-            // body.style =
-            //     "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
             ReactDOM.render(
                 <EditProfile user_id={this.props.user_id} />,
                 document.getElementById("root")
@@ -43,17 +40,8 @@ class UserProfileIntro extends React.Component {
         }
         return (
             <section className="p-5">
-                {/* <div className="text-right">
-                    <button
-                        className="btn btn-primary btn-round mr-2"
-                        onClick={this.renderEdit}
-                    >
-                        Edit Profile
-                    </button>
-                </div> */}
                 <div className="container">
                     <div className="row">
-                        {/* <div className="col-sm-10 col-lg-5"> */}
                         <div className="col-sm-10 col-md-5 bg-light p-4 rounded">
                             <div className="intro rounded mb-5">
                                 <div className="profile-img border border-light border-3">

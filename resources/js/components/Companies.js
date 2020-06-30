@@ -14,25 +14,27 @@ class Companies extends React.Component {
             location: ""
         };
     }
-
+    // ===================================================================== GET ALL COMPANIES
     componentDidMount() {
         this.axs();
     }
 
     axs() {
-        axios.get("/companies/get/all").then(response => {
+        axios.get("/api/companies/get/all").then(response => {
             this.setState({
                 companies: response.data,
                 current_co: response.data[0]
             });
         });
     }
-
+    // ===================================================================== DISPLAY COMPANY DETAILS | MAIN DISPLAY
     displayCompany() {
         if (this.state.companies.length === 0) {
             return (
                 <div className="p-5">
-                    <h4 className="text-muted"><i className="fas fa-times mr-3"></i>No result found</h4>
+                    <h4 className="text-muted">
+                        <i className="fas fa-times mr-3"></i>No result found
+                    </h4>
                 </div>
             );
         }
@@ -81,34 +83,32 @@ class Companies extends React.Component {
             </div>
         );
     }
-
+    // ===================================================================== CHANGE MAIN DISPLAY
     onClickCompanyCard(e, company) {
         this.setState({ current_co: company });
     }
 
+    // ===================================================================== SEARCH USING LOCATION
     onChangeLocation(e) {
         if (e.target.value !== "") {
-            axios.get("/companies/get/" + e.target.value).then(response => {
+            axios.get("/api/companies/get/" + e.target.value).then(response => {
                 this.setState({
                     companies: response.data,
                     current_co: response.data[0]
                 });
             });
         } else {
-            axios.get("/companies/get/all").then(response => {
-                this.setState({
-                    companies: response.data,
-                    current_co: response.data[0]
-                });
-            });
+            this.axs();
         }
     }
-
+    // ===================================================================== RENDER COMPANIES CARDS
     renderCompanies() {
         if (this.state.companies.length === 0) {
             return (
                 <div className="p-5">
-                    <h4 className="text-muted"><i className="fas fa-times mr-3"></i>No result found</h4>
+                    <h4 className="text-muted">
+                        <i className="fas fa-times mr-3"></i>No result found
+                    </h4>
                 </div>
             );
         }
@@ -124,7 +124,7 @@ class Companies extends React.Component {
                         onClick={e => {
                             this.onClickCompanyCard(e, element);
                         }}
-                        style={{minHeight:"250px"}}
+                        style={{ minHeight: "250px" }}
                     >
                         <div className="px-2 my-2">
                             <div className="row p-2 text-center justify-content-center">
@@ -153,6 +153,7 @@ class Companies extends React.Component {
             );
         });
     }
+    // ===================================================================== MAIN RENDER
     render() {
         return (
             <section className="my-5">

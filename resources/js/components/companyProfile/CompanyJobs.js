@@ -16,8 +16,7 @@ class CompanyJobs extends React.Component {
     }
 
     axs() {
-        axios.get("/jobs/get/" + this.props.co_id).then(response => {
-            // console.log('hola', response.data)
+        axios.get("/api/jobs/get/" + this.props.co_id).then(response => {
             this.setState({ jobs: response.data });
         });
     }
@@ -26,15 +25,7 @@ class CompanyJobs extends React.Component {
         return this.state.jobs.map(job => {
             return (
                 <div key={job.id} className="w-100">
-                    <Job
-                        // job_id={job.id}
-                        // title={job.title}
-                        // type={job.type}
-                        // description={job.description}
-                        // created_at={job.created_at}
-                        job={job}
-                        auth={this.props.auth}
-                    ></Job>
+                    <Job job={job} auth={this.props.auth}></Job>
                 </div>
             );
         });

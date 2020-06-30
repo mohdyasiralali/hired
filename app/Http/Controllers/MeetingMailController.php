@@ -35,7 +35,6 @@ class MeetingMailController extends Controller
             'meeting_ends' => $request->meeting_ends
         ];
         Mail::send(new MeetingMail($data));
-        // return redirect('/');
         return response()->json(['message' => 'sent']);
     }
 }

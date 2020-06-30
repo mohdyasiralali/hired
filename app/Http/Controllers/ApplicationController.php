@@ -31,7 +31,6 @@ class ApplicationController extends Controller
         }
 
         return $array;
-        // return  $company->applications;
     }
 
     public function delete($id){

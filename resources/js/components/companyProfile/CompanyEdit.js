@@ -1,7 +1,6 @@
 import React from "react";
 import Skills from "./Skills";
 import Swal from "sweetalert2";
-
 class CompanyEditProfile extends React.Component {
     constructor(props) {
         super(props);
@@ -32,9 +31,8 @@ class CompanyEditProfile extends React.Component {
 
     get_skills() {
         axios
-            .get("/skills")
+            .get("/api/skills")
             .then(response => {
-                // console.log("SKILLS", response.data);
                 return response.data;
             })
             .then(json => {
@@ -85,10 +83,9 @@ class CompanyEditProfile extends React.Component {
                     : this.state.overview,
             skills: this.state.skills
         };
-        console.log(post);
 
         if (this.props.create === 1) {
-            axios.post("/company/create", post).then(response => {
+            axios.post("/api/company/create", post).then(response => {
                 if (response.data.message === "added") {
                     Swal.fire({
                         position: "top-center",
@@ -106,7 +103,7 @@ class CompanyEditProfile extends React.Component {
                 }
             });
         } else {
-            let url = "/company/update/"+this.props.co_id;
+            let url = "/api/company/update/" + this.props.co_id;
             axios.put(url, post).then(response => {
                 if (response.data.message === "updated") {
                     Swal.fire({
@@ -129,11 +126,9 @@ class CompanyEditProfile extends React.Component {
     }
 
     render() {
-        console.log('Name =====>' , this.props.name, 'Create?', this.props.create)
         let my = "";
         let header = "Create Company Profile";
         if (this.props.create !== 1) {
-            // my = "my-5";
             header = "Edit Company Profile";
         }
         return (
@@ -151,26 +146,6 @@ class CompanyEditProfile extends React.Component {
                         </div>
                     </div>
                     <hr></hr>
-                    {/* <div id="profile-image" className="text-center">
-                        <img
-                            src="/storage/images/logo.png"
-                            className="mx-auto rounded"
-                            alt="avatar"
-                            style={{ width: "25%" }}
-                        ></img>
-                        <label>Company Logo</label>
-                        <label className="custom-file">
-                            <input
-                                type="file"
-                                id="file"
-                                className="custom-file-input"
-                            ></input>
-                            <span className="custom-file-control btn btn-danger">
-                                <i className="far fa-caret-square-up"></i>{" "}
-                                Choose file
-                            </span>
-                        </label>
-                    </div> */}
                     <div className="container mt-5">
                         <form onSubmit={this.onSubmitSave}>
                             <div className="form-group row">
@@ -181,7 +156,6 @@ class CompanyEditProfile extends React.Component {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        // value={this.state.name}
                                         defaultValue={this.state.name}
                                         onChange={this.onChangeName}
                                         required
@@ -196,7 +170,6 @@ class CompanyEditProfile extends React.Component {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        // value={this.state.indusrty}
                                         defaultValue={this.props.industry}
                                         onChange={this.onChangeIndustry}
                                         required
@@ -211,7 +184,6 @@ class CompanyEditProfile extends React.Component {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        // value={this.state.headquarter}
                                         defaultValue={this.props.headquarter}
                                         onChange={this.onChangeHeadquarter}
                                         required
@@ -226,7 +198,6 @@ class CompanyEditProfile extends React.Component {
                                     <input
                                         className="form-control"
                                         type="url"
-                                        // value={this.state.website}
                                         defaultValue={this.props.website}
                                         onChange={this.onChangeWebsite}
                                     ></input>
@@ -240,7 +211,6 @@ class CompanyEditProfile extends React.Component {
                                     <textarea
                                         className="form-control"
                                         rows="5"
-                                        // value={this.state.overview}
                                         defaultValue={this.props.overview}
                                         onChange={this.onChangeOverview}
                                         required

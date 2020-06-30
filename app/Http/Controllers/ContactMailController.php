@@ -11,7 +11,6 @@ class ContactMailController extends Controller
 {
     public function sendMail(Request $request)
     {
-        // dd($request->all());
         $data = [
             'email' => $request->email,
             'name' => $request->name,

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Company;
 use App\Profile;
 use App\Skill;
-use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
@@ -82,11 +81,4 @@ class CompanyController extends Controller
         }
         return $users;
     }
-
-    // public function get_company_skills($id)
-    // {
-    //     $co = Company::find($id);
-    //     $skills = $co->skills;
-    //     return $skills;
-    // }
 }

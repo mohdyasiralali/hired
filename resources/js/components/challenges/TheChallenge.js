@@ -7,7 +7,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ChallengeDiv from "./ChallengeDiv";
-import challenges from "./Challenges";
 import Swal from "sweetalert2";
 import Challenges from "./Challenges";
 
@@ -22,7 +21,6 @@ class TheChallenge extends React.Component {
         var length = this.props.questions.length;
 
         this.state = {
-            // auth_user_id: null,
             question: question,
             length: length,
             current: 0,
@@ -32,16 +30,6 @@ class TheChallenge extends React.Component {
 
         this.onClickChallenge = this.onClickChallenge.bind(this);
     }
-
-    // componentDidMount() {
-    //     this.axs();
-    // }
-
-    // axs() {
-    //     axios.get("/authenticated_user").then(response => {
-    //         this.setState({ auth_user_id: response.data.user_id });
-    //     });
-    // }
 
     onClickChallenge(id) {
         let index = parseInt(id) - 1;
@@ -71,13 +59,11 @@ class TheChallenge extends React.Component {
                 answers.push(answer);
 
                 if (this.state.current === this.state.length - 1) {
-                    console.log("SUBMITTED ANSWERS", this.state.answers);
                     axios
-                        .post("/challenge/submit", {
+                        .post("/api/challenge/submit", {
                             answers: this.state.answers
                         })
                         .then(response => {
-                            console.log(response.data);
                             if (
                                 response.data.message === "Successfully added"
                             ) {
@@ -137,7 +123,6 @@ class TheChallenge extends React.Component {
                         onClick={() => this.onClickChallenge(question.id)}
                         disabled={disable}
                     >
-                        {/* <i className="fas fa-check-circle mr-3"></i> */}
                         {icon}
                         <strong>{question.title}</strong>
                     </button>

@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CompanyProfile from "../companyProfile/CompanyProfile";
 import Quiz from "./Quiz";
 import Swal from "sweetalert2";
-import parse from "html-react-parser";
 
 class QuizCard extends React.Component {
     constructor(props) {
@@ -21,8 +19,7 @@ class QuizCard extends React.Component {
     }
 
     axs() {
-        axios.get("/quiz/get/" + this.props.quiz_id).then(response => {
-            // console.log(response.data);
+        axios.get("/api/quiz/get/" + this.props.quiz_id).then(response => {
             this.setState({ quiz: response.data.quiz });
             this.setState({ questions: response.data.questions });
         });
@@ -39,13 +36,6 @@ class QuizCard extends React.Component {
             confirmButtonText: "Yes,  continue!"
         }).then(result => {
             if (result.value) {
-                //   Swal.fire(
-                //     'Deleted!',
-                //     'Your file has been deleted.',
-                //     'success'
-                //   )
-                // body.style = "background-color : #2F3133";
-                // "background-image: linear-gradient(0deg, #766dff 0%, #88f3ff 100%)";
                 ReactDOM.render(
                     <Quiz
                         quiz_id={this.state.quiz.id}

@@ -2,19 +2,16 @@
 // HTML PARSER
 
 import React from "react";
-import parse from "html-react-parser";
 import TextArea from "./jobsPanel/TextArea";
 
 class Job extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // show: 0,
             subject: "",
             letter: ""
         };
 
-        // this.show = this.show.bind(this);
         this.render_description = this.render_description.bind(this);
         this.render_btn = this.render_btn.bind(this);
         this.apply = this.apply.bind(this);
@@ -31,21 +28,13 @@ class Job extends React.Component {
         this.setState({ letter: content });
     }
 
-    // show() {
-    //     if (this.state.show === 0) {
-    //         this.setState({ show: 1 });
-    //     } else this.setState({ show: 0 });
-    // }
-
     redner_job() {
         return (
             <div>
                 <h3>
                     <b>{this.props.job.title}</b>
                 </h3>
-
                 <h6 className="text-muted">{this.props.job.type}</h6>
-                {/* <h6 className="text-muted">5 days ago</h6> */}
             </div>
         );
     }
@@ -67,20 +56,12 @@ class Job extends React.Component {
             subject: this.state.subject,
             letter: this.state.letter
         };
-        // this.setState({
-        //     subject:"",
-        //     letter:""
-        // });
-
-        console.log(request);
 
         let target_apply_modal = "#modal-apply-" + this.props.job.id;
         $(target_apply_modal).modal("hide");
 
-        let url = "/job/apply/" + this.props.job.id;
-        axios.post(url, request).then(response => {
-            console.log("Application Response", response.data);
-        });
+        let url = "/api/job/apply/" + this.props.job.id;
+        axios.post(url, request).then(response => {});
     }
 
     render_btn() {
@@ -89,38 +70,27 @@ class Job extends React.Component {
             bool = true;
         }
         return (
-            // <div className="text-right">
             <button
                 className="btn btn-danger btn-sm btn-round mr-2"
                 onClick={this.apply}
                 disabled={bool}
             >
-                Apply   
+                Apply
             </button>
-            // </div>
         );
     }
 
     render_description() {
         const parse = require("html-react-parser");
 
-        // if (this.state.show === 1) {
         return (
             <div className="container p-5 bg-light">
                 {parse(this.props.job.description)}
-                {/* {this.render_btn()} */}
             </div>
         );
-        // }
     }
 
     render() {
-        // let btn = "";
-
-        // if (this.state.show === 1) {
-        //     btn = <i className="fas fa-chevron-circle-up"></i>;
-        // } else btn = <i className="fas fa-chevron-circle-down"></i>;
-
         let apply_modal = "modal-apply-" + this.props.job.id;
         let description_modal = "modal-description-" + this.props.job.id;
 
@@ -139,26 +109,17 @@ class Job extends React.Component {
                             ></img>
                         </div>
                         <div className="col-md-9 p-3">{this.redner_job()}</div>
-
                     </div>
-                    {/* <div className="col-md-1 p-2 mt-auto"> */}
                     <div className="text-right mb-2">
+                        <button
+                            className="btn btn-info mr-2 btn-sm btn-round"
+                            onClick={this.desc}
+                        >
+                            Job Description
+                        </button>
 
-                            {/* <a className="text-primary" onClick={this.show}>
-                                {btn}
-                            </a> */}
-                            <button
-                                className="btn btn-info mr-2 btn-sm btn-round"
-                                onClick={this.desc}
-                            >
-                                Job Description
-                            </button>
-                            {/* <a className="text-primary btn btn-info" onClick={this.desc}>
-                                Apply
-                            </a> */}
-                            {this.render_btn()}
-                        </div>
-                    {/* <div>{this.render_description()}</div> */}
+                        {this.render_btn()}
+                    </div>
                 </div>
 
                 {/* Description Modal ====================================================== */}

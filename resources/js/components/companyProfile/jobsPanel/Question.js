@@ -36,7 +36,6 @@ class AddQuestion extends React.Component {
     }
     onSubmitQuestion(e) {
         e.preventDefault();
-        console.log(this.state);
     }
 
     render() {

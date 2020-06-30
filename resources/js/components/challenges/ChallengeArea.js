@@ -1,5 +1,4 @@
 import React from "react";
-// import QuizCard from "./quiz_card";
 import ChallengeCard from "./ChallengeCard";
 
 class ChallengesArea extends React.Component {
@@ -16,7 +15,7 @@ class ChallengesArea extends React.Component {
     }
     get_user_taken() {
         axios
-            .get("/challenges/user/" + this.props.auth_user.user_id)
+            .get("/api/challenges/user/" + this.props.auth_user.user_id)
             .then(response => {
                 this.setState({ taken: response.data });
             });
@@ -26,7 +25,6 @@ class ChallengesArea extends React.Component {
             temp.push(company.company.id);
         });
         this.setState({ companies_array: temp });
-        console.log(this.state.companies_array);
     }
 
     renderChallenges() {
@@ -53,8 +51,6 @@ class ChallengesArea extends React.Component {
             let Difference_In_Days = Math.floor(
                 Difference_In_Time / (1000 * 3600 * 24)
             );
-
-            // console.log("Chalenge Dates", Difference_In_Time, "---", Math.floor(Difference_In_Days));
 
             let bool_taken = 0;
             if (this.state.taken.includes(challenge.id)) {

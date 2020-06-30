@@ -1,5 +1,4 @@
 import React from "react";
-// import JobsLayout from "../jobs/jobs-layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import ChallengesArea from "./ChallengeArea";
@@ -19,18 +18,16 @@ class Challenges extends React.Component {
     }
 
     axs() {
-        axios.get("/authenticated_user").then(response => {
+        axios.get("/api/authenticated_user").then(response => {
             this.setState({ auth_user: response.data });
-            // console.log('aith state user',this.state.auth_user);
         });
-        axios.get("/challenges/get/" + this.props.quiz_id).then(response => {
-            console.log(response.data);
+        axios.get("/api/challenges/get/" + this.props.quiz_id).then(response => {
             this.setState({ challenges: response.data });
         });
     }
     onChangeSearch(e) {
         axios
-            .get("/challenges/get/" + this.props.quiz_id + "/" + e.target.value)
+            .get("/api/challenges/get/" + this.props.quiz_id + "/" + e.target.value)
             .then(response => {
                 this.setState({ challenges: response.data });
             });
@@ -68,11 +65,6 @@ class Challenges extends React.Component {
                     </div>
                 </section>
                 {this.render_area()}
-                {/* <ChallengesArea
-                    challenges={this.state.challenges}
-                    quiz_id={this.props.quiz_id}
-                    auth_user={this.state.auth_user}
-                ></ChallengesArea> */}
             </div>
         );
     }

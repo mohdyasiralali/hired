@@ -8,7 +8,6 @@ class TextArea extends React.Component {
         this.handleEditorChange = this.handleEditorChange.bind(this);
     }
     handleEditorChange(e) {
-        // console.log("Content was updated:", e.target.getContent());
         this.props.getContent(e.target.getContent());
     }
 

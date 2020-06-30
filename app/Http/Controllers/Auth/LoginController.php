@@ -87,6 +87,6 @@ class LoginController extends Controller
             $profile->facebook_profile = 'https://www.facebook.com';
             $profile->save();
         }
-        return redirect()->to('/home');
+        return redirect()->to('/api/home');
     }
 }

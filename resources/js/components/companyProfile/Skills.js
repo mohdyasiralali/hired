@@ -13,8 +13,7 @@ class Skills extends React.Component {
     constructor(props) {
         super(props);
 
-
-        // SKILLS IN STATE TO BE DELETED 
+        // SKILLS IN STATE TO BE DELETED
         this.state = {
             skills: [],
             // user_skills: [],
@@ -53,7 +52,6 @@ class Skills extends React.Component {
         e.preventDefault();
         this.setState({ skills: values });
         this.returnSkills(values);
-        // console.log(this.state.user_skills);
     }
     // ======================================= DELETE SKILL
 
@@ -62,7 +60,6 @@ class Skills extends React.Component {
     //     // Axs delete
     //     let url = "/skill/delete/" + e.target.id;
     //     axios.delete(url).then(response => {
-    //         // console.log('MSHAXS', response.data)
     //         this.setState({ user_skills: response.data });
     //         // return response.data;
     //     });
@@ -70,7 +67,6 @@ class Skills extends React.Component {
     // ======================================= ADD SKILL NOTE:{Missing Clear Autocomplete value}
 
     returnSkills(values) {
-
         // let user_skills_array = [];
         // this.state.user_skills.map(skill => {
         //     user_skills_array.push(skill.id);
@@ -85,7 +81,6 @@ class Skills extends React.Component {
         });
         this.props.return_skills(skills_array);
         // axios.post("/skills/add", skills_array).then(response => {
-        //     console.log("save Skills", response.data);
         //     this.setState({ user_skills: response.data });
         //     this.setState({ skills: response.data });
         //     Swal.fire({

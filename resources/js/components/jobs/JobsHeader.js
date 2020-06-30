@@ -1,7 +1,7 @@
 import React from "react";
 import JobsLayout from "./JobLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 class JobsHeader extends React.Component {
     constructor(props) {
@@ -12,21 +12,24 @@ class JobsHeader extends React.Component {
         };
         this.onChangeSearch = this.onChangeSearch.bind(this);
     }
+
+    // ===================================================================== GET ALL SYSTEM QUIZZES
     componentDidMount() {
         this.axs();
     }
 
     axs() {
-        axios.get("/quizzes/get").then(response => {
+        axios.get("/api/quizzes/get").then(response => {
             this.setState({ quizzes: response.data });
         });
     }
+    // =====================================================================  SEARCH QUIZZES
     onChangeSearch(e) {
-        axios.get("/quizzes/get/" + e.target.value).then(response => {
+        axios.get("/api/quizzes/get/" + e.target.value).then(response => {
             this.setState({ quizzes: response.data });
         });
     }
-
+    // ===================================================================== MAIN RENDER
     render() {
         return (
             <div>
@@ -38,7 +41,13 @@ class JobsHeader extends React.Component {
                                     <div className="w-100 text-center">
                                         <h1 className="text-light mb-4">
                                             <b>
-                                                Get matched with a job you <span className="brand" style={{fontSize:"40px"}}>love</span>{" "}
+                                                Get matched with a job you{" "}
+                                                <span
+                                                    className="brand"
+                                                    style={{ fontSize: "40px" }}
+                                                >
+                                                    love
+                                                </span>{" "}
                                                 <i className="fas fa-heart"></i>
                                             </b>
                                         </h1>
@@ -52,10 +61,14 @@ class JobsHeader extends React.Component {
                                         </div>
                                         <h4 className="text-light mt-3 mb-5">
                                             <b>
-                                                Search a job that you think you are belong to
+                                                Search a job that you think you
+                                                are belong to
                                             </b>
                                         </h4>
-                                        <hr className="w-50" style={{borderColor:'#fff'}}></hr>
+                                        <hr
+                                            className="w-50"
+                                            style={{ borderColor: "#fff" }}
+                                        ></hr>
                                         <JobsLayout
                                             quizzes={this.state.quizzes}
                                         ></JobsLayout>
@@ -65,7 +78,6 @@ class JobsHeader extends React.Component {
                         </div>
                     </div>
                 </section>
-                {/* <JobsLayout quizzes={this.state.quizzes}></JobsLayout> */}
             </div>
         );
     }

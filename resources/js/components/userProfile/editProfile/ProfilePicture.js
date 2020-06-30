@@ -15,18 +15,12 @@ class ProfilePicture extends React.Component {
             },
             croppedImageUrl: null
         };
-        // this.handleChange = this.handleChange.bind(this);
         this.onSelectFile = this.onSelectFile.bind(this);
         this.onImageLoaded = this.onImageLoaded.bind(this);
         this.onCropChange = this.onCropChange.bind(this);
         this.onCropComplete = this.onCropComplete.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
     }
-    // handleChange(event) {
-    //     this.setState({
-    //         file: URL.createObjectURL(event.target.files[0])
-    //     });
-    // }
 
     onSelectFile(e) {
         if (e.target.files && e.target.files.length > 0) {
@@ -40,13 +34,11 @@ class ProfilePicture extends React.Component {
         $("#cropModal").modal("show");
     }
 
-    // If you setState the crop in here you should return false.
     onImageLoaded(image) {
         this.imageRef = image;
     }
 
     onCropComplete(crop) {
-        // this.makeClientCrop(crop);
         if (this.imageRef && crop.width && crop.height) {
             const croppedImageUrl = this.getCroppedImg(this.imageRef, crop);
             this.setState({ croppedImageUrl });
@@ -54,21 +46,8 @@ class ProfilePicture extends React.Component {
     }
 
     onCropChange(crop, percentCrop) {
-        // You could also use percentCrop:
-        // this.setState({ crop: percentCrop });
         this.setState({ crop });
     }
-
-    // async makeClientCrop(crop) {
-    //     if (this.imageRef && crop.width && crop.height) {
-    //         const croppedImageUrl = await this.getCroppedImg(
-    //             this.imageRef,
-    //             crop,
-    //             "newFile.jpeg"
-    //         );
-    //         this.setState({ croppedImageUrl });
-    //     }
-    // }
 
     dataURLtoFile(dataurl, filename) {
         let arr = dataurl.split(","),
@@ -111,25 +90,11 @@ class ProfilePicture extends React.Component {
                 this.dataURLtoFile(reader.result, "cropped.jpg");
             };
         });
-        // return new Promise((resolve, reject) => {
-        //     canvas.toBlob(blob => {
-        //         if (!blob) {
-        //             //reject(new Error('Canvas is empty'));
-        //             console.error("Canvas is empty");
-        //             return;
-        //         }
-        //         blob.name = fileName;
-        //         window.URL.revokeObjectURL(this.fileUrl);
-        //         this.fileUrl = window.URL.createObjectURL(blob);
-        //         resolve(this.fileUrl);
-        //     }, "image/jpeg");
-        // });
     }
 
     onClickSave(e) {
         e.preventDefault();
         this.props.savepp(this.state.croppedImage);
-        console.log(this.state.croppedImage);
     }
 
     render() {

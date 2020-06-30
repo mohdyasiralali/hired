@@ -2,7 +2,6 @@ import React from "react";
 import ProfilePicture from "./ProfilePicture";
 import SkillsTab from "./SkillsTab";
 import ProfileTab from "./ProfileTab";
-import PortfolioTab from "./PortfolioTab";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -27,9 +26,8 @@ class EditProfile extends React.Component {
 
     axs() {
         axios
-            .get("/profile/" + this.props.user_id)
+            .get("/api/profile/" + this.props.user_id)
             .then(response => {
-                // console.log("from user id", response.data);
                 return response.data;
             })
             .then(json => {
@@ -39,9 +37,8 @@ class EditProfile extends React.Component {
     }
     get_skills() {
         axios
-            .get("/skills")
+            .get("/api/skills")
             .then(response => {
-                // console.log("SKILLS", response.data);
                 return response.data;
             })
             .then(json => {
@@ -52,9 +49,8 @@ class EditProfile extends React.Component {
     // ============================================ EDIT? SAVE
     save(updatedProfile) {
         axios
-            .put("/profile/" + this.props.user_id + "/edit", updatedProfile)
+            .put("/api/profile/" + this.props.user_id + "/edit", updatedProfile)
             .then(response => {
-                // console.log("save", response.data);
                 return response.data;
             })
             .then(json => {
@@ -70,31 +66,18 @@ class EditProfile extends React.Component {
     }
 
     savepp(image) {
-        // const formData = new FormData();
-        // formData.append("image", image);
-
-        axios
-            .post("/image/upload", image)
-            .then(resposne => {
-                console.log('Response on Add Image',resposne.data);
-            })
-            // .then(data => {
-            //     console.log(data);
-            // });
+        axios.post("/api/image/upload", image).then(resposne => {});
     }
-    // =============================================
+    // ===================================================================== MAIN RENDER
 
     render() {
         return (
             <div>
-                <div
-                    className="container mt-5 bg-light p-5 rounded mb-5 h-100"
-                    // style={{ height: "1100px" }}
-                >
+                <div className="container mt-5 bg-light p-5 rounded mb-5 h-100">
                     {/* Profile Picture */}
                     <ProfilePicture
                         avatar={this.state.profile.avatar}
-                        savepp = {this.savepp.bind(this)}
+                        savepp={this.savepp.bind(this)}
                     ></ProfilePicture>
 
                     <div className="row my-2">
@@ -110,26 +93,6 @@ class EditProfile extends React.Component {
                                         Edit
                                     </a>
                                 </li>
-                                {/* <li className="nav-item">
-                                    <a
-                                        href=""
-                                        data-target="#skills"
-                                        data-toggle="tab"
-                                        className="nav-link"
-                                    >
-                                        Skills
-                                    </a>
-                                </li> */}
-                                {/* <li className="nav-item">
-                                    <a
-                                        href=""
-                                        data-target="#portfolio"
-                                        data-toggle="tab"
-                                        className="nav-link"
-                                    >
-                                        Portfolio
-                                    </a>
-                                </li> */}
                             </ul>
                             <div className="tab-content py-4">
                                 {/* Tabs */}
@@ -149,11 +112,6 @@ class EditProfile extends React.Component {
                                         ></SkillsTab>
                                     }
                                 ></ProfileTab>
-                                {/* <SkillsTab
-                                    sys_skills={this.state.sys_skills}
-                                    skills={this.state.skills}
-                                ></SkillsTab> */}
-                                {/* <PortfolioTab></PortfolioTab> */}
                             </div>
                         </div>
                     </div>
@@ -164,7 +122,3 @@ class EditProfile extends React.Component {
 }
 
 export default EditProfile;
-
-// if (document.getElementById("root")) {
-//     ReactDOM.render(<EditProfile />, document.getElementById("root"));
-// }

@@ -1,9 +1,7 @@
 import React from "react";
 import CompanyOverview from "./CompanyOverview";
 import CompanySkills from "./CompanySkills";
-import CompanyJobs from "./CompanyJobs";
 import CompanyMatching from "./CompanyMatching";
-import CompanyApplications from "./CompanyApplications";
 import CompanyEditProfile from "./CompanyEdit";
 import JobsPanel from "./jobsPanel/JobsPanel";
 import Submissions from "./Submissions";
@@ -20,17 +18,13 @@ class CompanyIntro extends React.Component {
         this.check_user();
     }
     check_user() {
-        axios.get("/company/auth/" + this.props.co_id).then(response => {
+        axios.get("/api/company/auth/" + this.props.co_id).then(response => {
             this.setState({ auth: response.data });
         });
     }
 
     // ===================================================== TABS
     // ===================================================== RENDER TABS
-    //     <CompanyJobs
-    //       co_id={this.props.co_id}
-    //       auth={this.state.auth}
-    //     ></CompanyJobs>
 
     renderTab() {
         if (this.state.auth === 1) {
@@ -113,7 +107,6 @@ class CompanyIntro extends React.Component {
     // ===================================================== RENDER TABS
 
     render() {
-        // console.log('pst  1 ', this.props.skills)
         return (
             <div>
                 <section className="mb-5 p-5">

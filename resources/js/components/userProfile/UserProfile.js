@@ -18,9 +18,8 @@ class UserProfile extends React.Component {
 
     axs() {
         axios
-            .get("/profile/" + this.props.user_id)
+            .get("/api/profile/" + this.props.user_id)
             .then(response => {
-                // console.log("from user profile", response.data);
                 return response.data;
             })
             .then(json => {

@@ -43,7 +43,6 @@ class ProfileTab extends React.Component {
 
     saveChanges(e) {
         e.preventDefault();
-        // console.log('STATE', this.state)
         let updatedProfile = {
             'name' : (this.state.name === "" ? this.props.name : this.state.name),
             'bd' : (this.state.bd === "" ? this.props.bd : this.state.bd),
@@ -52,7 +51,6 @@ class ProfileTab extends React.Component {
             'linkedin' : (this.state.linkedin === "" ? this.props.linkedin : this.state.linkedin),
             'bio' : (this.state.bio === "" ? this.props.bio : this.state.bio)
         };
-        // console.log(updateProfile);
         this.props.save(updatedProfile);
     }
     

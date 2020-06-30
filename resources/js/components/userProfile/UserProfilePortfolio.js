@@ -21,34 +21,30 @@ class UserProfilePortfolio extends React.Component {
         this.onClickProjectLink = this.onClickProjectLink.bind(this);
     }
 
+    // ===================================================================== PORTFOLIO | GET IMAGES & LINKS
     componentDidMount() {
         this.axs();
     }
     axs() {
-        let stateImages = [],
-            stateLinks = [];
         axios
-            .get("/portfolio/images/" + this.props.profile_id)
+            .get("/api/portfolio/images/" + this.props.profile_id)
             .then(response => {
                 this.setState({ images: response.data });
-                // stateImages = response.data;
             });
 
         axios
-            .get("/portfolio/links/" + this.props.profile_id)
+            .get("/api/portfolio/links/" + this.props.profile_id)
             .then(response => {
-                // stateLinks = response.data;
                 this.setState({ links: response.data });
             });
-
-        // this.setState({ images: stateImages, links: stateLinks });
     }
 
+    // ===================================================================== REDIRECT TO PROJECT LINK PAGE
     onClickProjectLink(e, link) {
-        console.log(link);
         window.open(link.link);
     }
 
+    // ===================================================================== IMAGE UPLOAD
     onChangeFile(e) {
         let files = e.target.files || e.dataTransfer.files;
         if (!files.length) return;
@@ -67,7 +63,7 @@ class UserProfilePortfolio extends React.Component {
     }
 
     onClickUpload() {
-        const url = "/portfolio/fileupload";
+        const url = "/api/portfolio/fileupload";
         const formData = {
             file: this.state.image,
             profile_id: this.props.profile_id
@@ -80,6 +76,7 @@ class UserProfilePortfolio extends React.Component {
         });
     }
 
+    // ===================================================================== CREATE NEW PROJECT LINK
     onClickAddLink() {
         $("#linkModal").modal("show");
     }
@@ -100,14 +97,14 @@ class UserProfilePortfolio extends React.Component {
             profile_id: this.props.profile_id
         };
         let stateLinks = this.state.links;
-        axios.post("/portfolio/addlink", data).then(response => {
-            // console.log(response.data);
+        axios.post("/api/portfolio/addlink", data).then(response => {
             stateLinks.push(response.data);
             this.setState({ links: stateLinks });
         });
         $("#linkModal").modal("hide");
     }
 
+    // ===================================================================== RENDER PROJECTS LINKS
     renderProjects() {
         return this.state.links.map(link => {
             return (
@@ -129,7 +126,6 @@ class UserProfilePortfolio extends React.Component {
                             }}
                         >
                             <div className="w-75 h-75 mx-auto mt-2">
-                                {/* <i className="fas fa-link fa-2x mt-2"></i> */}
                                 <img
                                     className="img-fluid"
                                     src="/storage/images/link.png"
@@ -146,6 +142,7 @@ class UserProfilePortfolio extends React.Component {
         });
     }
 
+    // ===================================================================== RENDER GALLERY IMAGES
     renderImages() {
         return this.state.images.map(image => {
             let src = "/storage/images/portfolio/" + image.img_src;
@@ -220,7 +217,7 @@ class UserProfilePortfolio extends React.Component {
                         </div>
                     </div>
                 </div>{" "}
-                {/* <!-- Modal Image --> */}
+                {/*     // ===================================================================== MODAL IMAGE PREVIEW & UPLOAD */}
                 <div
                     className="modal fade"
                     id="previewModal"
@@ -267,7 +264,7 @@ class UserProfilePortfolio extends React.Component {
                         </div>
                     </div>
                 </div>
-                {/* <!-- Modal Link --> */}
+                {/*     // ===================================================================== MODAL ADD NEW PROJECT LINK */}
                 <div
                     className="modal fade"
                     id="linkModal"

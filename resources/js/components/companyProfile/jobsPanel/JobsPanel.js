@@ -1,7 +1,5 @@
 import React from "react";
-// import JobEdit from "./job_edit";
 import AddJobModal from "./AddJobModal";
-import JobRecruiter from "./RecruiterJob";
 import Swal from "sweetalert2";
 
 class JobsPanel extends React.Component {
@@ -13,7 +11,6 @@ class JobsPanel extends React.Component {
         this.state = {
             co_id: co_id,
             challenges: []
-            // jobs: []
         };
         this.onClickDeleteChallenge = this.onClickDeleteChallenge.bind(this);
         this.render_modal_questions = this.render_modal_questions.bind(this);
@@ -24,15 +21,9 @@ class JobsPanel extends React.Component {
     }
 
     axs() {
-        // axios.get("/jobs/get/" + this.state.co_id).then(response => {
-        //     // console.log(response.data)
-        //     this.setState({ jobs: response.data });
-        // });
-
         axios
-            .get("/challenges/company/get/" + this.state.co_id)
+            .get("/api/challenges/company/get/" + this.state.co_id)
             .then(response => {
-                console.log("Challenges ======> ", response.data);
                 this.setState({ challenges: response.data });
             });
     }
@@ -42,75 +33,6 @@ class JobsPanel extends React.Component {
         temp.push(challenge);
         this.setState({ challenges: temp });
     }
-
-    // deleteJob(job) {
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, delete it!"
-    //     }).then(result => {
-    //         if (result.value) {
-    //             axios
-    //                 .delete("/job/delete/" + job.id)
-    //                 .then(response => {
-    //                     Swal.fire(
-    //                         "Deleted!",
-    //                         "Your file has been deleted.",
-    //                         "success"
-    //                     );
-    //                     return response.data;
-    //                 })
-    //                 .then(json => {
-    //                     let jobs = this.state.jobs;
-    //                     const index = jobs.indexOf(job);
-    //                     if (index > -1) {
-    //                         jobs.splice(index, 1);
-    //                     }
-    //                     this.setState({ jobs: jobs });
-    //                 });
-    //         }
-    //     });
-    // }
-
-    // updateJob(newjob, job){
-    //     // console.log('here we go ======>' ,job)
-    //     let url = '/job/update/'+job.id;
-    //     console.log(url)
-    //     axios.put(url, newjob)
-    //     .then(response => {
-    //         // console.log(response.data)
-    //          // console.log(response);
-    //          let jobs = this.state.jobs;
-    //          const index = jobs.indexOf(job);
-    //          if (index > -1) {
-    //              jobs.splice(index, 1);
-    //              jobs.push(response.data);
-    //          }
-    //          this.setState({
-    //              jobs: jobs
-    //          })
-
-    //     });
-    // }
-
-    // redner_jobs() {
-    //     return this.state.jobs.map(job => {
-    //         return (
-    //             <div key={job.id}>
-    //                 <JobRecruiter
-    //                     // job_id={job.id}
-    //                     job={job}
-    //                     deleteJob={this.deleteJob.bind(this)}
-    //                     updateJob={this.updateJob.bind(this)}
-    //                 ></JobRecruiter>
-    //             </div>
-    //         );
-    //     });
-    // }
-
     onClickDeleteChallenge(challenge) {
         Swal.fire({
             title: "Are you sure?",
@@ -122,7 +44,7 @@ class JobsPanel extends React.Component {
         }).then(result => {
             if (result.value) {
                 axios
-                    .delete("/challenge/delete/" + challenge.challenge_info.id)
+                    .delete("/api/challenge/delete/" + challenge.challenge_info.id)
                     .then(response => {
                         Swal.fire(
                             "Deleted!",
@@ -209,8 +131,6 @@ class JobsPanel extends React.Component {
                             <i className="far fa-trash-alt"></i>
                         </button>
                     </div>
-                    {/* </div> */}
-                    {/* <div>{this.render_edit()}</div> */}
                     {/* // =============================================Modal ChaLLENGE QUESTIONS */}
                     <div
                         className="modal fade"
@@ -257,7 +177,6 @@ class JobsPanel extends React.Component {
         });
     }
     render() {
-        // console.log("co_id ====>", this.props.co_id);
         return (
             <section>
                 <div className="p-5 bg-light rounded-bottom">
@@ -279,7 +198,6 @@ class JobsPanel extends React.Component {
                             </button>
                         </div>
                     </div>
-                    {/* <div className="container mt-5">{this.redner_jobs()}</div> */}
                     <div className="container row mt-5">
                         {this.redner_company_challenges()}
                     </div>

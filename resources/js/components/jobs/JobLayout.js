@@ -1,5 +1,4 @@
 import React from "react";
-// import JobCard from "./job-card";
 import QuizCard from "./QuizCard";
 class JobsLayout extends React.Component {
     constructor(props) {
@@ -9,6 +8,7 @@ class JobsLayout extends React.Component {
         this.onClickSlideBack = this.onClickSlideBack.bind(this);
     }
 
+    // ===================================================================== SLIDER
     sideScroll(element, direction, speed, distance, step) {
         var scrollAmount = 0;
         var slideTimer = setInterval(function() {
@@ -32,7 +32,7 @@ class JobsLayout extends React.Component {
         var container = document.getElementById("slide-scroll");
         this.sideScroll(container, "left", 15, 250, 10);
     }
-
+    // ===================================================================== RENDER QUIZZES
     renderQuizzes() {
         if (this.props.quizzes.length === 0) {
             return (
@@ -54,30 +54,22 @@ class JobsLayout extends React.Component {
             );
         });
     }
-
+    // ===================================================================== MAIN RENDER
     render() {
         return (
-            <section
-                style={{ marginTop: "80px" }}
-                className="d-flex"
-            >
+            <section style={{ marginTop: "80px" }} className="d-flex">
                 <div className="my-auto">
                     <button
                         id="slideBack"
                         className="text-light btn"
-                        style={{backgroundColor:"none"}}
+                        style={{ backgroundColor: "none" }}
                         onClick={this.onClickSlideBack}
                     >
                         <i className="fas fa-chevron-left fa-3x"></i>
                     </button>
                 </div>
-                <div className="container"
-                style={{width:"88%"}}>
-                    <div
-                        className="row-fluid d-flex"
-                        id="slide-scroll"
-                        // style={{ overflowX: "scroll" }}
-                    >
+                <div className="container" style={{ width: "88%" }}>
+                    <div className="row-fluid d-flex" id="slide-scroll">
                         {this.renderQuizzes()}
                     </div>
                 </div>
@@ -85,7 +77,7 @@ class JobsLayout extends React.Component {
                     <button
                         id="slide"
                         className="text-light btn"
-                        style={{backgroundColor:"none"}}
+                        style={{ backgroundColor: "none" }}
                         onClick={this.onClickSlide}
                     >
                         <i className="fas fa-chevron-right fa-3x"></i>

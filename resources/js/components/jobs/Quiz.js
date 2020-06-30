@@ -14,18 +14,14 @@ class Quiz extends React.Component {
             dataSet: dataSet,
             correct: 0,
             incorrect: 0,
-            submit: 0,
-            timer: 15,
-            // subject: "",
-            // letter: ""
+            timer: 15
         };
         this.handleClick = this.handleClick.bind(this);
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.startTimer = this.startTimer.bind(this);
-    } // end constructor
+    }
 
     componentDidMount() {
-        // console.log(this.props.questions);
         this.startTimer();
     }
 
@@ -38,7 +34,7 @@ class Quiz extends React.Component {
         }
 
         if (this.state.current == this.state.dataSet.length - 1) {
-            this.setState({ submit: 1 });
+            this.onClickSubmit();
         } else {
             this.setState({ timer: 15 });
             this.setState({ current: this.state.current + 1 });
@@ -46,9 +42,6 @@ class Quiz extends React.Component {
     }
 
     onClickSubmit() {
-        // console.log('COORECT',this.state.correct);
-        // console.log('CEIL', Math.ceil((this.state.dataSet.length*70)/100));
-        console.log('FLOOR', Math.floor((this.state.dataSet.length*70)/100));
         const body = document.getElementById("body");
         if (this.state.correct < Math.floor((this.state.dataSet.length*70)/100)) {
             Swal.fire({
@@ -59,7 +52,6 @@ class Quiz extends React.Component {
                     this.state.correct +
                     " out of "+this.state.dataSet.length+"! Try working on your skills "
             });
-            body.style = "background-color: #e6e9f0";
             ReactDOM.render(<JobsHeader />, document.getElementById("root"));
         } else {
             Swal.fire({
@@ -70,7 +62,6 @@ class Quiz extends React.Component {
                     this.state.correct +
                     " out of "+this.state.dataSet.length+"! Keep it up"
             });
-            // body.style = "background-color: #2F3133";
             ReactDOM.render(<Challenges 
                 quiz_id = {this.props.quiz_id}
             />, document.getElementById("root"));
@@ -113,21 +104,12 @@ class Quiz extends React.Component {
                         </p>
                     </div>
                     <div>
-                        <h2 className="text-danger">{this.state.timer}</h2>
+                        <h2 className="text-danger">00:{this.state.timer}</h2>
                     </div>
                     <QuizArea
                         handleClick={this.handleClick}
                         dataSet={this.state.dataSet[this.state.current]}
                     />
-                    <div className="text-right mt-5">
-                        <button
-                            className="btn btn-danger"
-                            disabled={btn_disable}
-                            onClick={this.onClickSubmit}
-                        >
-                            Submit
-                        </button>
-                    </div>
                 </div>
             </section>
         );
@@ -140,7 +122,6 @@ function Answer(props) {
     return (
         <div>
             <button
-                // style={style}
                 className="btn btn-primary w-75 btn-lg"
                 onClick={() => props.handleClick(props.choice)}
             >
@@ -170,7 +151,6 @@ function QuizArea(props) {
     return (
         <div className="align-items-center">
             <div className="text-center">
-                {/* <Question dataSet={props.dataSet} /> */}
                 <h1 className="mb-5">{props.dataSet.question}</h1>
             </div>
             <div className="text-center">
@@ -183,4 +163,3 @@ function QuizArea(props) {
     );
 }
 export default Quiz;
-// ReactDOM.render(<Quiz />, document.getElementById("root"));

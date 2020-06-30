@@ -23,7 +23,6 @@ class JobEdit extends React.Component {
     }
     onSubmitSave(e){
         e.preventDefault();
-        // console.log(this.props.job.id ,'======' , this.state)
         let newjob = {
             'title': this.state.title === "" ? this.props.job.title : this.state.title,
             'description': this.state.description === "" ? this.props.job.description : this.state.description,

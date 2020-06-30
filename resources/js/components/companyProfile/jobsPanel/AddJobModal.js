@@ -2,19 +2,12 @@ import React from "react";
 import TextArea from "./TextArea";
 import Swal from "sweetalert2";
 import Skills from "../Skills";
-// import CreateQuiz from "./create_quiz";
-// import Quiz from "../../jobs/quiz";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEye, faBurn } from "@fortawesome/free-solid-svg-icons";
 
 class AddJobModal extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            // title: "",
-            // type: "",
-            // description: "",
             position: "",
             skills: [],
             quiz_id: 1,
@@ -34,14 +27,12 @@ class AddJobModal extends React.Component {
         this.renderQuestions = this.renderQuestions.bind(this);
         this.onClickShowQuestion = this.onClickShowQuestion.bind(this);
         this.onClickDltQuestion = this.onClickDltQuestion.bind(this);
-        // this.mouseLeave = this.mouseLeave.bind(this);
-        // this.onChangeType = this.onChangeType.bind(this);
     }
 
     // ================================================== DB GET SKILLS AND QUIZZES
     axs() {
         axios
-            .get("/skills")
+            .get("/api/skills")
             .then(response => {
                 return response.data;
             })
@@ -50,7 +41,7 @@ class AddJobModal extends React.Component {
             });
 
         axios
-            .get("/quizzes/get")
+            .get("/api/quizzes/get")
             .then(response => {
                 return response.data;
             })
@@ -79,14 +70,6 @@ class AddJobModal extends React.Component {
     return_skills(skills) {
         this.setState({ skills: skills });
     }
-
-    // onChangeType(e) {
-    //     this.setState({ type: e.target.value });
-    // }
-    // onChangeDescription(jd) {
-    //     this.setState({ description: jd });
-    // }
-
     // =========================================== ON SUBMIT ADD
     onSubmitAddJob(e) {
         e.preventDefault();
@@ -108,8 +91,6 @@ class AddJobModal extends React.Component {
             let length = this.state.skills.length;
             this.state.sys_skills.map(skill => {
                 if (this.state.skills.includes(skill.id)) {
-                    console.log("LebgtH", length);
-
                     if (length === 1) {
                         techs = techs.concat(skill.title);
                     } else {
@@ -127,10 +108,8 @@ class AddJobModal extends React.Component {
                 questions: this.state.questions
             };
             this.setState({ questions: [] });
-            // console.log(return_array);
 
-            axios.post("/challenge/create", return_array).then(response => {
-                // console.log(response.data);
+            axios.post("/api/challenge/create", return_array).then(response => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -154,7 +133,6 @@ class AddJobModal extends React.Component {
             );
         });
     }
-
     // ====================================================== QUESTION: ADD, DELETE, SHOW
 
     addQuestion() {
@@ -189,7 +167,6 @@ class AddJobModal extends React.Component {
     onClickDltQuestion(e) {
         e.preventDefault();
         let key = e.target.value;
-        console.log("DElte", key);
         Swal.fire({
             title: "Are you sure?",
             icon: "warning",
@@ -221,7 +198,6 @@ class AddJobModal extends React.Component {
         return this.state.questions.map(question => {
             key = key + 1;
             let id = "pop-up-" + key;
-            // console.log("key", key);s
             return (
                 <div key={key} className="row mb-2">
                     <div className="col-md-6">

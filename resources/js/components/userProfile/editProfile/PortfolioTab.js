@@ -9,5 +9,4 @@ class PortfolioTab extends React.Component {
         );
     }
 }
-
 export default PortfolioTab;

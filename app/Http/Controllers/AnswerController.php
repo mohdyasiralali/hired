@@ -19,13 +19,16 @@ class AnswerController extends Controller
 
         foreach ($challenges as $challenge) {
             $submission = Answer::where('challenge_id', $challenge->id)->get();
+
             foreach ($submission as $sub) {
-                $user = User::find($sub->user_id);
                 $question = cquestions::find($sub->question_id);
+                $user = User::find($sub->user_id);
+
                 array_push($submissions, [
                     'challenge' => $challenge,
                     'submission' => $sub,
                     'question' => $question->title,
+
                     'user' => [
                         'user_id' => $user->id,
                         'user_name' => $user->name,
@@ -34,7 +37,6 @@ class AnswerController extends Controller
                     ]
                 ]);
             }
-            // array_push($submissions, ['challenge' => $challenge, 'submission' => $submission]);
         }
 
 

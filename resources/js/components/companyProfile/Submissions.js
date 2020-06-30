@@ -21,7 +21,7 @@ class Submissions extends React.Component {
         super(props);
 
         const current_date = new Date();
-        const day = current_date.getUTCDate() + 1; // Next Day
+        const day = current_date.getUTCDate(); // Next Day
         const year = current_date.getUTCFullYear();
         const month = current_date.getUTCMonth() + 1; //months from 1-12
         let initial_date = year + "-" + month + "-" + day;
@@ -68,13 +68,12 @@ class Submissions extends React.Component {
     }
     axs() {
         axios
-            .get("/challenge/submissions/get/" + this.props.co_id)
+            .get("/api/challenge/submissions/get/" + this.props.co_id)
             .then(response => {
                 this.setState({ submissions: response.data });
-                console.log(response.data);
             });
     }
-
+    // ===================================================================== COPY CODE TO CLIPBOARD
     copyToClipBoard(code) {
         navigator.clipboard.writeText(code);
         Swal.fire({
@@ -86,6 +85,7 @@ class Submissions extends React.Component {
         });
     }
 
+    // ===================================================================== ON CHANGE FUNCTIONS
     onChangeAddEventTitle(e) {
         this.setState({ event_title: e.target.value });
     }
@@ -125,7 +125,7 @@ class Submissions extends React.Component {
         e.preventDefault();
         $("#CalendarModal").modal("show");
     }
-
+    // =====================================================================MEETING EMAIL
     // ============================================= MESSAGE
     onChangeMessageSubject(e) {
         this.setState({ msg_subject: e.target.value });
@@ -174,26 +174,18 @@ class Submissions extends React.Component {
 
     onClickChat(e, user) {
         e.preventDefault();
-        console.log(user)
         ReactDOM.render(
             <Chats user={user}></Chats>,
             document.getElementById("root")
         );
     }
 
+    // ===================================================================== RENDER ALL SUBMISSIONS
     render_submissions() {
         if (this.state.submissions.length === 0) {
             return (
                 <div className="my-4">
                     <h5 className="text-muted">No Submissions Yet!</h5>
-                    {/* <iframe
-                        src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23616161&amp;ctz=Asia%2FBeirut&amp;src=bW9oZC55YXNpci5hbGFsaUBnbWFpbC5jb20&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4ubGIjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;showTitle=0&amp;showTz=1&amp;mode=WEEK"
-                        style={{width:"800px",
-                        height:"600px",
-                        frameborder:"0",
-                        scrolling:"no"}}
-
-                    ></iframe> */}
                 </div>
             );
         } else {
@@ -272,7 +264,7 @@ class Submissions extends React.Component {
                             </div>
                         </div>
 
-                        {/* <!-- Modal CODE SHOW --> */}
+                        {/* <!-- Modal SHOW CODE --> */}
                         <div
                             className="modal fade"
                             id={modal_show_code}
@@ -335,7 +327,7 @@ class Submissions extends React.Component {
                             </div>
                         </div>
 
-                        {/* <!-- Modal Message to Aoolicant --> */}
+                        {/* <!-- Modal MEETING EMAIL --> */}
                         <div
                             className="modal fade"
                             id={message_modal}
@@ -504,13 +496,12 @@ class Submissions extends React.Component {
             });
         }
     }
-
+    // ===================================================================== MAIN RENDER
     render() {
         return (
             <section>
                 <div className="p-5 bg-light rounded-bottom">
                     <div className="row mb-2"></div>
-                    {/* <div className="container mt-5">{this.redner_jobs()}</div> */}
                     <div className="container row mt-5">
                         {this.render_submissions()}
                     </div>

@@ -40,9 +40,8 @@ class SkillsTab extends React.Component {
         this.axs();
     }
     axs() {
-        axios.get("/user_skills").then(response => {
+        axios.get("/api/user_skills").then(response => {
             this.setState({ user_skills: response.data });
-            // return response.data;
         });
     }
     // ======================================= SET STATE ON Autocomplete CHANGE
@@ -50,18 +49,15 @@ class SkillsTab extends React.Component {
     onSkillsChange(e, values) {
         e.preventDefault();
         this.setState({ skills: values });
-        // console.log(this.state.user_skills);
     }
     // ======================================= DELETE SKILL
 
     onClickDeleteSkill(e) {
         e.preventDefault();
         // Axs delete
-        let url = "/skill/delete/" + e.target.id;
+        let url = "/api/skill/delete/" + e.target.id;
         axios.delete(url).then(response => {
-            // console.log('MSHAXS', response.data)
             this.setState({ user_skills: response.data });
-            // return response.data;
         });
     }
     // ======================================= ADD SKILL NOTE:{Missing Clear Autocomplete value}
@@ -81,8 +77,7 @@ class SkillsTab extends React.Component {
                 skills_array.push(skill.id);
             }
         });
-        axios.post("/skills/add", skills_array).then(response => {
-            console.log("save Skills", response.data);
+        axios.post("/api/skills/add", skills_array).then(response => {
             this.setState({ user_skills: response.data });
             this.setState({ skills: response.data });
             Swal.fire({
@@ -114,7 +109,6 @@ class SkillsTab extends React.Component {
     }
     render() {
         return (
-            // <div className="tab-pane" id="skills">
             <div className="container mt-3">
                 <form onSubmit={this.onSubmitAddSkills}>
                     <div className={this.state.classes.root}>
@@ -123,7 +117,6 @@ class SkillsTab extends React.Component {
                             id="tags-standard"
                             options={this.props.sys_skills}
                             getOptionLabel={option => option.title}
-                            // defaultValue={[this.props.sys_skills[1]]}
                             onChange={this.onSkillsChange}
                             renderInput={params => (
                                 <TextField
@@ -145,7 +138,6 @@ class SkillsTab extends React.Component {
                 </form>
                 <div>{this.renderUserSkills()}</div>
             </div>
-            // </div>
         );
     }
 }

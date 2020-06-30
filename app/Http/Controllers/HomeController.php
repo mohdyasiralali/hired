@@ -111,12 +111,6 @@ class HomeController extends Controller
         return $user->profile->skills;
     }
 
-    public function get_users()
-    {
-        $users = User::select('id', 'name')->get()->take(5);
-        return $users;
-    }
-
     public function get_companies()
     {
         $companies = Company::get();

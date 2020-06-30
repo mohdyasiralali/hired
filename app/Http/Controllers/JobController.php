@@ -49,7 +49,6 @@ class JobController extends Controller
         foreach($jobs as $job){
             $temp = [
                 'job_id' => $job->id,
-                // 'co_id' => $job->company->id,
                 'company' => $job->company,
                 'title' =>$job->title,
                 'type' => $job->type,

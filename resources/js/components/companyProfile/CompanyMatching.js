@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import UserProfile from "../userProfile/UserProfile";
-import Chats from '../Chats';
+import Chats from "../Chats";
 
 class CompanyMatching extends React.Component {
     constructor(props) {
@@ -20,8 +20,7 @@ class CompanyMatching extends React.Component {
     }
 
     axs() {
-        axios.get("/company/matching/" + this.props.co_id).then(response => {
-            // console.log('Matching: ' ,response.data);
+        axios.get("/api/company/matching/" + this.props.co_id).then(response => {
             this.setState({ users: response.data });
         });
     }
@@ -38,11 +37,11 @@ class CompanyMatching extends React.Component {
     onClickChat(e, user_param) {
         e.preventDefault();
         let chat_user = {
-            user_id : user_param.id,
-            user_name : user_param.name,
-            user_email : user_param.email,
-            user_avatar : user_param.avatar
-        }
+            user_id: user_param.id,
+            user_name: user_param.name,
+            user_email: user_param.email,
+            user_avatar: user_param.avatar
+        };
         ReactDOM.render(
             <Chats user={chat_user}></Chats>,
             document.getElementById("root")

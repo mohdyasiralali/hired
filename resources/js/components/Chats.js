@@ -20,7 +20,7 @@ class Chats extends React.Component {
     componentDidMount() {
         this.on();
     }
-
+    // ===================================================================== FIREBASE CREATE NEW CHANNEL, CHATS
     on() {
         if (this.props.user) {
             // ======================== Add New Chats
@@ -69,7 +69,7 @@ class Chats extends React.Component {
                     timestamp: Date.now() //for now
                 });
         }
-
+        // =====================================================================FIREBASE LISTENER
         // ======================= Get Chat List
         let list_users = this.state.list_users;
 
@@ -83,9 +83,13 @@ class Chats extends React.Component {
             this.setState({ list_users: list_users });
         });
     }
-
+    // ===================================================================== MESSAGE SEND FUNCTION | FIREBASE PUSH
     onChangeMessage(e) {
         this.setState({ message_input: e.target.value });
+    }
+    onKeyPress(e) {
+        if (e.key !== "Enter") return;
+        this.onClickSend();
     }
 
     onClickSend(e) {
@@ -116,11 +120,7 @@ class Chats extends React.Component {
         this.setState({ message_input: "" });
     }
 
-    onKeyPress(e) {
-        if (e.key !== "Enter") return;
-        this.onClickSend();
-    }
-
+    // ===================================================================== RENDER MESSAGES
     renderMessages() {
         if (this.state.messages.length === 0) {
             return (
@@ -136,7 +136,6 @@ class Chats extends React.Component {
         let key = 0;
         return this.state.messages.map(message => {
             key = key + 1;
-            // console.log(message);
             if (
                 message.senderId === undefined &&
                 message.receiverId === undefined
@@ -176,7 +175,7 @@ class Chats extends React.Component {
             }
         });
     }
-
+    // ===================================================================== RENDER TOP TAB | USER
     renderTopTab() {
         if (this.state.current_user.length === 0) {
             return <h5>Start Chatting</h5>;
@@ -197,6 +196,8 @@ class Chats extends React.Component {
             </div>
         );
     }
+
+    // ===================================================================== CHANGE CURRENT CHAT USER
     onClickTab(current_user) {
         let ref = "";
         if (user.user_id > current_user.id) {
@@ -226,6 +227,7 @@ class Chats extends React.Component {
         this.setState({ current_user: current_user });
     }
 
+    // ===================================================================== GET ALL CHAT CHANNELS
     renderTabs() {
         let key = 0;
         return this.state.list_users.map(user => {
@@ -254,6 +256,7 @@ class Chats extends React.Component {
         });
     }
 
+    // ===================================================================== MAIN RENDER
     render() {
         return (
             <div className="container chats-container">

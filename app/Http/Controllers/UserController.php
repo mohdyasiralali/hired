@@ -10,13 +10,6 @@ class UserController extends Controller
     public function get_user_skills(){
         $user = Auth::user();
         $skills = $user->profile->skills;
-
-        // $plucked_skills = [];
-
-        // foreach ($skills as $skill) {
-        //     array_push($plucked_skills, $skill->title);
-        // }
-
         return $skills;
     }
 }
